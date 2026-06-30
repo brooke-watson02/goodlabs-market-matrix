@@ -1,0 +1,823 @@
+<title>GoodLabs — Market × Persona Matrix</title>
+<style>
+  :root {
+    --bg:        #F8F7F4;
+    --surface:   #FFFFFF;
+    --surface-2: #F0EDE7;
+    --border:    #E2DDD7;
+    --text-1:    #1C1917;
+    --text-2:    #65605A;
+    --text-3:    #9C9690;
+    --accent:    #B83A22;
+    --accent-bg: #FAF0EC;
+
+    --hi:        #1B5E3B;
+    --hi-bg:     #E3F2EA;
+    --hi-dot:    #2A7A50;
+    --md:        #7A5200;
+    --md-bg:     #FEF3DC;
+    --md-dot:    #B07A10;
+    --lo:        #555250;
+    --lo-bg:     #EDECEA;
+    --lo-dot:    #888480;
+
+    --panel-w:   380px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+  body {
+    background: var(--bg);
+    color: var(--text-1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── page header ─────────────────────────────────────── */
+  .page-header {
+    background: var(--text-1);
+    color: #fff;
+    padding: 20px 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .page-header h1 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -.01em;
+  }
+  .page-header p {
+    font-size: 12px;
+    color: #9C9690;
+    flex: 1;
+  }
+  .legend {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #9C9690;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── matrix wrapper ──────────────────────────────────── */
+  .matrix-wrap {
+    overflow-x: auto;
+    transition: margin-right .3s ease;
+  }
+  .matrix-wrap.panel-open {
+    margin-right: var(--panel-w);
+  }
+
+  /* ── matrix table ────────────────────────────────────── */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 820px;
+  }
+
+  /* corner cell */
+  th.corner {
+    background: var(--bg);
+    border-bottom: 2px solid var(--border);
+    border-right: 2px solid var(--border);
+    width: 200px;
+    min-width: 160px;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+  }
+  th.corner-inner {
+    padding: 14px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  th.corner .axis-y {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  th.corner .axis-x {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    text-align: right;
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+  }
+
+  /* persona header cells */
+  th.persona-header {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    border-right: 1px solid var(--border);
+    padding: 14px 14px 12px;
+    text-align: left;
+    vertical-align: bottom;
+    min-width: 160px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  th.persona-header:last-child { border-right: none; }
+  .persona-name {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--text-1);
+    display: block;
+    margin-bottom: 4px;
+    text-wrap: balance;
+  }
+  .persona-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  /* market header cells */
+  td.market-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    border-right: 2px solid var(--border);
+    padding: 14px 16px;
+    vertical-align: top;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    min-width: 160px;
+  }
+  .market-name {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.35;
+    color: var(--text-1);
+    margin-bottom: 5px;
+    display: block;
+  }
+  .market-examples {
+    font-size: 11px;
+    color: var(--text-3);
+    line-height: 1.4;
+  }
+
+  /* data cells */
+  td.cell {
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    padding: 10px 12px;
+    vertical-align: top;
+    cursor: pointer;
+    transition: background .12s;
+    min-width: 160px;
+  }
+  td.cell:last-child { border-right: none; }
+  td.cell:hover { background: var(--surface); }
+  td.cell.active { background: var(--accent-bg); outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .cell-priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 8px 3px 6px;
+    border-radius: 40px;
+    margin-bottom: 7px;
+  }
+  .cell-priority .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pri-hi { background: var(--hi-bg); color: var(--hi); }
+  .pri-hi .dot { background: var(--hi-dot); }
+  .pri-md { background: var(--md-bg); color: var(--md); }
+  .pri-md .dot { background: var(--md-dot); }
+  .pri-lo { background: var(--lo-bg); color: var(--lo); }
+  .pri-lo .dot { background: var(--lo-dot); }
+
+  .cell-channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .ch-pill {
+    font-size: 10px;
+    color: var(--text-2);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2px 6px;
+    white-space: nowrap;
+  }
+
+  /* ── detail panel ────────────────────────────────────── */
+  .detail-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: var(--panel-w);
+    height: 100vh;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform .25s ease;
+    z-index: 100;
+  }
+  .detail-panel.open {
+    transform: translateX(0);
+  }
+
+  .panel-header {
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+  .panel-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-3);
+    font-size: 20px;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color .1s;
+  }
+  .panel-close:hover { color: var(--text-1); }
+
+  .panel-mkt {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 4px;
+  }
+  .panel-persona {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--text-1);
+    margin-bottom: 10px;
+    text-wrap: balance;
+    padding-right: 28px;
+  }
+
+  .panel-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 22px; }
+
+  .panel-field {}
+  .panel-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 7px;
+  }
+  .panel-value {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-1);
+  }
+
+  .channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .channel-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-1);
+  }
+  .channel-row::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .msg-box {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text-1);
+  }
+
+  .panel-note {
+    background: var(--surface-2);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  .hint {
+    padding: 12px 28px;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: .04em;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  /* source badges */
+  .src-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+  }
+  .src-data     { background: #DFF0FF; color: #1A4F7A; }
+  .src-partial  { background: var(--md-bg); color: var(--md); }
+  .src-inferred { background: var(--lo-bg); color: var(--lo); }
+
+  @media (max-width: 640px) {
+    :root { --panel-w: 100vw; }
+    .matrix-wrap.panel-open { margin-right: 0; }
+  }
+</style>
+
+<header class="page-header">
+  <h1>Market × Persona Matrix</h1>
+  <p>GoodLabs · Donor Acquisition Strategy · June 2026 — click any cell for channels + messaging</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#2A7A50"></div>High priority</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#B07A10"></div>Medium priority</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#888480"></div>Low priority</div>
+    <div style="width:1px;background:#3a3836;align-self:stretch;margin:0 4px;"></div>
+    <div class="legend-item"><span class="src-badge src-data">From data</span></div>
+    <div class="legend-item"><span class="src-badge src-partial">Partial</span></div>
+    <div class="legend-item"><span class="src-badge src-inferred">Inferred</span></div>
+  </div>
+</header>
+
+<div class="matrix-wrap" id="matrixWrap">
+  <table>
+    <thead>
+      <tr>
+        <th class="corner" style="position:sticky;top:0;z-index:4;">
+          <div class="corner-inner" style="position:relative;min-height:56px;">
+            <span class="axis-y">Market type</span>
+            <span class="axis-x">Donor persona →</span>
+          </div>
+        </th>
+        <th class="persona-header">
+          <span class="persona-name">Health Optimizer</span>
+          <span class="persona-tag">Seg. 1</span>
+        </th>
+        <th class="persona-header">
+          <span class="persona-name">Altruistic Regular Donor</span>
+          <span class="persona-tag">Seg. 2</span>
+        </th>
+        <th class="persona-header">
+          <span class="persona-name">Healthcare Gap Donor</span>
+          <span class="persona-tag">Seg. 3</span>
+        </th>
+        <th class="persona-header">
+          <span class="persona-name">Curious First-Timer</span>
+          <span class="persona-tag">Seg. 4</span>
+        </th>
+        <th class="persona-header">
+          <span class="persona-name">Protocol Tracker</span>
+          <span class="persona-tag">Seg. 5</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody id="matrixBody"></tbody>
+  </table>
+  <p class="hint">Click any cell to see acquisition channels, message angle, and market notes</p>
+</div>
+
+<div class="detail-panel" id="detailPanel">
+  <div class="panel-header">
+    <div class="panel-mkt" id="panelMkt"></div>
+    <div class="panel-persona" id="panelPersona"></div>
+    <div id="panelPriority"></div>
+    <button class="panel-close" id="panelClose" aria-label="Close">×</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<script>
+const MARKETS = [
+  {
+    name: "Urban Tech Hub",
+    examples: "SF, NYC, Seattle, Austin",
+  },
+  {
+    name: "Mid-size Southern City",
+    examples: "Nashville, Chattanooga, Atlanta",
+  },
+  {
+    name: "Government & Professional Hub",
+    examples: "DC, Denver, Raleigh",
+  },
+  {
+    name: "Rust Belt / Mid-size City",
+    examples: "Pittsburgh, Cleveland, Cincinnati",
+  },
+  {
+    name: "College Town",
+    examples: "Ann Arbor, Boulder, Madison",
+  },
+  {
+    name: "Suburban Sprawl",
+    examples: "Sacramento, Phoenix, Tampa",
+  }
+];
+
+const PERSONAS = [
+  "Health Optimizer",
+  "Altruistic Regular Donor",
+  "Healthcare Gap Donor",
+  "Curious First-Timer",
+  "Protocol Tracker"
+];
+
+// priority: "hi" | "md" | "lo"
+// channels: string[]
+// message: string
+// note: string
+const CELLS = {
+  // Urban Tech Hub
+  "0-0": {
+    priority: "hi", source: "data",
+    sourceDetail: "Instagram dominant in #donations referral data; Reddit r/SF and r/goodlabs organic; staff in-person SF observations; multiple Optimizer profiles observed (pharmacist, tech professionals)",
+    channels: ["Instagram (health/longevity ads)", "Reddit (r/goodlabs, r/SF, r/longevity)", "Huberman-adjacent podcasts", "Word-of-mouth among health professionals"],
+    message: "Know your numbers. Donate while you're at it.",
+    note: "Tech workers are price-sensitive about healthcare but spend freely on health optimization. The pharmacist story (Nashville) maps well to this market — 'data guy' framing converts. Reddit organic community is already seeding itself."
+  },
+  "0-1": {
+    priority: "md", source: "data",
+    sourceDetail: "Vitalant brand confusion observed in SF (UX feedback, a documented 'wrong location' incident); multiple rescheduling and cancellation events at SF centers; donor who said 'I'll just come without GoodLabs' after wait time friction",
+    channels: ["Vitalant / NY Blood Center in-center partnership", "In-center signage + staff FAQ", "Friend and family referral"],
+    message: "You already donate. Now get something back.",
+    note: "Donation culture exists but is less ingrained than in Southern markets. The two-entity brand confusion (GoodLabs / Vitalant) is especially acute in SF — Vitalant branding doesn't feel local or trusted in the same way Blood Assurance does in Nashville."
+  },
+  "0-2": {
+    priority: "md", source: "partial",
+    sourceDetail: "Spanish-speaking donor in #customer-texts; Medicaid and no-insurance responses in #care-nav; donor email explicitly noting no insurance; not all geo-tagged to SF specifically",
+    channels: ["Community health orgs", "Spanish-language Instagram + Facebook", "In-center flyers in low-income zip codes", "Gig worker / service worker channels"],
+    message: "Free bloodwork. No insurance needed.",
+    note: "Significant uninsured gig worker and service worker population in tech cities. This segment is present but harder to activate via paid social alone — community partnerships required. Spanish-language support is a near-term need."
+  },
+  "0-3": {
+    priority: "hi", source: "data",
+    sourceDetail: "Ad-to-donation under 12 hours observed (staff note); downtown SF field observations (3 returning donors, Instagram dominant, lunch-break workers); multiple Reddit-sourced first-timers; Instagram-referred donors; majority of donation orders are first-time (is_first_donation_order: true)",
+    channels: ["TikTok", "Instagram", "Local subreddits (r/sanfrancisco, etc.)", "Friend referral"],
+    message: "The easiest way to finally get your bloodwork done.",
+    note: "Ad-to-donation in under 12 hours observed in SF. Fast conversion when creative lands. The post-result Barry experience is the conversion lever for retention — if results feel interesting, they come back."
+  },
+  "0-4": {
+    priority: "hi", source: "data",
+    sourceDetail: "Reddit r/ResearchCompounds and r/BodyHackGuide organic posts; care-nav respondent on peptides and gray-market stacks; donor requesting LLM caching feature and building own health platform; Facebook inquiry about TB-500/BPC-157 baseline testing",
+    channels: ["Reddit (r/Peptides, r/longevity, r/BodyHackGuide)", "Biohacking forums + Discord", "Direct search ('free testosterone test')", "Word-of-mouth in longevity circles"],
+    message: "Test what your doctor won't order.",
+    note: "Highest concentration of this persona nationally. Already discussing GoodLabs organically on Reddit. Wants custom panels and a less conservative Barry. Privacy-aware — data use messaging matters."
+  },
+
+  // Mid-size Southern City
+  "1-0": {
+    priority: "md", source: "data",
+    sourceDetail: "Nashville pharmacist (sales call) — gym referral source visible in #donations events; enthusiastic Chattanooga donor; gym as referral source in donations data",
+    channels: ["Instagram", "Gym partnerships (CrossFit, fitness studios)", "Local health influencers"],
+    message: "Know your numbers.",
+    note: "Health optimization culture is growing in Southern cities but is less tech-saturated. Gym channel is relatively stronger here than on the coasts. Message should lean into performance and vitality over longevity/biohacking framing."
+  },
+  "1-1": {
+    priority: "hi", source: "data",
+    sourceDetail: "Nashville pharmacist was pre-existing Blood Assurance donor who trusted BA before GoodLabs; Chattanooga donor described as 'incredibly enthusiastic'; gym referral source in donations; West End Donor Center most active in #donations data; friend_family is second-largest referral source overall",
+    channels: ["Blood Assurance / LifeSouth in-center (signage, staff)", "Church and civic org partnerships", "Gym community word-of-mouth", "Friend and family referral"],
+    message: "Keep giving. Start knowing.",
+    note: "The strongest market for this persona nationally. Deep Blood Assurance culture in Nashville and Chattanooga — the pharmacist story is the template. Staff FAQs at donation centers are high-leverage here. Community trust is the moat."
+  },
+  "1-2": {
+    priority: "hi", source: "partial",
+    sourceDetail: "Medicaid and no-insurance responses in #care-nav; donor email explicitly mentioning no insurance; known demographic — Southern states have higher uninsured rates than national average. Not directly geo-tagged to Nashville in the data.",
+    channels: ["Community health fairs", "FQHCs and community health centers", "Spanish-language social (Facebook dominant)", "In-center flyers in lower-income zip codes"],
+    message: "Free bloodwork. No insurance needed.",
+    note: "Higher uninsured rates in Southern states. Significant Hispanic communities in Nashville, Atlanta, and Chattanooga. Spanish-language support is essential, not optional. Research trial participation as a retention mechanism is especially relevant here."
+  },
+  "1-3": {
+    priority: "md", source: "partial",
+    sourceDetail: "TikTok appears as referral source in #donations data (2 donors at West End/Blood Assurance). Small sample but directionally consistent with TikTok's stronger Southern penetration.",
+    channels: ["TikTok (strong penetration in Southern markets)", "Instagram", "Gym community word-of-mouth"],
+    message: "Easiest way to get your bloodwork done.",
+    note: "TikTok is disproportionately strong in Southern markets. Conversion is possible but the physical density of donation centers matters — access is more of a barrier here than in SF."
+  },
+  "1-4": {
+    priority: "lo", source: "inferred",
+    sourceDetail: "No direct Protocol Tracker signals from Nashville or Chattanooga data. Inferred from general gym culture being strong in the South and this persona existing at low density in all markets.",
+    channels: ["Reddit (niche fitness/peptide)", "Local gym community"],
+    message: "Track your protocols.",
+    note: "Smaller population of this persona in Southern cities, but gym culture is strong. Worth seeding in CrossFit and performance training communities, but not a primary investment market for this segment."
+  },
+
+  // Government & Professional Hub
+  "2-0": {
+    priority: "hi", source: "inferred",
+    sourceDetail: "No direct GoodLabs data from DC or Denver. Inferred from: educated professional demographic, health-conscious workforce patterns, and Optimizer persona being strong wherever health-aware professionals cluster.",
+    channels: ["Instagram", "LinkedIn (workplace wellness angle)", "Podcast (policy/health/wellness adjacent)", "Employer wellness programs"],
+    message: "Optimize like the data-driven professional you are.",
+    note: "Educated, health-conscious federal and professional workforce. DC skews older and more institutional than SF — 'longevity' framing may resonate more than 'biohacker.' Employer wellness program partnerships could be a unique channel here."
+  },
+  "2-1": {
+    priority: "hi", source: "partial",
+    sourceDetail: "One DC/Inova donor — already donates platelets + plasma with Red Cross, offered to be point person for an Inova blood drive, interested in genetic testing. Single data point but a very rich one. Everything else inferred.",
+    channels: ["Inova in-center partnership", "Federal employee wellness programs", "Civic and community orgs", "Friend referral"],
+    message: "Continue your donation habit. Get your labs back.",
+    note: "The DC/Inova donor profile is the template — already donates platelets and plasma with Red Cross, offered to organize blood drives. DC has strong civic donation culture. Inova partnership is the primary acquisition lever."
+  },
+  "2-2": {
+    priority: "md", source: "inferred",
+    sourceDetail: "No direct data from DC. Inferred from known DC demographic geography (mixed income, large immigrant communities) and the broader care-nav insurance signal across all markets.",
+    channels: ["Community health orgs", "In-center flyers low-income zip codes", "Multilingual outreach (Spanish, Amharic in DC)"],
+    message: "Free bloodwork. No insurance needed.",
+    note: "Mixed income geography — affluent suburbs alongside underserved urban areas. Community partnership approach required. DC's Ethiopian and Latino communities are large and underserved."
+  },
+  "2-3": {
+    priority: "md", source: "inferred",
+    sourceDetail: "No direct data from DC or government hub markets. Inferred from professional demographic and general First-Timer behavior patterns observed in SF.",
+    channels: ["Instagram", "Workplace wellness / employee referral", "Friend referral"],
+    message: "Finally, easy bloodwork.",
+    note: "Professional population responds well to convenience and efficiency messaging. Less social-discovery-driven than SF or college towns. Employer channels may be more effective than consumer social here."
+  },
+  "2-4": {
+    priority: "md", source: "inferred",
+    sourceDetail: "No direct data. Inferred from known military/government health culture and Protocol Tracker persona's privacy sensitivity aligning with this market's security-conscious population.",
+    channels: ["Reddit", "Direct search", "Military and government health community networks"],
+    message: "Test what your doctor won't order.",
+    note: "Military and government health community has a meaningful Protocol Tracker cohort — performance monitoring, peptide use, and self-directed health are common. Privacy sensitivity is high in this market."
+  },
+
+  // Rust Belt / Mid-size City
+  "3-0": {
+    priority: "md", source: "inferred",
+    sourceDetail: "No direct GoodLabs data from Pittsburgh or Cleveland. Inferred from Optimizer persona being present at medium density in all markets with health-aware populations.",
+    channels: ["Instagram", "Facebook (stronger in this market)", "Local health influencers"],
+    message: "Know your numbers.",
+    note: "Growing health awareness but less digitally-native than coastal markets. Facebook is meaningfully more effective than Reddit for reaching this population. Message should avoid overly technical biohacking framing."
+  },
+  "3-1": {
+    priority: "hi", source: "partial",
+    sourceDetail: "Pittsburgh NPS respondent explicitly stated: 'Bringing the free donation blood test to Pittsburgh, PA area would be a game changer for everyone around me since we all donate blood to Vitalant anyway.' Single data point, but unusually direct market signal.",
+    channels: ["Vitalant in-center partnership (Pittsburgh, Cleveland)", "Community referral and word-of-mouth", "Local civic orgs and churches"],
+    message: "You already give to Vitalant. Now get labs too.",
+    note: "A Pittsburgh NPS respondent explicitly called this a 'game changer' because people here already donate to Vitalant anyway. The activation cost is low — existing donors just need to hear about GoodLabs once. In-center is the highest-leverage channel."
+  },
+  "3-2": {
+    priority: "hi", source: "inferred",
+    sourceDetail: "No direct GoodLabs data. Inferred from known higher uninsured/underinsured rates in Rust Belt cities and the Healthcare Gap persona's demonstrated presence in all markets with economic stress.",
+    channels: ["Community health orgs", "FQHCs", "Church partnerships", "Spanish-language Facebook"],
+    message: "Free bloodwork. No insurance needed.",
+    note: "High uninsured and underinsured rates. Economically stressed communities where free bloodwork has the most impact. Community trust channels matter more than paid social."
+  },
+  "3-3": {
+    priority: "lo", source: "inferred",
+    sourceDetail: "No direct data. Inferred from lower social-discovery penetration in non-coastal markets and slower TikTok/Reddit conversion patterns observed indirectly.",
+    channels: ["Facebook", "Instagram", "Local community Facebook groups"],
+    message: "First bloodwork, free.",
+    note: "Less social-discovery-driven than coastal markets. Community channels and word-of-mouth are more effective than TikTok or Reddit here. Lower priority because conversion funnel is longer."
+  },
+  "3-4": {
+    priority: "lo", source: "inferred",
+    sourceDetail: "No direct data. Inferred from lower population density of this persona outside major coastal metro areas.",
+    channels: ["Reddit", "Local fitness community"],
+    message: "—",
+    note: "Small population, lower density. Not a primary investment market for this segment. May emerge as the market matures."
+  },
+
+  // College Town
+  "4-0": {
+    priority: "md", source: "inferred",
+    sourceDetail: "No direct GoodLabs data from college towns. A Santa Clara college student observed in SF is adjacent — college-age, health-curious — but not from a college town context. Everything else inferred from demographic reasoning.",
+    channels: ["Instagram", "Campus health channels", "Reddit (university subreddits)"],
+    message: "Know your numbers.",
+    note: "Health-conscious student athletes and grad students are a real cohort. Student athlete panels (nutrient, performance) may be especially resonant. Campus health center partnerships could be a cost-effective channel."
+  },
+  "4-1": {
+    priority: "lo", source: "inferred",
+    sourceDetail: "No direct data. Inferred from younger donor demographics being less habitual about blood donation. Campus blood drives are a known channel nationally but GoodLabs has no observed college town presence.",
+    channels: ["Campus blood drives", "Existing donor referral (upperclassmen)"],
+    message: "Donate and actually see your results.",
+    note: "Younger population donates less consistently. Campus blood drives are an opportunity to introduce GoodLabs but the donation cycle habit isn't established yet. Worth seeding, not a primary investment."
+  },
+  "4-2": {
+    priority: "hi", source: "inferred",
+    sourceDetail: "No direct data. Inferred from known high uninsured rate among graduate and international students nationally. A college student observed visiting SF (Reddit-sourced) is a loose adjacent data point.",
+    channels: ["Campus health centers", "Graduate student org partnerships", "International student outreach", "In-center flyers"],
+    message: "Free bloodwork. No insurance needed.",
+    note: "Grad students, international students, and part-time workers are frequently uninsured. This is a high-density Healthcare Gap cohort in a small geography. University health center partnerships could be unusually efficient."
+  },
+  "4-3": {
+    priority: "hi", source: "partial",
+    sourceDetail: "Santa Clara comp sci student observed in SF — enthusiastic about GoodLabs, wanted to organize a campus hackathon around it. College student visiting SF (Reddit-sourced). Both observed in SF not a college town, but strong college-age profile. TikTok conversion data from #donations supports high First-Timer conversion via social.",
+    channels: ["TikTok", "Instagram", "Campus word-of-mouth and student orgs", "Greek life / campus social networks"],
+    message: "Your first bloodwork. Free.",
+    note: "Highest TikTok penetration of any market type. Social proof travels extremely fast on campus — one viral moment can fill a week of appointments. The Santa Clara comp sci student profile is the template: young, health-curious, wants to organize a campus event around it."
+  },
+  "4-4": {
+    priority: "md", source: "inferred",
+    sourceDetail: "No direct data. Inferred from known supplement and fitness culture in college athletic communities. This persona skews younger in this market — less peptide-focused, more performance-monitoring.",
+    channels: ["Reddit (fitness, supplement subreddits)", "Campus CrossFit and performance training community"],
+    message: "Track your protocols.",
+    note: "Supplement and performance culture is strong on college campuses, particularly in athletic communities. This persona skews younger here — less peptide-focused, more fitness-monitoring."
+  },
+
+  // Suburban Sprawl
+  "5-0": {
+    priority: "md", source: "inferred",
+    sourceDetail: "Sacramento has some appointment confirmation data in #donations but no qualitative Optimizer signal. Everything else inferred from demographic and platform-use patterns.",
+    channels: ["Instagram", "Facebook (suburban health groups)", "Local health influencers"],
+    message: "Know your numbers.",
+    note: "Dispersed population makes paid social less efficient. Facebook health groups are more relevant than Reddit. Message should emphasize convenience and affordability over optimization framing."
+  },
+  "5-1": {
+    priority: "md", source: "inferred",
+    sourceDetail: "Sacramento appointment confirmations in #donations (Quest-based) show some activity but no donor-type qualitative signal. All else inferred.",
+    channels: ["Quest / blood center in-center partnership", "Community flyers and local orgs", "Facebook community groups"],
+    message: "You already donate. Now get something back.",
+    note: "Some existing Quest donors in these markets. Community channel matters. Less blood bank loyalty than Southern markets — Vitalant / Blood Assurance culture doesn't apply the same way."
+  },
+  "5-2": {
+    priority: "hi", source: "inferred",
+    sourceDetail: "No direct GoodLabs data. Inferred from known high uninsured rates and large Hispanic populations in Sacramento, Phoenix, and Tampa. Spanish-language signal from #customer-texts supports the broader need.",
+    channels: ["Community health orgs", "Spanish-language Facebook and Instagram", "Local clinics and FQHCs", "In-center flyers"],
+    message: "Free bloodwork. No insurance needed.",
+    note: "High uninsured rates in Sun Belt sprawl cities. Large Hispanic populations in Sacramento, Phoenix, Tampa. Spanish-language is essential. Community partnership approach required — paid social alone won't reach this segment efficiently."
+  },
+  "5-3": {
+    priority: "md", source: "inferred",
+    sourceDetail: "No direct data. Inferred from general First-Timer behavior patterns and suburban Facebook usage patterns.",
+    channels: ["Instagram", "Facebook", "Friend referral"],
+    message: "Easy bloodwork, finally.",
+    note: "Facebook more effective than Reddit in suburban markets. Convenience is the primary message angle. Longer commute to donation centers is a real friction — center density matters for this market."
+  },
+  "5-4": {
+    priority: "lo", source: "inferred",
+    sourceDetail: "No direct data. Inferred from dispersed population and lower Protocol Tracker density outside coastal metro areas.",
+    channels: ["Reddit", "Local gym community"],
+    message: "—",
+    note: "Dispersed population; smaller community. Not a primary investment market for this segment."
+  }
+};
+
+function getPriorityLabel(p) {
+  if (p === "hi") return "High priority";
+  if (p === "md") return "Medium priority";
+  return "Low priority";
+}
+function getPriorityClass(p) {
+  return "pri-" + p;
+}
+function getPriorityHTML(p) {
+  return `<div class="cell-priority ${getPriorityClass(p)}"><span class="dot"></span>${getPriorityLabel(p)}</div>`;
+}
+
+// Build matrix rows
+const tbody = document.getElementById("matrixBody");
+MARKETS.forEach((market, mi) => {
+  const tr = document.createElement("tr");
+  // market header cell
+  const tdMkt = document.createElement("td");
+  tdMkt.className = "market-header";
+  tdMkt.innerHTML = `<span class="market-name">${market.name}</span><span class="market-examples">${market.examples}</span>`;
+  tr.appendChild(tdMkt);
+
+  // data cells
+  PERSONAS.forEach((persona, pi) => {
+    const key = `${mi}-${pi}`;
+    const data = CELLS[key];
+    const td = document.createElement("td");
+    td.className = "cell";
+    td.dataset.key = key;
+    td.dataset.market = market.name;
+    td.dataset.persona = persona;
+
+    const topChannels = data.channels.slice(0, 2);
+    const srcLabel = data.source === "data" ? "From data" : data.source === "partial" ? "Partial" : "Inferred";
+    td.innerHTML = `
+      <span class="src-badge src-${data.source}">${srcLabel}</span>
+      ${getPriorityHTML(data.priority)}
+      <div class="cell-channels">
+        ${topChannels.map(c => `<span class="ch-pill">${c}</span>`).join("")}
+      </div>
+    `;
+    td.addEventListener("click", () => openPanel(key, market.name, persona, data));
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+});
+
+// Panel logic
+let activeKey = null;
+const panel = document.getElementById("detailPanel");
+const wrap = document.getElementById("matrixWrap");
+
+function openPanel(key, market, persona, data) {
+  // deactivate old
+  if (activeKey) {
+    const old = document.querySelector(`[data-key="${activeKey}"]`);
+    if (old) old.classList.remove("active");
+  }
+  activeKey = key;
+  const td = document.querySelector(`[data-key="${key}"]`);
+  if (td) td.classList.add("active");
+
+  document.getElementById("panelMkt").textContent = market;
+  document.getElementById("panelPersona").textContent = persona;
+  document.getElementById("panelPriority").innerHTML = getPriorityHTML(data.priority);
+
+  const srcLabel = data.source === "data" ? "From data" : data.source === "partial" ? "Partial" : "Inferred";
+  const body = document.getElementById("panelBody");
+  body.innerHTML = `
+    <div class="panel-field">
+      <div class="panel-label">Data Source</div>
+      <span class="src-badge src-${data.source}">${srcLabel}</span>
+      <div class="panel-note" style="margin-top:8px">${data.sourceDetail}</div>
+    </div>
+    <div class="panel-field">
+      <div class="panel-label">Acquisition Channels</div>
+      <div class="channel-list">
+        ${data.channels.map(c => `<div class="channel-row">${c}</div>`).join("")}
+      </div>
+    </div>
+    <div class="panel-field">
+      <div class="panel-label">Message Angle</div>
+      <div class="msg-box">${data.message}</div>
+    </div>
+    <div class="panel-field">
+      <div class="panel-label">Market Notes</div>
+      <div class="panel-note">${data.note}</div>
+    </div>
+  `;
+
+  panel.classList.add("open");
+  wrap.classList.add("panel-open");
+}
+
+document.getElementById("panelClose").addEventListener("click", () => {
+  panel.classList.remove("open");
+  wrap.classList.remove("panel-open");
+  if (activeKey) {
+    const td = document.querySelector(`[data-key="${activeKey}"]`);
+    if (td) td.classList.remove("active");
+    activeKey = null;
+  }
+});
+</script>
