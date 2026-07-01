@@ -394,7 +394,7 @@
 
 <header class="page-header">
   <h1>Market × Persona Matrix</h1>
-  <p>GoodLabs · Donor Acquisition Strategy · June 2026 — click any cell for channels + messaging</p>
+  <p>GoodLabs · Donor Acquisition Strategy · July 2026 · 554 donors · 3 live orgs — click any cell for channels + messaging</p>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#2A7A50"></div>High priority</div>
     <div class="legend-item"><div class="legend-dot" style="background:#B07A10"></div>Medium priority</div>
@@ -417,24 +417,24 @@
           </div>
         </th>
         <th class="persona-header">
-          <span class="persona-name">Health Optimizer</span>
-          <span class="persona-tag">Seg. 1</span>
+          <span class="persona-name">The Optimizer</span>
+          <span class="persona-tag">12% · 65 donors · bio + repeat</span>
         </th>
         <th class="persona-header">
-          <span class="persona-name">Altruistic Regular Donor</span>
-          <span class="persona-tag">Seg. 2</span>
+          <span class="persona-name">The Habitual Altruist</span>
+          <span class="persona-tag">16% · 89 donors · repeat, no bio signal</span>
         </th>
         <th class="persona-header">
-          <span class="persona-name">Healthcare Gap Donor</span>
-          <span class="persona-tag">Seg. 3</span>
+          <span class="persona-name">The Access Seeker</span>
+          <span class="persona-tag">~25% · ~138 donors · healthcare gap</span>
         </th>
         <th class="persona-header">
-          <span class="persona-name">Curious First-Timer</span>
-          <span class="persona-tag">Seg. 4</span>
+          <span class="persona-name">The Curious Converter</span>
+          <span class="persona-tag">26% · 144 donors · bio signal, not yet repeat</span>
         </th>
         <th class="persona-header">
-          <span class="persona-name">Protocol Tracker</span>
-          <span class="persona-tag">Seg. 5</span>
+          <span class="persona-name">The Social Responder</span>
+          <span class="persona-tag">~21% · ~118 donors · IG/TikTok acquired</span>
         </th>
       </tr>
     </thead>
@@ -457,15 +457,15 @@
 const MARKETS = [
   {
     name: "Urban Tech Hub",
-    examples: "SF, NYC, Seattle, Austin",
+    examples: "SF Bay Area · Vitalant · 262 donors",
   },
   {
     name: "Mid-size Southern City",
-    examples: "Nashville, Chattanooga, Atlanta",
+    examples: "Nashville, Chattanooga · Blood Assurance · 179 donors · launched May 2026",
   },
   {
     name: "Government & Professional Hub",
-    examples: "DC, Denver, Raleigh",
+    examples: "DC suburbs, NoVA · Inova · 90 donors",
   },
   {
     name: "Rust Belt / Mid-size City",
@@ -482,238 +482,238 @@ const MARKETS = [
 ];
 
 const PERSONAS = [
-  "Health Optimizer",
-  "Altruistic Regular Donor",
-  "Healthcare Gap Donor",
-  "Curious First-Timer",
-  "Protocol Tracker"
+  "The Optimizer",
+  "The Habitual Altruist",
+  "The Access Seeker",
+  "The Curious Converter",
+  "The Social Responder"
 ];
 
 // priority: "hi" | "md" | "lo"
-// channels: string[]
-// message: string
-// note: string
+// source: "data" | "partial" | "inferred"
+// channels: string[], message: string, note: string
 const CELLS = {
-  // Urban Tech Hub
+
+  // ── Urban Tech Hub (Vitalant, SF Bay Area, 262 donors) ──────────────────
   "0-0": {
     priority: "hi", source: "data",
-    sourceDetail: "Instagram dominant in #donations referral data; Reddit r/SF and r/goodlabs organic; staff in-person SF observations; multiple Optimizer profiles observed (pharmacist, tech professionals)",
-    channels: ["Instagram (health/longevity ads)", "Reddit (r/goodlabs, r/SF, r/longevity)", "Huberman-adjacent podcasts", "Word-of-mouth among health professionals"],
+    sourceDetail: "Vitalant segment data: 75% of Optimizer donors are CA-based. Top referral source: friend_family (13 known), trainer (2). Avg 40.9 unique biomarkers — highest engagement of any segment. 88% repeat rate. Word-of-mouth driven, not paid social. Multiple health professionals observed (pharmacist, tech workers).",
+    channels: ["Word-of-mouth / friend + trainer referral", "Reddit (r/longevity, r/goodlabs)", "Huberman-adjacent podcasts", "Instagram (health optimization creative)"],
     message: "Know your numbers. Donate while you're at it.",
-    note: "Tech workers are price-sensitive about healthcare but spend freely on health optimization. The pharmacist story (Nashville) maps well to this market — 'data guy' framing converts. Reddit organic community is already seeding itself."
+    note: "This segment self-selects into GoodLabs. Vitalant market is producing nearly all Optimizer donors nationally — 75% CA concentration. The acquisition channel is trust networks (trainers, friends in health communities), not paid social. Reddit is already seeding itself organically."
   },
   "0-1": {
     priority: "md", source: "data",
-    sourceDetail: "Vitalant brand confusion observed in SF (UX feedback, a documented 'wrong location' incident); multiple rescheduling and cancellation events at SF centers; donor who said 'I'll just come without GoodLabs' after wait time friction",
-    channels: ["Vitalant / NY Blood Center in-center partnership", "In-center signage + staff FAQ", "Friend and family referral"],
+    sourceDetail: "Vitalant repeat rate: 18% — highest of the three live orgs. Friend_family dominant referral for this segment (30 known across all markets). CMP and testosterone panels popular at Vitalant, suggesting habitual donors with some health interest. Brand confusion (GoodLabs vs. Vitalant) documented in #customer-texts.",
+    channels: ["Vitalant in-center signage + staff FAQ", "Friend and family referral", "Community referral programs"],
     message: "You already donate. Now get something back.",
-    note: "Donation culture exists but is less ingrained than in Southern markets. The two-entity brand confusion (GoodLabs / Vitalant) is especially acute in SF — Vitalant branding doesn't feel local or trusted in the same way Blood Assurance does in Nashville."
+    note: "Vitalant's 18% repeat rate is the benchmark for a mature market. Habitual Altruists here have some health interest (CMP, testosterone panels) but aren't full Optimizers — they're upgradeable. In-center activation is the highest-leverage channel; brand confusion with Vitalant is a real friction to address."
   },
   "0-2": {
     priority: "md", source: "partial",
-    sourceDetail: "Spanish-speaking donor in #customer-texts; Medicaid and no-insurance responses in #care-nav; donor email explicitly noting no insurance; not all geo-tagged to SF specifically",
+    sourceDetail: "Spanish-speaking donor in #customer-texts; Medicaid and uninsured responses in #care-nav (20% uninsured overall); donor email explicitly noting no insurance. Care-nav data is not donor-specific so counts are mixed with direct-pay population. Uninsured gig worker presence in SF Bay Area is well-documented.",
     channels: ["Community health orgs", "Spanish-language Instagram + Facebook", "In-center flyers in low-income zip codes", "Gig worker / service worker channels"],
     message: "Free bloodwork. No insurance needed.",
-    note: "Significant uninsured gig worker and service worker population in tech cities. This segment is present but harder to activate via paid social alone — community partnerships required. Spanish-language support is a near-term need."
+    note: "Significant uninsured gig and service worker population in tech cities despite high cost of living. Harder to reach via paid social alone — community partnerships required. Spanish-language support is a near-term need."
   },
   "0-3": {
     priority: "hi", source: "data",
-    sourceDetail: "Ad-to-donation under 12 hours observed (staff note); downtown SF field observations (3 returning donors, Instagram dominant, lunch-break workers); multiple Reddit-sourced first-timers; Instagram-referred donors; majority of donation orders are first-time (is_first_donation_order: true)",
-    channels: ["TikTok", "Instagram", "Local subreddits (r/sanfrancisco, etc.)", "Friend referral"],
+    sourceDetail: "Biohacker signal = true, repeat = false: 144 donors, 63 in CA. Instagram (12), Reddit (6), TikTok (6) are top referral sources for this segment. Avg 43.3 biomarkers — highest raw curiosity of any segment. Ad-to-donation under 12 hours documented in SF. 0% repeat yet — key conversion window is 56-day re-eligibility.",
+    channels: ["Instagram (curiosity-driven creative)", "Reddit (r/sanfrancisco, r/longevity)", "TikTok", "Friend referral"],
     message: "The easiest way to finally get your bloodwork done.",
-    note: "Ad-to-donation in under 12 hours observed in SF. Fast conversion when creative lands. The post-result Barry experience is the conversion lever for retention — if results feel interesting, they come back."
+    note: "Fastest-converting segment in SF — ad to donation in under 12 hours documented. They come for the data curiosity. The post-result Barry experience is the conversion lever: if first results feel meaningful, they become Optimizers. The 56-day re-eligibility window is the retention moment to own."
   },
   "0-4": {
     priority: "hi", source: "data",
-    sourceDetail: "Reddit r/ResearchCompounds and r/BodyHackGuide organic posts; care-nav respondent on peptides and gray-market stacks; donor requesting LLM caching feature and building own health platform; Facebook inquiry about TB-500/BPC-157 baseline testing",
+    sourceDetail: "Reddit r/ResearchCompounds and r/BodyHackGuide organic posts; care-nav respondent on peptides and gray-market stacks; donor requesting LLM caching feature and building own health platform; Facebook inquiry about TB-500/BPC-157 baseline testing. This persona maps to the Curious Converter segment but with protocol-specific intent.",
     channels: ["Reddit (r/Peptides, r/longevity, r/BodyHackGuide)", "Biohacking forums + Discord", "Direct search ('free testosterone test')", "Word-of-mouth in longevity circles"],
     message: "Test what your doctor won't order.",
-    note: "Highest concentration of this persona nationally. Already discussing GoodLabs organically on Reddit. Wants custom panels and a less conservative Barry. Privacy-aware — data use messaging matters."
+    note: "Highest concentration of protocol-tracking behavior nationally. Already discussing GoodLabs organically on Reddit. Wants custom panels and a less conservative Barry. Privacy-aware — data use messaging matters. This persona overlaps heavily with The Curious Converter in Vitalant markets."
   },
 
-  // Mid-size Southern City
+  // ── Mid-size Southern City (Blood Assurance, Nashville/Chattanooga, 179 donors, launched May 2026) ───
   "1-0": {
     priority: "md", source: "data",
-    sourceDetail: "Nashville pharmacist (sales call) — gym referral source visible in #donations events; enthusiastic Chattanooga donor; gym as referral source in donations data",
-    channels: ["Instagram", "Gym partnerships (CrossFit, fitness studios)", "Local health influencers"],
+    sourceDetail: "Blood Assurance #donations data: gym as referral source in multiple orders. Men's Hormone (11), Cortisol (11), and Thyroid (11) panels popular — performance and wellness orientation. Nashville pharmacist (sales call) is the archetype. Instagram also a referral source. Note: Blood Assurance launched May 2026 — repeat data not yet meaningful.",
+    channels: ["Instagram", "Gym partnerships (CrossFit, fitness studios)", "Local health influencers", "Word-of-mouth"],
     message: "Know your numbers.",
-    note: "Health optimization culture is growing in Southern cities but is less tech-saturated. Gym channel is relatively stronger here than on the coasts. Message should lean into performance and vitality over longevity/biohacking framing."
+    note: "Health optimization culture is growing in Southern cities but less tech-saturated. Gym channel stronger here than on coasts. Hormone and cortisol panel interest suggests performance + vitality framing over longevity/biohacking. Market launched May 2026 — Optimizer segment is early stage here."
   },
   "1-1": {
     priority: "hi", source: "data",
-    sourceDetail: "Nashville pharmacist was pre-existing Blood Assurance donor who trusted BA before GoodLabs; Chattanooga donor described as 'incredibly enthusiastic'; gym referral source in donations; West End Donor Center most active in #donations data; friend_family is second-largest referral source overall",
-    channels: ["Blood Assurance / LifeSouth in-center (signage, staff)", "Church and civic org partnerships", "Gym community word-of-mouth", "Friend and family referral"],
+    sourceDetail: "Blood Assurance: friend_family is second-largest referral source (20 orders). Nashville pharmacist was a pre-existing Blood Assurance donor who trusted BA before GoodLabs. West End Donor Center most active in #donations. Chattanooga donor described as 'incredibly enthusiastic.' Blood Assurance launched May 2026 — 93% first-timers is launch math, not a retention problem. Repeat rate data meaningful starting ~Aug 2026.",
+    channels: ["Blood Assurance in-center (signage, staff FAQ)", "Friend and family referral", "Church and civic org partnerships", "Gym community word-of-mouth"],
     message: "Keep giving. Start knowing.",
-    note: "The strongest market for this persona nationally. Deep Blood Assurance culture in Nashville and Chattanooga — the pharmacist story is the template. Staff FAQs at donation centers are high-leverage here. Community trust is the moat."
+    note: "Strongest market for this persona nationally. Deep Blood Assurance trust in Nashville and Chattanooga — the pharmacist story is the template. 93% first-timers reflects May 2026 launch, not churn. First repeat cohort becomes eligible Aug 2026. Staff FAQs at donation centers are highest-leverage activation channel."
   },
   "1-2": {
     priority: "hi", source: "partial",
-    sourceDetail: "Medicaid and no-insurance responses in #care-nav; donor email explicitly mentioning no insurance; known demographic — Southern states have higher uninsured rates than national average. Not directly geo-tagged to Nashville in the data.",
+    sourceDetail: "Medicaid and uninsured responses in #care-nav; donor email explicitly mentioning no insurance; Southern states have higher uninsured rates than national average (TN ~11% uninsured). News and poster referral sources visible in Blood Assurance donor data — community-channel acquisition already happening. Not directly geo-tagged to Nashville in all cases.",
     channels: ["Community health fairs", "FQHCs and community health centers", "Spanish-language social (Facebook dominant)", "In-center flyers in lower-income zip codes"],
     message: "Free bloodwork. No insurance needed.",
-    note: "Higher uninsured rates in Southern states. Significant Hispanic communities in Nashville, Atlanta, and Chattanooga. Spanish-language support is essential, not optional. Research trial participation as a retention mechanism is especially relevant here."
+    note: "Higher uninsured rates in Southern states. News and poster referrals suggest this segment is already self-activating through community channels. Spanish-language support is essential — significant Hispanic communities in Nashville and Chattanooga. Research trial participation is a relevant retention mechanism."
   },
   "1-3": {
-    priority: "md", source: "partial",
-    sourceDetail: "TikTok appears as referral source in #donations data (2 donors at West End/Blood Assurance). Small sample but directionally consistent with TikTok's stronger Southern penetration.",
-    channels: ["TikTok (strong penetration in Southern markets)", "Instagram", "Gym community word-of-mouth"],
+    priority: "hi", source: "data",
+    sourceDetail: "Blood Assurance: Instagram is dominant referral (52 orders — largest single-channel count of any org). TikTok appears as referral source at West End. 93% first-timers reflects May 2026 launch cadence. Avg 43.3 biomarkers in biohacker-signal segment. This is the primary acquisition cohort driving the Nashville launch surge (154 signups May 2026).",
+    channels: ["Instagram (dominant — 52 BA orders)", "TikTok (strong Southern penetration)", "Friend referral", "News / earned media"],
     message: "Easiest way to get your bloodwork done.",
-    note: "TikTok is disproportionately strong in Southern markets. Conversion is possible but the physical density of donation centers matters — access is more of a barrier here than in SF."
+    note: "Instagram is driving the Blood Assurance launch — 52 attributed orders, far higher than any other channel. TikTok has strong Southern penetration. The May 2026 surge (154 signups) was largely this segment responding to social creative. Post-result activation is the next challenge — converting Instagram-driven first-timers into Curious Converters."
   },
   "1-4": {
     priority: "lo", source: "inferred",
-    sourceDetail: "No direct Protocol Tracker signals from Nashville or Chattanooga data. Inferred from general gym culture being strong in the South and this persona existing at low density in all markets.",
-    channels: ["Reddit (niche fitness/peptide)", "Local gym community"],
-    message: "Track your protocols.",
-    note: "Smaller population of this persona in Southern cities, but gym culture is strong. Worth seeding in CrossFit and performance training communities, but not a primary investment market for this segment."
+    sourceDetail: "No direct Social Responder signals distinct from Curious Converter in Blood Assurance data. The 'neither signal' cohort in TN (98 donors) likely splits between Access Seekers and Social Responders. Instagram/TikTok acquisition is confirmed; intent split is inferred.",
+    channels: ["Instagram", "TikTok", "Local community word-of-mouth"],
+    message: "See what donating actually does for you.",
+    note: "Lower intrinsic health motivation than the Curious Converter segment. Will likely need a compelling first-result experience to re-engage. Blood Assurance's Instagram reach means this segment is being acquired at scale — activation quality of first visit is the key variable."
   },
 
-  // Government & Professional Hub
+  // ── Government & Professional Hub (Inova, NoVA/DC, 90 donors) ──────────
   "2-0": {
-    priority: "hi", source: "inferred",
-    sourceDetail: "No direct GoodLabs data from DC or Denver. Inferred from: educated professional demographic, health-conscious workforce patterns, and Optimizer persona being strong wherever health-aware professionals cluster.",
-    channels: ["Instagram", "LinkedIn (workplace wellness angle)", "Podcast (policy/health/wellness adjacent)", "Employer wellness programs"],
+    priority: "hi", source: "partial",
+    sourceDetail: "Inova data: 20% repeat rate (highest of live orgs). Heart Health (5) and Nutrient (3) panels popular — health-aware professional orientation. Instagram (11 orders) and gym (2) referral sources observed. 80% first-timers, but 20% repeat suggests health-oriented base converting well. Professional DC/NoVA demographic strongly associated with health optimization culture.",
+    channels: ["Instagram", "Gym partnerships", "LinkedIn (workplace wellness angle)", "Employer wellness programs"],
     message: "Optimize like the data-driven professional you are.",
-    note: "Educated, health-conscious federal and professional workforce. DC skews older and more institutional than SF — 'longevity' framing may resonate more than 'biohacker.' Employer wellness program partnerships could be a unique channel here."
+    note: "Inova's 20% repeat rate is the highest of any live org — this market is producing the most repeat-donor Optimizers per capita. Heart Health and nutrient panel interest reflects an older, more preventive-care-oriented professional demographic vs. SF's performance focus. Employer wellness programs are a distinctive channel in this market."
   },
   "2-1": {
     priority: "hi", source: "partial",
-    sourceDetail: "One DC/Inova donor — already donates platelets + plasma with Red Cross, offered to be point person for an Inova blood drive, interested in genetic testing. Single data point but a very rich one. Everything else inferred.",
-    channels: ["Inova in-center partnership", "Federal employee wellness programs", "Civic and community orgs", "Friend referral"],
+    sourceDetail: "Inova repeat rate 20% — highest of all live orgs. Friend_family referral confirmed (2 Inova orders). One DC-area donor already donates platelets + plasma with Red Cross, offered to organize a blood drive, interested in genetic testing. Community donation culture is strong in the DC area (federal employee drives, etc.).",
+    channels: ["Inova in-center partnership", "Federal employee wellness programs", "Friend and family referral", "Civic and community orgs"],
     message: "Continue your donation habit. Get your labs back.",
-    note: "The DC/Inova donor profile is the template — already donates platelets and plasma with Red Cross, offered to organize blood drives. DC has strong civic donation culture. Inova partnership is the primary acquisition lever."
+    note: "DC has strong civic donation culture — the Red Cross donor profile is the template here. Inova's 20% repeat rate confirms this segment is active and converting. Federal employee wellness programs are a unique, high-efficiency channel not available in other markets."
   },
   "2-2": {
     priority: "md", source: "inferred",
-    sourceDetail: "No direct data from DC. Inferred from known DC demographic geography (mixed income, large immigrant communities) and the broader care-nav insurance signal across all markets.",
-    channels: ["Community health orgs", "In-center flyers low-income zip codes", "Multilingual outreach (Spanish, Amharic in DC)"],
+    sourceDetail: "No direct Access Seeker data from DC/NoVA. Inferred from care-nav insurance breakdown (20% uninsured across all markets) and known DC demographic geography (mixed income, large immigrant communities). Inova market serves both affluent NoVA suburbs and lower-income DC zip codes.",
+    channels: ["Community health orgs", "In-center flyers in lower-income zip codes", "Multilingual outreach (Spanish, Amharic in DC)"],
     message: "Free bloodwork. No insurance needed.",
-    note: "Mixed income geography — affluent suburbs alongside underserved urban areas. Community partnership approach required. DC's Ethiopian and Latino communities are large and underserved."
+    note: "Mixed income geography — affluent suburbs (Fairfax, Centreville, Ashburn) alongside underserved urban areas in DC. Community partnership approach required. DC's Ethiopian and Latino communities are large and underserved medically."
   },
   "2-3": {
-    priority: "md", source: "inferred",
-    sourceDetail: "No direct data from DC or government hub markets. Inferred from professional demographic and general First-Timer behavior patterns observed in SF.",
-    channels: ["Instagram", "Workplace wellness / employee referral", "Friend referral"],
+    priority: "hi", source: "data",
+    sourceDetail: "Inova: Instagram dominant (11 orders), gym referrals (2). 80% first-timers — healthy first-timer rate for a non-launch market. Biohacker-signal donors in VA: 26 donors. Heart Health and CMP panels suggest health-aware but not yet habitual. Professional demographic responds to efficiency and data messaging.",
+    channels: ["Instagram", "Gym partnerships", "Workplace wellness / employee referral", "Friend referral"],
     message: "Finally, easy bloodwork.",
-    note: "Professional population responds well to convenience and efficiency messaging. Less social-discovery-driven than SF or college towns. Employer channels may be more effective than consumer social here."
+    note: "Instagram is driving Curious Converter acquisition at Inova — 11 attributed orders. The professional DC/NoVA demographic responds to convenience and quality-of-data messaging. This segment has strong conversion potential to Optimizer given the market's 20% repeat base. Employer channels may be more effective than consumer social here."
   },
   "2-4": {
     priority: "md", source: "inferred",
-    sourceDetail: "No direct data. Inferred from known military/government health culture and Protocol Tracker persona's privacy sensitivity aligning with this market's security-conscious population.",
-    channels: ["Reddit", "Direct search", "Military and government health community networks"],
-    message: "Test what your doctor won't order.",
-    note: "Military and government health community has a meaningful Protocol Tracker cohort — performance monitoring, peptide use, and self-directed health are common. Privacy sensitivity is high in this market."
+    sourceDetail: "No direct Social Responder data from Inova/DC. Inferred from Instagram being the dominant acquisition channel and the 'neither signal' cohort existing in all markets. DC's security-conscious culture may mean lower social-media-motivated acquisition than other markets.",
+    channels: ["Instagram", "Friend referral", "Reddit"],
+    message: "See what your blood can tell you.",
+    note: "Lower priority in this market — the Inova population skews toward health-aware professionals who convert more easily to Curious Converters than pure Social Responders. Social media acquisition exists but intrinsic motivation is higher here than in Nashville."
   },
 
-  // Rust Belt / Mid-size City
+  // ── Rust Belt / Mid-size City (aspirational — no live org) ─────────────
   "3-0": {
     priority: "md", source: "inferred",
-    sourceDetail: "No direct GoodLabs data from Pittsburgh or Cleveland. Inferred from Optimizer persona being present at medium density in all markets with health-aware populations.",
+    sourceDetail: "No live GoodLabs org in Rust Belt markets. Inferred from Optimizer persona being present wherever health-aware populations cluster. Facebook meaningfully stronger in these markets than Reddit.",
     channels: ["Instagram", "Facebook (stronger in this market)", "Local health influencers"],
     message: "Know your numbers.",
-    note: "Growing health awareness but less digitally-native than coastal markets. Facebook is meaningfully more effective than Reddit for reaching this population. Message should avoid overly technical biohacking framing."
+    note: "Growing health awareness but less digitally-native than coastal markets. Facebook health groups are more effective than Reddit here. Message should avoid biohacking framing — vitality and longevity language resonates more."
   },
   "3-1": {
     priority: "hi", source: "partial",
-    sourceDetail: "Pittsburgh NPS respondent explicitly stated: 'Bringing the free donation blood test to Pittsburgh, PA area would be a game changer for everyone around me since we all donate blood to Vitalant anyway.' Single data point, but unusually direct market signal.",
-    channels: ["Vitalant in-center partnership (Pittsburgh, Cleveland)", "Community referral and word-of-mouth", "Local civic orgs and churches"],
+    sourceDetail: "Pittsburgh NPS respondent stated: 'Bringing the free donation blood test to Pittsburgh, PA area would be a game changer for everyone around me since we all donate blood to Vitalant anyway.' Single data point, but unusually direct market signal. Vitalant operates in Pittsburgh and Cleveland.",
+    channels: ["Vitalant in-center partnership (Pittsburgh, Cleveland)", "Friend and community referral", "Local civic orgs and churches"],
     message: "You already give to Vitalant. Now get labs too.",
-    note: "A Pittsburgh NPS respondent explicitly called this a 'game changer' because people here already donate to Vitalant anyway. The activation cost is low — existing donors just need to hear about GoodLabs once. In-center is the highest-leverage channel."
+    note: "The Pittsburgh NPS respondent is the template: existing Vitalant donor, strong community ties, would bring their network. Activation cost is low — existing donors just need to hear about GoodLabs once. In-center is the highest-leverage channel and Vitalant infrastructure already exists."
   },
   "3-2": {
     priority: "hi", source: "inferred",
-    sourceDetail: "No direct GoodLabs data. Inferred from known higher uninsured/underinsured rates in Rust Belt cities and the Healthcare Gap persona's demonstrated presence in all markets with economic stress.",
+    sourceDetail: "No direct GoodLabs data. Inferred from known higher uninsured/underinsured rates in Rust Belt cities and Access Seeker persona's demonstrated presence across all economically stressed markets.",
     channels: ["Community health orgs", "FQHCs", "Church partnerships", "Spanish-language Facebook"],
     message: "Free bloodwork. No insurance needed.",
     note: "High uninsured and underinsured rates. Economically stressed communities where free bloodwork has the most impact. Community trust channels matter more than paid social."
   },
   "3-3": {
     priority: "lo", source: "inferred",
-    sourceDetail: "No direct data. Inferred from lower social-discovery penetration in non-coastal markets and slower TikTok/Reddit conversion patterns observed indirectly.",
+    sourceDetail: "No direct data. Inferred from lower social-discovery penetration in non-coastal markets.",
     channels: ["Facebook", "Instagram", "Local community Facebook groups"],
     message: "First bloodwork, free.",
-    note: "Less social-discovery-driven than coastal markets. Community channels and word-of-mouth are more effective than TikTok or Reddit here. Lower priority because conversion funnel is longer."
+    note: "Less social-discovery-driven than coastal markets. Community channels and word-of-mouth are more effective than TikTok or Reddit. Lower priority — conversion funnel is longer without strong social infrastructure."
   },
   "3-4": {
     priority: "lo", source: "inferred",
-    sourceDetail: "No direct data. Inferred from lower population density of this persona outside major coastal metro areas.",
-    channels: ["Reddit", "Local fitness community"],
+    sourceDetail: "No direct data. Inferred from lower Social Responder density outside major coastal metros where Instagram/TikTok health content is most prevalent.",
+    channels: ["Instagram", "Local Facebook groups"],
     message: "—",
-    note: "Small population, lower density. Not a primary investment market for this segment. May emerge as the market matures."
+    note: "Small population, lower social-media density. Not a primary investment market for this segment. May grow as the market matures."
   },
 
-  // College Town
+  // ── College Town (aspirational — no live org) ───────────────────────────
   "4-0": {
     priority: "md", source: "inferred",
-    sourceDetail: "No direct GoodLabs data from college towns. A Santa Clara college student observed in SF is adjacent — college-age, health-curious — but not from a college town context. Everything else inferred from demographic reasoning.",
+    sourceDetail: "No direct GoodLabs data from college towns. A Santa Clara college student observed in SF is adjacent — college-age, health-curious — but not in a college town context. Nutrient and performance panels ordered by younger donors are adjacent signals.",
     channels: ["Instagram", "Campus health channels", "Reddit (university subreddits)"],
     message: "Know your numbers.",
-    note: "Health-conscious student athletes and grad students are a real cohort. Student athlete panels (nutrient, performance) may be especially resonant. Campus health center partnerships could be a cost-effective channel."
+    note: "Student athletes and health-conscious grad students are a real cohort. Nutrient and performance panels may be especially resonant. Campus health center partnerships could be a cost-effective channel."
   },
   "4-1": {
     priority: "lo", source: "inferred",
-    sourceDetail: "No direct data. Inferred from younger donor demographics being less habitual about blood donation. Campus blood drives are a known channel nationally but GoodLabs has no observed college town presence.",
+    sourceDetail: "No direct data. Inferred from younger donor demographics being less habitual about blood donation. Campus blood drives are a known national channel but GoodLabs has no college town presence.",
     channels: ["Campus blood drives", "Existing donor referral (upperclassmen)"],
     message: "Donate and actually see your results.",
-    note: "Younger population donates less consistently. Campus blood drives are an opportunity to introduce GoodLabs but the donation cycle habit isn't established yet. Worth seeding, not a primary investment."
+    note: "Younger population donates less consistently. Campus blood drives are an opportunity to introduce GoodLabs but habit isn't established yet. Worth seeding, not a primary investment."
   },
   "4-2": {
     priority: "hi", source: "inferred",
-    sourceDetail: "No direct data. Inferred from known high uninsured rate among graduate and international students nationally. A college student observed visiting SF (Reddit-sourced) is a loose adjacent data point.",
+    sourceDetail: "No direct data. Inferred from known high uninsured rate among grad students and international students nationally. A college student observed visiting SF (Reddit-sourced) is a loose adjacent signal.",
     channels: ["Campus health centers", "Graduate student org partnerships", "International student outreach", "In-center flyers"],
     message: "Free bloodwork. No insurance needed.",
-    note: "Grad students, international students, and part-time workers are frequently uninsured. This is a high-density Healthcare Gap cohort in a small geography. University health center partnerships could be unusually efficient."
+    note: "Grad students, international students, and part-time workers are frequently uninsured. High-density Access Seeker cohort in a small geography. University health center partnerships could be unusually efficient."
   },
   "4-3": {
     priority: "hi", source: "partial",
-    sourceDetail: "Santa Clara comp sci student observed in SF — enthusiastic about GoodLabs, wanted to organize a campus hackathon around it. College student visiting SF (Reddit-sourced). Both observed in SF not a college town, but strong college-age profile. TikTok conversion data from #donations supports high First-Timer conversion via social.",
+    sourceDetail: "Santa Clara comp sci student observed in SF — enthusiastic, wanted to organize a campus hackathon around GoodLabs. Reddit-sourced college student also observed in SF. Both in SF not a college town but strong college-age profile. TikTok conversion data from #donations supports high Curious Converter conversion via social for this demographic.",
     channels: ["TikTok", "Instagram", "Campus word-of-mouth and student orgs", "Greek life / campus social networks"],
     message: "Your first bloodwork. Free.",
-    note: "Highest TikTok penetration of any market type. Social proof travels extremely fast on campus — one viral moment can fill a week of appointments. The Santa Clara comp sci student profile is the template: young, health-curious, wants to organize a campus event around it."
+    note: "Highest TikTok penetration of any market type. Social proof travels fast on campus — one viral moment can fill a week of appointments. The Santa Clara comp sci student is the template: young, health-curious, wants to organize a campus event. The Curious Converter JTBD ('I want to know what my blood says') is especially strong for first-time-health-data college students."
   },
   "4-4": {
     priority: "md", source: "inferred",
-    sourceDetail: "No direct data. Inferred from known supplement and fitness culture in college athletic communities. This persona skews younger in this market — less peptide-focused, more performance-monitoring.",
-    channels: ["Reddit (fitness, supplement subreddits)", "Campus CrossFit and performance training community"],
-    message: "Track your protocols.",
-    note: "Supplement and performance culture is strong on college campuses, particularly in athletic communities. This persona skews younger here — less peptide-focused, more fitness-monitoring."
+    sourceDetail: "No direct data. Inferred from Instagram and TikTok being dominant acquisition channels for the under-25 demographic and Social Responder behavior being driven by social proof.",
+    channels: ["TikTok", "Instagram", "Campus word-of-mouth"],
+    message: "Everyone's doing it. See what they're seeing.",
+    note: "Social proof is the primary driver in this market. Campus Social Responders are more convertible than in other markets — peer influence is unusually strong and the first-result experience can rapidly shift them to Curious Converter behavior."
   },
 
-  // Suburban Sprawl
+  // ── Suburban Sprawl (aspirational — no live org) ────────────────────────
   "5-0": {
     priority: "md", source: "inferred",
-    sourceDetail: "Sacramento has some appointment confirmation data in #donations but no qualitative Optimizer signal. Everything else inferred from demographic and platform-use patterns.",
+    sourceDetail: "Sacramento has appointment confirmation data in #donations (Quest-based) but no Optimizer-specific qualitative signal. Everything else inferred from demographic and platform-use patterns.",
     channels: ["Instagram", "Facebook (suburban health groups)", "Local health influencers"],
     message: "Know your numbers.",
-    note: "Dispersed population makes paid social less efficient. Facebook health groups are more relevant than Reddit. Message should emphasize convenience and affordability over optimization framing."
+    note: "Dispersed population makes paid social less efficient. Facebook health groups are more relevant than Reddit in these markets. Message should emphasize convenience and affordability over optimization framing."
   },
   "5-1": {
     priority: "md", source: "inferred",
-    sourceDetail: "Sacramento appointment confirmations in #donations (Quest-based) show some activity but no donor-type qualitative signal. All else inferred.",
+    sourceDetail: "Sacramento Quest-based appointment confirmations in #donations suggest some habitual donor activity. No donor-type qualitative signal. All else inferred from market demographics.",
     channels: ["Quest / blood center in-center partnership", "Community flyers and local orgs", "Facebook community groups"],
     message: "You already donate. Now get something back.",
-    note: "Some existing Quest donors in these markets. Community channel matters. Less blood bank loyalty than Southern markets — Vitalant / Blood Assurance culture doesn't apply the same way."
+    note: "Some existing Quest donors in these markets. Less blood bank loyalty than Southern markets — Vitalant / Blood Assurance community culture doesn't translate the same way. In-center activation is still the primary lever."
   },
   "5-2": {
     priority: "hi", source: "inferred",
-    sourceDetail: "No direct GoodLabs data. Inferred from known high uninsured rates and large Hispanic populations in Sacramento, Phoenix, and Tampa. Spanish-language signal from #customer-texts supports the broader need.",
+    sourceDetail: "No direct GoodLabs data. Inferred from known high uninsured rates and large Hispanic populations in Sacramento, Phoenix, Tampa. Spanish-language acquisition signal from #customer-texts supports the broader need across markets.",
     channels: ["Community health orgs", "Spanish-language Facebook and Instagram", "Local clinics and FQHCs", "In-center flyers"],
     message: "Free bloodwork. No insurance needed.",
-    note: "High uninsured rates in Sun Belt sprawl cities. Large Hispanic populations in Sacramento, Phoenix, Tampa. Spanish-language is essential. Community partnership approach required — paid social alone won't reach this segment efficiently."
+    note: "High uninsured rates in Sun Belt sprawl cities. Large Hispanic populations in Sacramento, Phoenix, Tampa. Spanish-language is essential. Community partnership approach required — paid social alone won't efficiently reach this segment."
   },
   "5-3": {
     priority: "md", source: "inferred",
-    sourceDetail: "No direct data. Inferred from general First-Timer behavior patterns and suburban Facebook usage patterns.",
+    sourceDetail: "No direct data. Inferred from Instagram being a universal first-time-donor acquisition channel and suburban Facebook usage patterns for health content.",
     channels: ["Instagram", "Facebook", "Friend referral"],
     message: "Easy bloodwork, finally.",
-    note: "Facebook more effective than Reddit in suburban markets. Convenience is the primary message angle. Longer commute to donation centers is a real friction — center density matters for this market."
+    note: "Facebook more effective than Reddit in suburban markets. Convenience is the primary message angle. Longer commutes to donation centers are a real friction — center density matters for conversion in this market."
   },
   "5-4": {
     priority: "lo", source: "inferred",
-    sourceDetail: "No direct data. Inferred from dispersed population and lower Protocol Tracker density outside coastal metro areas.",
-    channels: ["Reddit", "Local gym community"],
+    sourceDetail: "No direct data. Inferred from dispersed population and lower social-media health content density outside major metro areas.",
+    channels: ["Instagram", "Local Facebook groups"],
     message: "—",
-    note: "Dispersed population; smaller community. Not a primary investment market for this segment."
+    note: "Dispersed population; limited social infrastructure. Not a primary investment market for this segment."
   }
 };
 
