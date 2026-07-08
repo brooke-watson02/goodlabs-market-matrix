@@ -511,6 +511,10 @@ const MARKETS = [
   {
     name: "Suburban Sprawl",
     examples: "Sacramento, Phoenix, Tampa",
+  },
+  {
+    name: "Rural Southern Town",
+    examples: "Rome, GA · Gadsden, AL · NE Georgia · Blood Assurance territory",
   }
 ];
 
@@ -785,6 +789,48 @@ const CELLS = {
     message: "It's at your office. Free. Takes 20 minutes.",
     testMethods: ["survey"],
     note: "Employer and community blood drives are the natural trigger in suburban markets. The interest is latent; the event removes every barrier. Without a live org partner the volume is untapped. Low priority to build from scratch — high priority once a partner is in place and drive events can be activated."
+  },
+
+  // ── Rural Southern Town (Blood Assurance territory — Rome GA, Gadsden AL) ─
+  "6-0": {
+    priority: "lo", source: "inferred",
+    sourceDetail: "No direct GoodLabs data from rural Southern markets. Inferred from Optimizer persona requiring high health data awareness and digital fluency — both lower in rural demographics. Small cohort even in live markets.",
+    channels: ["Local health influencers", "Facebook health groups", "Gym and CrossFit"],
+    message: "Know your numbers.",
+    testMethods: ["survey"],
+    note: "Small cohort in rural markets. Health optimization culture exists but is less digitally-driven. Not a primary investment segment here — energy is better spent on Altruist and Access Seeker who are much larger and more accessible."
+  },
+  "6-1": {
+    priority: "hi", source: "partial",
+    sourceDetail: "Blood Assurance has deep roots in northeast Georgia and operates donation centers in Rome, GA. Church and civic blood drives are a documented acquisition channel in BA's service area. Friend_family referral is the dominant signal in BA data broadly. Rural Southern communities have high blood donation participation rates nationally.",
+    channels: ["Blood Assurance in-center (Rome, GA)", "Church blood drives", "Civic orgs (Rotary, Lions Club, VFW)", "Friend and family referral"],
+    message: "Giving is what this community does. Now you get something back.",
+    testMethods: ["interview", "survey"],
+    note: "The highest-potential persona in this market. Blood donation is a civic and religious identity in rural Southern towns — not a transaction. The Altruist here gives because their church does it, their parents did it, their neighbors do it. GoodLabs fits naturally as the benefit that makes a deeply-held habit more tangible. Blood Assurance's existing community relationships are the activation infrastructure."
+  },
+  "6-2": {
+    priority: "hi", source: "partial",
+    sourceDetail: "Rural Georgia and Alabama have some of the highest uninsured rates in the country. Limited local healthcare options — many rural hospitals have closed in the past decade. Care-nav respondents from Southern states skew uninsured. Community health fairs are a documented outreach channel for this population.",
+    channels: ["Community health fairs", "FQHCs and rural health clinics", "Church health ministries", "In-center flyers"],
+    message: "Free bloodwork. No insurance needed.",
+    testMethods: ["interview", "survey"],
+    note: "Rural Southern towns have acute healthcare access gaps — hospital closures, provider shortages, high uninsured rates. This segment has the most to gain from GoodLabs of any group. Trust is community-first: a pastor or a local clinic recommending GoodLabs will outperform any paid channel. Faith-based health ministries are an underused but high-trust access point."
+  },
+  "6-3": {
+    priority: "lo", source: "inferred",
+    sourceDetail: "No direct data. Inferred from lower health optimization culture in rural demographics and smaller overall cohort size.",
+    channels: ["Facebook health groups", "Local gym word-of-mouth"],
+    message: "You take care of yourself. Now see what your blood says.",
+    testMethods: ["survey"],
+    note: "Smaller cohort in rural markets. Health-conscious individuals exist but the Oura ring profile is less common. Not a primary investment segment here — secondary to Altruist and Access Seeker activation."
+  },
+  "6-4": {
+    priority: "md", source: "partial",
+    sourceDetail: "Church and civic blood drives are deeply embedded in rural Southern culture. Blood Assurance runs regular community drives in its Georgia service area. Convenience-triggered donors are likely a significant share of rural BA donors given the community drive infrastructure.",
+    channels: ["Church blood drives", "Civic org drives (Rotary, VFW, Lions Club)", "Employer drives", "Community health fairs"],
+    message: "Your church blood drive just got a lot more useful.",
+    testMethods: ["interview", "survey"],
+    note: "Community blood drives are the dominant acquisition channel in rural Southern towns — not social media. The Opportunist here is triggered by a church event or a civic org drive, not an Instagram ad. High volume potential given how embedded drive culture is in this geography. Re-engagement post-visit needs to work through the same community channels — a follow-up from the church or Blood Assurance center, not a push notification."
   }
 };
 
