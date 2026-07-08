@@ -1,0 +1,851 @@
+
+<title>GoodLabs Donor Segmentation — Product Discovery Report</title>
+<style>
+  :root {
+    --bg:        #F8F7F4;
+    --surface:   #FFFFFF;
+    --surface-2: #F2EFE9;
+    --border:    #E2DDD7;
+    --text-1:    #1C1917;
+    --text-2:    #65605A;
+    --text-3:    #9C9690;
+    --accent:    #B83A22;
+    --accent-bg: #FAF0EC;
+    --accent-mid:#E06040;
+    --conf-hi-bg:#EAF4EF;
+    --conf-hi:   #2A7250;
+    --conf-md-bg:#FEF7EA;
+    --conf-md:   #A06B14;
+    --conf-lo-bg:#FDF0EE;
+    --conf-lo:   #922520;
+
+    --c1: #1C4E8A; --c1-lt: #E8EFF8;
+    --c2: #2D7D52; --c2-lt: #E6F3EC;
+    --c3: #8B4E1A; --c3-lt: #F5EDE3;
+    --c4: #5B4A9C; --c4-lt: #EEEAF8;
+    --c5: #7A3D5A; --c5-lt: #F5EAF0;
+  }
+
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .segment-card, .rubric-block { break-inside: avoid; }
+    .section { break-before: auto; }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--text-1);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.7;
+    padding: 0 0 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .masthead {
+    background: var(--text-1);
+    color: #fff;
+    padding: 52px 48px 44px;
+  }
+  .masthead-eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent-mid); margin-bottom: 18px;
+  }
+  .masthead h1 {
+    font-size: clamp(26px, 4vw, 42px); font-weight: 400; line-height: 1.2;
+    letter-spacing: -.02em; max-width: 660px; text-wrap: balance;
+  }
+  .masthead-meta { margin-top: 28px; display: flex; gap: 36px; flex-wrap: wrap; }
+  .masthead-meta dt {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-3); margin-bottom: 4px;
+  }
+  .masthead-meta dd { font-size: 14px; color: #D0CBC5; }
+
+  .content { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .section {
+    padding: 56px 0 0; border-top: 1px solid var(--border); margin-top: 56px;
+  }
+  .section:first-child { margin-top: 0; border-top: none; padding-top: 52px; }
+
+  .section-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 3vw, 30px); font-weight: 400; line-height: 1.25;
+    letter-spacing: -.015em; margin-bottom: 20px; text-wrap: balance;
+  }
+  h3 {
+    font-size: 18px; font-weight: 700; letter-spacing: -.01em; margin: 32px 0 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-2); margin: 24px 0 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+
+  p { margin-bottom: 16px; font-size: 16px; max-width: 680px; }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; max-width: 680px; }
+  li { margin-bottom: 8px; font-size: 15px; }
+
+  blockquote {
+    border-left: 3px solid var(--accent); margin: 28px 0; padding: 4px 0 4px 22px; max-width: 620px;
+  }
+  blockquote p { font-style: italic; font-size: 17px; color: var(--text-1); line-height: 1.6; margin-bottom: 8px; }
+  blockquote cite {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-style: normal; font-size: 12px; color: var(--text-3); letter-spacing: .04em;
+  }
+
+  .callout {
+    background: var(--accent-bg); border: 1px solid #EBD4CC; border-radius: 6px;
+    padding: 20px 24px; margin: 24px 0; max-width: 700px;
+  }
+  .callout p { font-size: 15px; margin-bottom: 0; }
+
+  /* segment cards */
+  .segments-grid { display: flex; flex-direction: column; gap: 32px; margin-top: 8px; }
+  .segment-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+  }
+  .segment-header {
+    padding: 22px 28px 18px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .segment-num {
+    width: 36px; height: 36px; border-radius: 6px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 16px; font-weight: 800; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; margin-top: 3px;
+  }
+  .segment-name { font-size: 20px; font-weight: 400; letter-spacing: -.01em; margin-bottom: 4px; }
+  .segment-size {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 12px; color: var(--text-3); margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .segment-jtbd {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 13px; color: var(--text-2); font-style: italic;
+  }
+  .segment-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  @media (max-width: 600px) { .segment-body { grid-template-columns: 1fr; } }
+
+  .seg-field {
+    padding: 18px 28px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .seg-field:nth-child(even) { border-right: none; }
+  .seg-field:nth-last-child(-n+2) { border-bottom: none; }
+  @media (max-width: 600px) {
+    .seg-field { border-right: none; }
+    .seg-field:last-child { border-bottom: none; }
+  }
+  .seg-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-3); margin-bottom: 7px;
+  }
+  .seg-value { font-size: 14px; line-height: 1.6; color: var(--text-1); }
+  .seg-quote {
+    padding: 18px 28px; background: var(--bg); border-top: 1px solid var(--border);
+    grid-column: 1 / -1; font-style: italic; font-size: 14px; color: var(--text-2); line-height: 1.6;
+  }
+  .seg-quote::before { content: '"'; color: var(--accent); font-size: 24px; line-height: 0; vertical-align: -5px; margin-right: 4px; font-style: normal; }
+  .seg-quote::after  { content: '"'; color: var(--accent); font-size: 24px; line-height: 0; vertical-align: -5px; margin-left: 4px; font-style: normal; }
+
+  /* segment color accents */
+  .seg-1 .segment-num { background: var(--c1-lt); color: var(--c1); }
+  .seg-1 .segment-header { border-left: 4px solid var(--c1); }
+  .seg-2 .segment-num { background: var(--c2-lt); color: var(--c2); }
+  .seg-2 .segment-header { border-left: 4px solid var(--c2); }
+  .seg-3 .segment-num { background: var(--c3-lt); color: var(--c3); }
+  .seg-3 .segment-header { border-left: 4px solid var(--c3); }
+  .seg-4 .segment-num { background: var(--c4-lt); color: var(--c4); }
+  .seg-4 .segment-header { border-left: 4px solid var(--c4); }
+  .seg-5 .segment-num { background: var(--c5-lt); color: var(--c5); }
+  .seg-5 .segment-header { border-left: 4px solid var(--c5); }
+
+  /* conf badge */
+  .conf {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: .05em;
+    padding: 3px 10px; border-radius: 40px; vertical-align: middle;
+  }
+  .conf-hi { background: var(--conf-hi-bg); color: var(--conf-hi); }
+  .conf-md { background: var(--conf-md-bg); color: var(--conf-md); }
+  .conf-lo { background: var(--conf-lo-bg); color: var(--conf-lo); }
+  .conf::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: currentColor;
+  }
+
+  /* cross grid */
+  .cross-grid {
+    display: flex; flex-direction: column; gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 24px 0;
+  }
+  .cross-row {
+    background: var(--surface); padding: 18px 24px;
+    display: grid; grid-template-columns: 200px 1fr 120px; gap: 20px; align-items: start;
+  }
+  @media (max-width: 640px) { .cross-row { grid-template-columns: 1fr; } }
+  .cross-row:first-child {
+    background: var(--surface-2);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3);
+  }
+  .cross-name { font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; }
+  .cross-desc { font-size: 14px; line-height: 1.6; color: var(--text-2); }
+
+  /* tables */
+  .dq-table-wrap { overflow-x: auto; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  thead tr { background: var(--surface-2); }
+  th { padding: 10px 14px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); border-bottom: 1px solid var(--border); }
+  td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--text-1); line-height: 1.5; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 40px; font-size: 11px; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  .pill-green { background: var(--conf-hi-bg); color: var(--conf-hi); }
+  .pill-amber { background: var(--conf-md-bg); color: var(--conf-md); }
+  .pill-red   { background: var(--conf-lo-bg); color: var(--conf-lo); }
+  .pill-grey  { background: var(--surface-2); color: var(--text-2); }
+
+  /* stat row */
+  .stat-row { display: flex; gap: 24px; flex-wrap: wrap; margin: 24px 0; }
+  .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 24px; min-width: 130px; }
+  .stat-num { font-size: 32px; font-weight: 400; letter-spacing: -.02em; line-height: 1; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .stat-label { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 11px; color: var(--text-3); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+
+  /* next steps */
+  .steps-list { list-style: none; padding: 0; margin: 16px 0; max-width: 760px; }
+  .steps-list > li { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .steps-list > li:last-child { border-bottom: none; }
+  .step-marker { width: 28px; height: 28px; background: var(--accent-bg); color: var(--accent); border-radius: 50%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step-text strong { display: block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+
+  .rubric-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px 28px; margin: 16px 0; max-width: 740px; }
+  .rubric-block h4 { margin-top: 0; }
+  .rubric-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tag { display: inline-block; padding: 4px 12px; border-radius: 4px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 12px; background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px 28px; margin: 32px 0; max-width: 480px; }
+  .toc-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; }
+  .toc ol { padding-left: 18px; margin: 0; }
+  .toc li { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 13px; margin-bottom: 6px; color: var(--text-2); }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .note { background: var(--surface-2); border-left: 3px solid var(--border); padding: 10px 16px; margin: 16px 0; font-size: 13px; color: var(--text-2); max-width: 680px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; border-radius: 0 4px 4px 0; }
+
+  /* size bar */
+  .size-bar-wrap { margin: 20px 0; }
+  .size-bar { display: flex; height: 24px; border-radius: 6px; overflow: hidden; gap: 2px; max-width: 680px; }
+  .size-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  .size-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+  .size-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  .size-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* org cards */
+  .org-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 20px 0; max-width: 760px; }
+  @media (max-width: 600px) { .org-grid { grid-template-columns: 1fr; } }
+  .org-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; }
+  .org-name { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .org-market { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 11px; color: var(--text-3); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 12px; }
+  .org-stat { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; border-bottom: 1px solid var(--border); }
+  .org-stat:last-child { border-bottom: none; }
+  .org-stat-label { color: var(--text-3); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 11px; }
+  .org-stat-val { font-variant-numeric: tabular-nums; font-size: 13px; }
+</style>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-eyebrow">GoodLabs · Internal Research</div>
+  <h1>Donor Segmentation<br>Product Discovery Report</h1>
+  <dl class="masthead-meta">
+    <div><dt>Prepared</dt><dd>July 2026</dd></div>
+    <div><dt>Data Sources</dt><dd>554-donor CSV export, DB schema, #donations, #nps, #customer-texts, #care-nav</dd></div>
+    <div><dt>Status</dt><dd>Working Draft v2 — Updated with CSV + DB analysis</dd></div>
+    <div><dt>Scope</dt><dd>Donors Only (donation_count > 0, lab_order_count = 0)</dd></div>
+  </dl>
+</header>
+
+<div class="content">
+
+<!-- 1. EXECUTIVE SUMMARY -->
+<div class="section" id="exec-summary">
+  <div class="section-label">Section 1</div>
+  <h2>Executive Summary</h2>
+
+  <p>This report presents a revised donor segmentation for GoodLabs, updated from the June 2026 Slack-only draft to incorporate a 554-donor CSV export and the full database schema. The quantitative data substantially confirms the qualitative segmentation while adding accurate sizing, behavioral benchmarks, and three important corrections to the prior framing.</p>
+
+  <p>Five donor segments emerge from combining behavioral signals (biohacker_signal, regular_donor_signal) with acquisition data (referral sources, UTM), engagement depth (Barry conversations, action plans, profile completion), and geographic/org context. The segments differ meaningfully on JTBD, acquisition channel, and activation pattern — and require distinct messaging and product experiences.</p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num">554</div><div class="stat-label">Total donors</div></div>
+    <div class="stat-box"><div class="stat-num">349</div><div class="stat-label">Completed ≥1 donation (63%)</div></div>
+    <div class="stat-box"><div class="stat-num">116</div><div class="stat-label">Repeat donors (21%)</div></div>
+    <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Live orgs</div></div>
+    <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Segments</div></div>
+  </div>
+
+  <h3>Three corrections to the prior segmentation</h3>
+  <ol>
+    <li><strong>The "Curious First-Timer" bucket was too broad.</strong> What looked like one segment in the Slack data is actually three distinct groups with different JTBDs: health-curious Converters (biohacker signal, will re-engage if results feel meaningful), Access Seekers (free healthcare access as primary driver), and Social Responders (Instagram/TikTok–driven, low intrinsic health motivation). These require entirely different activation strategies.</li>
+    <li><strong>The Nashville retention signal was premature.</strong> Blood Assurance launched in May 2026. The 93% first-timer rate in that market is launch math — the first re-eligible cohort arrives August 2026. Repeat rate data from Nashville is not yet meaningful.</li>
+    <li><strong>The "Protocol Tracker" segment is real but concentrated.</strong> It overlaps heavily with The Optimizer in the Vitalant/CA market and doesn't warrant a separate segment at current scale. Rolled into The Optimizer and The Curious Converter depending on repeat behavior.</li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>Key finding:</strong> 79% of donors have donated only once. The critical business question is not acquisition — it's what happens between a donor's first result and their 56-day re-eligibility window. Barry engagement (chat conversations) is the strongest leading indicator of repeat behavior in the data.</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#exec-summary">Executive Summary</a></li>
+      <li><a href="#methodology">Methodology</a></li>
+      <li><a href="#data-quality">Data Sources & Quality</a></li>
+      <li><a href="#sizing">Segment Sizing Model</a></li>
+      <li><a href="#segments">The Five Segments</a></li>
+      <li><a href="#orgs">Market & Org Context</a></li>
+      <li><a href="#cross-cutting">Cross-Cutting Behaviors</a></li>
+      <li><a href="#what-data-suggests">What the Data Suggests</a></li>
+      <li><a href="#uncertainties">What We Are Less Certain About</a></li>
+      <li><a href="#next-steps">Recommended Next Steps</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- 2. METHODOLOGY -->
+<div class="section" id="methodology">
+  <div class="section-label">Section 2</div>
+  <h2>Methodology</h2>
+
+  <p>This revision adds two new data sources to the prior Slack-only analysis: a 554-row CSV export of all donor accounts (donation_count > 0, lab_order_count = 0) and the full Drizzle ORM database schema, which clarifies field definitions, join paths, and available behavioral signals.</p>
+
+  <h3>Segmentation Signal Model</h3>
+  <p>The CSV contains two pre-computed boolean signal fields — <code>biohacker_signal</code> and <code>regular_donor_signal</code> — that serve as the primary segmentation axis. These were cross-validated against behavioral data (biomarker counts, Barry conversations, action plans, panel selections) and acquisition data (referral sources, UTM source) to confirm the signal definitions are meaningful.</p>
+
+  <p>The four quadrants these two signals create (bio+reg, bio only, reg only, neither) map cleanly to the qualitative archetypes from the Slack analysis, with one exception: the "neither" quadrant (46% of donors) contains at least two distinct sub-populations — Access Seekers and Social Responders — that can be partially separated by acquisition channel and geographic market.</p>
+
+  <h3>Org → Market Mapping</h3>
+  <p>Order creation events in the #donations Slack channel contain <code>orgName</code>, <code>userId</code>, and <code>orderReferralSource</code> fields. By joining these to the donor CSV on userId, we confirmed that the three live orgs map to distinct geographic markets: Vitalant (CA/SF Bay Area), Blood Assurance (TN/GA), and Inova (VA/DC). This provides a clean market-level segmentation layer on top of the behavioral segments.</p>
+
+  <h3>Limitations</h3>
+  <p>The Slack–CSV join matched only 30 donors (5.4%) due to Slack retaining only recent events. The CSV is the authoritative behavioral record; Slack provides qualitative signal and acquisition attribution for a recent slice. Segment sizes for Access Seekers and Social Responders are estimates — the CSV has no insurance field, making these sub-populations difficult to separate definitively without additional data.</p>
+</div>
+
+<!-- 3. DATA SOURCES -->
+<div class="section" id="data-quality">
+  <div class="section-label">Section 3</div>
+  <h2>Data Sources & Quality</h2>
+
+  <div class="dq-table-wrap">
+    <table>
+      <thead>
+        <tr><th>Source</th><th>Signal Quality</th><th>Donor Coverage</th><th>Key Fields / Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Donor CSV (554 rows)</td>
+          <td><span class="pill pill-green">High</span></td>
+          <td>100% donors — pre-filtered</td>
+          <td>biohacker_signal, regular_donor_signal, donation_count, unique_biomarkers_tested, total_conversations, goals, referral_sources, UTM fields, address. Primary quantitative source.</td>
+        </tr>
+        <tr>
+          <td>DB Schema (Drizzle ORM)</td>
+          <td><span class="pill pill-green">High</span></td>
+          <td>Defines all tables</td>
+          <td>Confirms join paths: orders.userId → #donations events; user_profiles.email → NPS/care-nav. Clarifies signal field logic and available biomarker tables.</td>
+        </tr>
+        <tr>
+          <td>#donations (Slack)</td>
+          <td><span class="pill pill-green">High</span></td>
+          <td>100% donors</td>
+          <td>orgName, orderReferralSource, testName, is_first_donation_order. Covers recent window only (~531K chars, ~200+ order events). Referral source and org data richer than CSV.</td>
+        </tr>
+        <tr>
+          <td>#customer-stories</td>
+          <td><span class="pill pill-green">High</span></td>
+          <td>Mostly donors</td>
+          <td>Best source of motivation narrative. Recency bias — mostly SF and Nashville. Staff-observed, not self-reported. All names anonymized in this report.</td>
+        </tr>
+        <tr>
+          <td>#care-nav</td>
+          <td><span class="pill pill-amber">Medium</span></td>
+          <td>Mixed — ~6% donors (12/198)</td>
+          <td>Insurance status (56% commercial, 20% uninsured, 6% Medicaid). Form responses don't include order type — donor/direct-pay split estimated from join. Access Seeker segment evidence lives here.</td>
+        </tr>
+        <tr>
+          <td>#nps (Donor)</td>
+          <td><span class="pill pill-red">Low volume</span></td>
+          <td>10 donor responses</td>
+          <td>10 donor NPS vs 167 direct-pay. Donor NPS is underrepresented. Self-selected archetypes are suggestive, not conclusive. Useful for tone, not sizing.</td>
+        </tr>
+        <tr>
+          <td>#customer-texts</td>
+          <td><span class="pill pill-amber">Medium</span></td>
+          <td>Mixed — mostly operational</td>
+          <td>Appointment management noise dominates. Occasional substantive signal (result anxiety, Spanish speaker, friction). Donor vs. direct-pay not reliably distinguishable from SMS alone.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 4. SEGMENT SIZING -->
+<div class="section" id="sizing">
+  <div class="section-label">Section 4</div>
+  <h2>Segment Sizing Model</h2>
+
+  <p>The two pre-computed signal fields in the CSV — <code>biohacker_signal</code> and <code>regular_donor_signal</code> — produce four clean quadrants across 554 donors. The "neither" quadrant (46%) is split into two estimated sub-segments based on acquisition channel and geography.</p>
+
+  <div class="size-bar-wrap">
+    <div class="size-bar">
+      <div class="size-seg" style="background:var(--c1); width:11.7%">12%</div>
+      <div class="size-seg" style="background:var(--c2); width:16.1%">16%</div>
+      <div class="size-seg" style="background:var(--c3); width:24.9%">25%</div>
+      <div class="size-seg" style="background:var(--c4); width:26%">26%</div>
+      <div class="size-seg" style="background:var(--c5); width:21.3%">21%</div>
+    </div>
+    <div class="size-legend">
+      <div class="size-legend-item"><div class="size-dot" style="background:var(--c1)"></div>The Optimizer — 65</div>
+      <div class="size-legend-item"><div class="size-dot" style="background:var(--c2)"></div>The Habitual Altruist — 89</div>
+      <div class="size-legend-item"><div class="size-dot" style="background:var(--c3)"></div>The Access Seeker — ~138</div>
+      <div class="size-legend-item"><div class="size-dot" style="background:var(--c4)"></div>The Curious Converter — 144</div>
+      <div class="size-legend-item"><div class="size-dot" style="background:var(--c5)"></div>The Social Responder — ~118</div>
+    </div>
+  </div>
+
+  <div class="dq-table-wrap" style="margin-top: 24px">
+    <table>
+      <thead>
+        <tr>
+          <th>Segment</th><th>Signal basis</th><th>n</th><th>Avg donations</th><th>Avg biomarkers</th><th>Avg Barry chats</th><th>% with goals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>The Optimizer</td>
+          <td>bio=true, reg=true</td>
+          <td>65</td><td>2.4</td><td>40.9</td><td>2.3</td><td>29%</td>
+        </tr>
+        <tr>
+          <td>The Habitual Altruist</td>
+          <td>bio=false, reg=true</td>
+          <td>89</td><td>2.0</td><td>31.6</td><td>1.1</td><td>7%</td>
+        </tr>
+        <tr>
+          <td>The Access Seeker</td>
+          <td>bio=false, reg=false (TN/news/poster)</td>
+          <td>~138</td><td>1.0</td><td>~20</td><td>&lt;0.5</td><td>&lt;5%</td>
+        </tr>
+        <tr>
+          <td>The Curious Converter</td>
+          <td>bio=true, reg=false</td>
+          <td>144</td><td>1.0</td><td>43.3</td><td>2.3</td><td>23%</td>
+        </tr>
+        <tr>
+          <td>The Social Responder</td>
+          <td>bio=false, reg=false (IG/TikTok)</td>
+          <td>~118</td><td>1.0</td><td>~20</td><td>0.7</td><td>&lt;5%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">Access Seeker and Social Responder are estimated sub-splits of the 256-donor "neither signal" cohort. The split is based on acquisition channel (news/poster/community vs. Instagram/TikTok) and geography (TN-heavy vs. distributed). Exact sizing requires insurance status or a richer acquisition-intent signal not currently in the CSV.</div>
+</div>
+
+<!-- 5. THE FIVE SEGMENTS -->
+<div class="section" id="segments">
+  <div class="section-label">Section 5</div>
+  <h2>The Five Segments</h2>
+
+  <div class="segments-grid">
+
+    <!-- SEGMENT 1: The Optimizer -->
+    <div class="segment-card seg-1">
+      <div class="segment-header">
+        <div class="segment-num">1</div>
+        <div class="segment-title-block">
+          <div class="segment-name">The Optimizer</div>
+          <div class="segment-size">65 donors · 12% · biohacker_signal=true + regular_donor_signal=true</div>
+          <div class="segment-jtbd">Help me understand my numbers so I can keep improving them.</div>
+        </div>
+        <div style="margin-left:auto; padding-top: 4px;"><span class="conf conf-hi">High confidence</span></div>
+      </div>
+      <div class="segment-body">
+        <div class="seg-field">
+          <div class="seg-label">Primary Motivation</div>
+          <div class="seg-value">Active health self-management. Uses bloodwork to track longitudinally, not to diagnose. Sees donation as complementary to — or an extension of — their existing health practice.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Behavioral Signals (CSV)</div>
+          <div class="seg-value">Avg 40.9 unique biomarkers tested. 88% have donated 2+ times. 2.3 avg Barry conversations. Goals set: 29% (highest segment). Blood type known: 26% (highest). Strongest action plan engagement.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Acquisition</div>
+          <div class="seg-value">Word-of-mouth / friend and trainer referral dominant (13 known). Reddit (r/goodlabs, r/longevity). Very low paid social acquisition — trust networks, not Instagram. 75% concentrated in CA/Vitalant market.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Test Preferences</div>
+          <div class="seg-value">Hormone panels (Men's Hormone, Testosterone, Free & Total), CMP, Thyroid, Nutrient. Plans to rotate panels across donation cycles. Wants add-on paid tests at checkout.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Activation Pattern</div>
+          <div class="seg-value">Arrives with a tracking mindset — doesn't need activation, needs depth. Barry engagement is high. Main friction: can't add paid tests at time of donation. No longitudinal comparison view.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">GTM Implication</div>
+          <div class="seg-value">Best fit for Reddit, Huberman/longevity podcast audiences, and word-of-mouth programs. "Know your numbers" framing. Add-on paid tests at checkout = highest LTV lever for this segment.</div>
+        </div>
+        <div class="seg-quote">I was going to buy tests from someone else and then saw your ad. I'm a data guy — I want to track it every year. Can I add a paid test when I donate?</div>
+      </div>
+    </div>
+
+    <!-- SEGMENT 2: The Habitual Altruist -->
+    <div class="segment-card seg-2">
+      <div class="segment-header">
+        <div class="segment-num">2</div>
+        <div class="segment-title-block">
+          <div class="segment-name">The Habitual Altruist</div>
+          <div class="segment-size">89 donors · 16% · regular_donor_signal=true, biohacker_signal=false</div>
+          <div class="segment-jtbd">I already donate blood. GoodLabs makes it feel worth more.</div>
+        </div>
+        <div style="margin-left:auto; padding-top: 4px;"><span class="conf conf-hi">High confidence</span></div>
+      </div>
+      <div class="segment-body">
+        <div class="seg-field">
+          <div class="seg-label">Primary Motivation</div>
+          <div class="seg-value">Civic and altruistic — giving blood is an established part of their identity. GoodLabs is an upgrade to an existing habit, not a new behavior. The health data is a bonus, not the reason they came.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Behavioral Signals (CSV)</div>
+          <div class="seg-value">66% have donated 2+ times. Avg 31.6 unique biomarkers — lower than biohacker segments. 1.1 avg Barry conversations. Goals set: only 7%. Blood type known: 11%. Low health-tracking orientation.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Acquisition</div>
+          <div class="seg-value">Overwhelmingly word-of-mouth and friend/family referral (30 known referrals — dominant across all markets). In-center signage and staff recommendation. Geographically distributed; not concentrated in one org market.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Test Preferences</div>
+          <div class="seg-value">General panel most common. CMP. Less specialized test selection than Optimizer — health interest exists but is not active management. May not fully engage with results after viewing.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Activation Pattern</div>
+          <div class="seg-value">Habit is already formed — they don't need activation, they need a reason to go deeper. Low Barry engagement suggests results aren't prompting follow-through. Small nudges post-result could shift them toward Optimizer behavior.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">GTM Implication</div>
+          <div class="seg-value">Best reached via in-center activation (Blood Assurance, Vitalant, Inova signage and staff). Community channels, civic orgs. "You already give — now get something back" framing. Most retention-stable segment; low churn risk.</div>
+        </div>
+        <div class="seg-quote">I donate blood regularly with Blood Assurance. When I heard I could get my labs back, I thought, why wouldn't I?</div>
+      </div>
+    </div>
+
+    <!-- SEGMENT 3: The Access Seeker -->
+    <div class="segment-card seg-3">
+      <div class="segment-header">
+        <div class="segment-num">3</div>
+        <div class="segment-title-block">
+          <div class="segment-name">The Access Seeker</div>
+          <div class="segment-size">~138 donors · ~25% · neither signal, TN-heavy, community-channel acquired (estimated)</div>
+          <div class="segment-jtbd">I can't afford lab tests. Donating blood is how I get access to care.</div>
+        </div>
+        <div style="margin-left:auto; padding-top: 4px;"><span class="conf conf-md">Medium confidence</span></div>
+      </div>
+      <div class="segment-body">
+        <div class="seg-field">
+          <div class="seg-label">Primary Motivation</div>
+          <div class="seg-value">Free healthcare access. The donation is a mechanism, not an identity. The free bloodwork substitutes for lab work they would otherwise forgo due to cost or insurance gaps. Functional value prop.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Behavioral Signals (inferred)</div>
+          <div class="seg-value">Neither biohacker nor regular_donor signal. News/poster acquisition channels. TN concentration (Blood Assurance). Care-nav data: 20% uninsured, 6% Medicaid in donor-adjacent population. Very low Barry engagement.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Acquisition</div>
+          <div class="seg-value">News coverage (noogatoday.com visible in UTM), physical posters in community settings, in-center flyers at Blood Assurance. Spanish-language social (Facebook dominant in these communities). Not paid digital.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Test Preferences</div>
+          <div class="seg-value">Likely General panel — minimal panel selection effort. Results may reveal health issues they've been unable to address. Healthcare navigation may be more relevant than optimization messaging.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Activation Pattern</div>
+          <div class="seg-value">May repeat if they have ongoing health concerns and the donation cycle addresses them. Risk of one-and-done if results feel disconnected from actionable next steps. Care navigation is a high-value follow-up for this segment.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">GTM Implication</div>
+          <div class="seg-value">Community health fair partnerships, FQHCs, Spanish-language Facebook/Instagram. "Free bloodwork. No insurance needed." — functional, not aspirational. Care-nav integration could be particularly high-impact here.</div>
+        </div>
+        <div class="seg-quote">I saw the poster at the donation center. I don't have insurance so I just wanted to get the bloodwork done.</div>
+      </div>
+    </div>
+
+    <!-- SEGMENT 4: The Curious Converter -->
+    <div class="segment-card seg-4">
+      <div class="segment-header">
+        <div class="segment-num">4</div>
+        <div class="segment-title-block">
+          <div class="segment-name">The Curious Converter</div>
+          <div class="segment-size">144 donors · 26% · biohacker_signal=true, regular_donor_signal=false</div>
+          <div class="segment-jtbd">I want to know what my blood is actually telling me — I've never had this data before.</div>
+        </div>
+        <div style="margin-left:auto; padding-top: 4px;"><span class="conf conf-hi">High confidence</span></div>
+      </div>
+      <div class="segment-body">
+        <div class="seg-field">
+          <div class="seg-label">Primary Motivation</div>
+          <div class="seg-value">Health curiosity and data interest, but no established tracking habit. They came because the biomarker data sounded interesting — not because they already track their health. The free bloodwork is the entry point.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Behavioral Signals (CSV)</div>
+          <div class="seg-value">Avg 43.3 unique biomarkers — highest raw curiosity of any segment. 0% repeat yet. 2.3 avg Barry conversations — same as Optimizers. Goals set: 23%. The biomarker interest is real; the habit isn't formed.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Acquisition</div>
+          <div class="seg-value">Instagram (12 known), Reddit (6), TikTok (6). Mix of CA, TN, and VA — not concentrated in one market. Social discovery driven. Ad-to-donation under 12 hours documented in SF for this archetype.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Test Preferences</div>
+          <div class="seg-value">Strong biomarker curiosity — high biomarker counts suggest they order comprehensive panels. Hormone, CMP, and general panels popular. Interest in understanding results, not just receiving them.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Activation Pattern</div>
+          <div class="seg-value">The critical window is the 56 days between first donation and re-eligibility. If first results feel meaningful (via Barry, action plan, or clear follow-up prompt), they convert to Optimizers. If results feel inert, they churn. This is the highest-value conversion funnel.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">GTM Implication</div>
+          <div class="seg-value">Instagram and Reddit creative for health-curious audiences. "The easiest way to finally get your bloodwork done." Post-result experience — what Barry says in the first 48 hours — is the retention lever. Re-donation reminder at day 50+ is the re-engagement moment.</div>
+        </div>
+        <div class="seg-quote">I've always meant to get bloodwork done but it's such a hassle. This seemed easy and I get to help people. The results actually surprised me.</div>
+      </div>
+    </div>
+
+    <!-- SEGMENT 5: The Social Responder -->
+    <div class="segment-card seg-5">
+      <div class="segment-header">
+        <div class="segment-num">5</div>
+        <div class="segment-title-block">
+          <div class="segment-name">The Social Responder</div>
+          <div class="segment-size">~118 donors · ~21% · neither signal, Instagram/TikTok acquired (estimated)</div>
+          <div class="segment-jtbd">I saw this on Instagram and it seemed like a good/interesting thing to do.</div>
+        </div>
+        <div style="margin-left:auto; padding-top: 4px;"><span class="conf conf-md">Medium confidence</span></div>
+      </div>
+      <div class="segment-body">
+        <div class="seg-field">
+          <div class="seg-label">Primary Motivation</div>
+          <div class="seg-value">Social proof and low-friction altruism. No strong intrinsic health tracking motivation. Acted because the content made it feel easy, social, and good. May not have thought deeply about the biomarker component before signing up.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Behavioral Signals (inferred)</div>
+          <div class="seg-value">Neither biohacker nor regular_donor signal. Instagram/TikTok acquisition. Lowest avg biomarkers (~20) and Barry engagement (0.7 chats). Goals set &lt;5%. Blood Assurance launch drove significant volume of this segment (May 2026 surge).</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Acquisition</div>
+          <div class="seg-value">Instagram (37 in the "neither" segment), TikTok (27). Blood Assurance + CA distributed. Paid social campaigns are the primary driver. Instagram is generating 52 attributed Blood Assurance orders — the largest single channel by volume.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Test Preferences</div>
+          <div class="seg-value">Likely General panel — minimal selection effort. Results may feel abstract without context. Lowest engagement with Barry suggests results aren't prompting follow-through questions.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">Activation Pattern</div>
+          <div class="seg-value">Highest churn risk. A compelling first-result experience (surprising finding, clear action, engaging Barry conversation) can shift them toward Curious Converter behavior. Without that, this segment one-and-dones.</div>
+        </div>
+        <div class="seg-field">
+          <div class="seg-label">GTM Implication</div>
+          <div class="seg-value">Being acquired at scale via Instagram creative — no acquisition problem. The product problem is activation quality of the first visit. Social proof content (results screenshots, donor stories) may extend the social motivation into the health layer.</div>
+        </div>
+        <div class="seg-quote">I saw it on Instagram and thought it was a good cause. The free blood test was a nice bonus. I haven't really looked at the results yet.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 6. ORG + MARKET CONTEXT -->
+<div class="section" id="orgs">
+  <div class="section-label">Section 6</div>
+  <h2>Market &amp; Org Context</h2>
+
+  <p>The three live blood center org partners map 1:1 to geographic markets and account for 531 of 554 donors (96%). Each org has a distinct acquisition mix and behavioral profile that reinforces — and in some cases explains — the segment distribution.</p>
+
+  <div class="org-grid">
+    <div class="org-card">
+      <div class="org-name">Vitalant</div>
+      <div class="org-market">Urban Tech Hub · SF Bay Area</div>
+      <div class="org-stat"><span class="org-stat-label">Donors</span><span class="org-stat-val">262 (47%)</span></div>
+      <div class="org-stat"><span class="org-stat-label">Repeat rate</span><span class="org-stat-val">18% (mature)</span></div>
+      <div class="org-stat"><span class="org-stat-label">Top referral</span><span class="org-stat-val">Friend/family</span></div>
+      <div class="org-stat"><span class="org-stat-label">Top panels</span><span class="org-stat-val">CMP, Testosterone</span></div>
+      <div class="org-stat"><span class="org-stat-label">Skews to</span><span class="org-stat-val">Optimizer</span></div>
+    </div>
+    <div class="org-card">
+      <div class="org-name">Blood Assurance</div>
+      <div class="org-market">Mid-size Southern · Nashville / Chattanooga</div>
+      <div class="org-stat"><span class="org-stat-label">Donors</span><span class="org-stat-val">179 (32%) · launched May 2026</span></div>
+      <div class="org-stat"><span class="org-stat-label">Repeat rate</span><span class="org-stat-val">Not yet meaningful (Aug 2026)</span></div>
+      <div class="org-stat"><span class="org-stat-label">Top referral</span><span class="org-stat-val">Instagram (52 orders)</span></div>
+      <div class="org-stat"><span class="org-stat-label">Top panels</span><span class="org-stat-val">General, Hormone, Cortisol</span></div>
+      <div class="org-stat"><span class="org-stat-label">Skews to</span><span class="org-stat-val">Social Responder + Altruist</span></div>
+    </div>
+    <div class="org-card">
+      <div class="org-name">Inova</div>
+      <div class="org-market">Government Hub · NoVA / DC suburbs</div>
+      <div class="org-stat"><span class="org-stat-label">Donors</span><span class="org-stat-val">90 (16%)</span></div>
+      <div class="org-stat"><span class="org-stat-label">Repeat rate</span><span class="org-stat-val">20% (highest of live orgs)</span></div>
+      <div class="org-stat"><span class="org-stat-label">Top referral</span><span class="org-stat-val">Instagram (11), gym (2)</span></div>
+      <div class="org-stat"><span class="org-stat-label">Top panels</span><span class="org-stat-val">Heart Health, Nutrient, CMP</span></div>
+      <div class="org-stat"><span class="org-stat-label">Skews to</span><span class="org-stat-val">Curious Converter → Optimizer</span></div>
+    </div>
+  </div>
+
+  <p>The Vitalant market produces nearly all Optimizer donors — word-of-mouth and trainer referrals in a health-optimization–saturated culture. Inova's 20% repeat rate is the best current benchmark for mature market performance: Instagram-first acquisition converting to repeat behavior at twice Vitalant's rate, driven by a professional demographic with preventive care orientation. Blood Assurance's first repeat cohort becomes eligible in August 2026 — that will be the first real retention signal from the Southern market.</p>
+</div>
+
+<!-- 7. CROSS-CUTTING BEHAVIORS -->
+<div class="section" id="cross-cutting">
+  <div class="section-label">Section 7</div>
+  <h2>Cross-Cutting Behaviors</h2>
+
+  <h3>The retention cliff</h3>
+  <p>79% of donors have donated only once (438 of 554). This is the defining fact of the current user base. The critical question is what distinguishes the 21% who return.</p>
+
+  <div class="cross-grid">
+    <div class="cross-row">
+      <div>Behavior</div>
+      <div>One-time donors (79%)</div>
+      <div>Repeat donors (21%)</div>
+    </div>
+    <div class="cross-row">
+      <div class="cross-name">Barry engagement</div>
+      <div class="cross-desc">45% used Barry at all</div>
+      <div class="cross-desc">63% used Barry — strongest single differentiator in the data</div>
+    </div>
+    <div class="cross-row">
+      <div class="cross-name">Blood type known</div>
+      <div class="cross-desc">10%</div>
+      <div class="cross-desc">22% — proxy for profile investment</div>
+    </div>
+    <div class="cross-row">
+      <div class="cross-name">Cancellations</div>
+      <div class="cross-desc">Not a reliable signal — 40% had at least one cancellation</div>
+      <div class="cross-desc">49% had at least one cancellation — scheduling friction ≠ churn intent</div>
+    </div>
+    <div class="cross-row">
+      <div class="cross-name">Geography</div>
+      <div class="cross-desc">TN heavily over-represented (Blood Assurance launch math)</div>
+      <div class="cross-desc">CA and VA over-represented — Vitalant and Inova markets</div>
+    </div>
+  </div>
+
+  <p>Barry engagement (total_conversations > 0) is the strongest behavioral predictor of repeat donation available in the current data. Scheduling cancellations are not a churn signal — 49% of repeat donors had at least one cancellation, meaning the willingness to reschedule is itself a positive signal.</p>
+
+  <h3>Profile completion is very low overall</h3>
+  <p>Only 13% of donors have set health goals, 12% have a blood type on file, and 9% have recorded lifestyle interventions. These numbers are highest in the Optimizer segment (29% goals, 26% blood type) and near-zero in the Social Responder and Access Seeker segments. Profile depth is both a segmentation signal and a product opportunity.</p>
+
+  <h3>Test interest by panel type</h3>
+  <p>The General panel is the most ordered by volume, but the distribution shifts dramatically by segment. Biohacker-signal donors order hormone panels (Men's Hormone, Testosterone, Cortisol), nutrient panels, and CMP at meaningfully higher rates. Vitalant donors trend toward testosterone and metabolic panels; Inova donors toward heart health and nutrient panels — suggesting different health orientations in each market that warrant different content and panel merchandising.</p>
+
+  <h3>Referral source concentration</h3>
+  <p>Instagram is the single largest acquisition channel by volume (53 donors with confirmed Instagram referral in CSV, 74 in recent #donations events). TikTok is second (34 CSV, 15 in Slack window). Friend and family referral is the highest-quality channel — it produced the fewest donors by count but the most Optimizers and Habitual Altruists.</p>
+</div>
+
+<!-- 8. WHAT DATA SUGGESTS -->
+<div class="section" id="what-data-suggests">
+  <div class="section-label">Section 8</div>
+  <h2>What the Data Suggests</h2>
+
+  <ul>
+    <li><strong>The product's retention lever is the post-result experience, not re-acquisition.</strong> Barry engagement is the strongest repeat-donation predictor available. The 56-day window between first donation and re-eligibility is the product's most important activation window. What happens in that period — what Barry says, whether results feel actionable — determines whether a Curious Converter becomes an Optimizer or churns.</li>
+    <li><strong>The Optimizer segment is acquired almost entirely through trust networks.</strong> Word-of-mouth and trainer referrals produce the highest-LTV donors. Paid social produces volume (Social Responders) but not the self-directed health trackers who generate repeat visits and panel upgrades. These are different funnels requiring different investment logic.</li>
+    <li><strong>Inova's 20% repeat rate is the benchmark.</strong> At 90 donors in what appears to be a moderately mature market, Inova's 20% repeat rate is the most comparable signal to what Vitalant should be producing at scale. Vitalant at 18% is roughly in line. The Southern market (Blood Assurance) will be the real test — first data available August 2026.</li>
+    <li><strong>Add-on paid tests at checkout is the most visible LTV expansion opportunity.</strong> Multiple Optimizer donors raised this independently. The panel selection step is where the highest-intent users are most motivated to upgrade. This signal appeared in both the Slack qualitative data and indirectly in the CSV (high biomarker counts suggesting breadth of interest that exceeds what's available for free).</li>
+    <li><strong>The Access Seeker segment is being acquired and under-served.</strong> News and poster acquisition is reaching this segment, and 20% of care-nav users are uninsured. The product and messaging isn't optimized for this JTBD — results may be surfacing health issues with no clear path to care navigation. Care-nav integration post-result could make this the highest-social-impact segment.</li>
+  </ul>
+</div>
+
+<!-- 9. UNCERTAINTIES -->
+<div class="section" id="uncertainties">
+  <div class="section-label">Section 9</div>
+  <h2>What We Are Less Certain About</h2>
+
+  <ul>
+    <li><strong>Access Seeker vs. Social Responder split within the "neither signal" cohort.</strong> The 256 donors with neither signal are the least understood group. The Access Seeker / Social Responder split is inferred from acquisition channel and geography — not directly measured. Insurance status is the missing field that would cleanly separate these sub-populations.</li>
+    <li><strong>Blood Assurance retention.</strong> 93% first-timers reflects a 6-week-old market. No conclusions about Southern retention can be drawn until August 2026 when the first eligible cohort re-presents. The acquisition channels and test preferences are clear; the retention story is not yet written.</li>
+    <li><strong>Barry causality.</strong> Barry engagement correlates with repeat donation, but causality is not established. High-intent donors may engage with Barry more because they were already going to return, not because Barry caused them to return. An experiment (withholding or delaying Barry prompt post-result) would be needed to establish causality.</li>
+    <li><strong>What "General panel" donors actually want.</strong> The General panel is the most-ordered by far, but it's also the default. We can't distinguish donors who actively chose it from those who accepted the default. Panel selection UX data would clarify whether test merchandising could shift more donors toward specialized panels.</li>
+    <li><strong>Goals field reliability.</strong> Only 71 donors (13%) have set goals, and the field shows very low completion across all segments. It's unclear whether low completion reflects low motivation or poor UX (field not prominent enough, friction in the goal-setting flow). If it's UX, this is fixable and the field becomes a much stronger segmentation signal with improvement.</li>
+  </ul>
+</div>
+
+<!-- 10. NEXT STEPS -->
+<div class="section" id="next-steps">
+  <div class="section-label">Section 10</div>
+  <h2>Recommended Next Steps</h2>
+
+  <ul class="steps-list">
+    <li>
+      <div class="step-marker">1</div>
+      <div class="step-text">
+        <strong>Score all 554 donors into segments programmatically</strong>
+        Use biohacker_signal, regular_donor_signal, referral_sources, and address_state to assign a primary segment to each donor. Build a simple scoring table. This enables cohort-level analysis of retention, panel choice, and Barry engagement by segment — turning the qualitative framework into a working analytics layer.
+      </div>
+    </li>
+    <li>
+      <div class="step-marker">2</div>
+      <div class="step-text">
+        <strong>Add insurance status to the donor export</strong>
+        The Access Seeker / Social Responder split cannot be confirmed without insurance or income data. Adding a field from the orders or user_profiles table — or connecting the care-nav form responses via email join — would allow proper sizing of the Access Seeker segment and targeted activation.
+      </div>
+    </li>
+    <li>
+      <div class="step-marker">3</div>
+      <div class="step-text">
+        <strong>Track the Blood Assurance first re-eligible cohort (August 2026)</strong>
+        The earliest May 2026 Blood Assurance donors become eligible to re-donate around late July–early August. Monitoring the re-donation rate for this cohort is the first real Southern market retention signal. Set up a tracking view now so the data is ready when it arrives.
+      </div>
+    </li>
+    <li>
+      <div class="step-marker">4</div>
+      <div class="step-text">
+        <strong>Test the post-result Barry prompt timing</strong>
+        Barry engagement is the strongest repeat-donation predictor available. An experiment varying the timing and content of the first post-result Barry message (day 1 vs. day 3 vs. day 7 after results delivery) would establish whether the prompt is causal — and, if so, when it's most effective.
+      </div>
+    </li>
+    <li>
+      <div class="step-marker">5</div>
+      <div class="step-text">
+        <strong>Prototype add-on paid test selection at checkout</strong>
+        Multiple Optimizer donors independently raised the inability to add paid tests at donation time as a friction point. This is both a retention and revenue lever for the highest-LTV segment. A mockup of the add-on flow — even just as a form — would validate demand before engineering investment.
+      </div>
+    </li>
+    <li>
+      <div class="step-marker">6</div>
+      <div class="step-text">
+        <strong>Build a goals-setting prompt into the post-first-result flow</strong>
+        Only 13% of donors have set health goals despite 100% completing onboarding. Goals are the strongest profile completion signal for Optimizer behavior. A prompted goal-setting moment in the result delivery experience (not buried in onboarding) could meaningfully increase engagement depth — and improve the segmentation signal quality.
+      </div>
+    </li>
+  </ul>
+</div>
+
+</div>
