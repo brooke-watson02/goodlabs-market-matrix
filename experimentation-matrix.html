@@ -421,7 +421,7 @@
 
 <header class="page-header">
   <h1>Market × Persona Matrix</h1>
-  <p>GoodLabs · Donor Acquisition Strategy · July 2026 · 554 donors · 3 live orgs — click any cell for hypothesis + test approach</p>
+  <p>GoodLabs · Donor Acquisition Strategy · July 2026 · 554 donors · 3 live orgs · Updated with Listen Labs N=17 + Prolific N=204 findings — click any cell for hypothesis + test approach</p>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#2A7A50"></div>High priority</div>
     <div class="legend-item"><div class="legend-dot" style="background:#B07A10"></div>Medium priority</div>
@@ -554,7 +554,7 @@ const CELLS = {
     channels: ["Vitalant in-center signage + staff FAQ", "Friend and family referral", "Community referral programs"],
     message: "You already donate. Now get something back.",
     testMethods: ["survey", "interview"],
-    note: "Vitalant's 18% repeat rate is the benchmark for a mature market. Altruists here have some health interest (CMP, testosterone panels) but giving is the primary identity. The message isn't about health optimization — it's reciprocity. In-center activation is the highest-leverage channel; brand confusion with Vitalant is a real friction to address."
+    note: "Vitalant's 18% repeat rate is the benchmark for a mature market. Altruists here have some health interest (CMP, testosterone panels) but giving is the primary identity. The message isn't about health optimization — it's reciprocity. In-center activation is the highest-leverage channel; brand confusion with Vitalant is a real friction to address. Listen Labs caveat: altruism scored highest in appeal (Prolific net +224) but appeal and behavioral intent diverge for prosocial messaging — participants liked altruistic messages without that translating to action. Body-level barriers (needles, fainting, eligibility uncertainty) are the actual conversion blockers, and no altruism message addresses them. For existing Altruists already donating, altruism framing reinforces identity; for new acquisition, pair altruism with body-reassurance creative."
   },
   "0-2": {
     priority: "md", source: "partial",
@@ -562,7 +562,7 @@ const CELLS = {
     channels: ["Community health orgs", "Spanish-language Instagram + Facebook", "In-center flyers in low-income zip codes", "Gig worker / service worker channels"],
     message: "Free bloodwork. No insurance needed.",
     testMethods: ["interview", "survey"],
-    note: "Significant uninsured gig and service worker population in tech cities despite high cost of living. Harder to reach via paid social alone — community partnerships required. Spanish-language support is a near-term need."
+    note: "Significant uninsured gig and service worker population in tech cities despite high cost of living. Harder to reach via paid social alone — community partnerships required. Spanish-language support is a near-term need. Listen Labs: for Access Seekers, the sharper hook is 'bloodwork without insurance, without a doctor visit' — functional removal of structural barriers, not altruism framing. Prolific data confirms: Access Seekers are the only persona where Altruism does not lead message preference (they chose Wellness 48%, Altruism 35%). The results interpretation layer matters more for this segment than any other — they have no clinician to follow up with. A one-tap eligibility checker at the top of the funnel could recover self-disqualifiers, many of whom opt out on incorrect assumptions."
   },
   "0-3": {
     priority: "hi", source: "data",
@@ -570,7 +570,7 @@ const CELLS = {
     channels: ["Instagram (curiosity-driven creative)", "Reddit (r/sanfrancisco, r/longevity)", "TikTok", "Friend referral"],
     message: "You take care of yourself. Now see what your blood says.",
     testMethods: ["meta", "listen"],
-    note: "Oura ring, morning runs, decent diet — health-conscious but not tracking biomarkers yet. SF has a high density of this profile. The JTBD isn't optimization, it's validation: they want to know they're doing okay. The post-result Barry experience is the retention lever — if the results feel meaningful and approachable, they come back."
+    note: "Oura ring, morning runs, decent diet — health-conscious but not tracking biomarkers yet. SF has a high density of this profile. The JTBD is validation: they want to know they're doing okay. Listen Labs confirmed: lead with 'see what's going on inside your body' (participants' own language), not wellness optimization framing. The 'two birds, one stone' frame works (help someone + learn about yourself), but the self-insight half does the converting — altruism alone is insufficient for this group. Their objection to Goodlabs over their PCP must be answered explicitly: panel scope, interpretation layer, no appointment required. Avoid 'biomarkers' and 'optimize' — these read as niche. Post-result experience is the retention lever."
   },
   "0-4": {
     priority: "hi", source: "data",
@@ -596,7 +596,7 @@ const CELLS = {
     channels: ["Blood Assurance in-center (signage, staff FAQ)", "Friend and family referral", "Church and civic org partnerships", "Gym community word-of-mouth"],
     message: "Keep giving. Start knowing.",
     testMethods: ["survey", "interview"],
-    note: "Strongest market for this persona nationally. Deep Blood Assurance trust in Nashville and Chattanooga — the pharmacist story is the template. Giving is the primary identity; GoodLabs is the reward that comes with it. 93% first-timers reflects May 2026 launch, not churn. First repeat cohort becomes eligible Aug 2026. Staff FAQs at donation centers are the highest-leverage activation channel."
+    note: "Strongest market for this persona nationally. Deep Blood Assurance trust in Nashville and Chattanooga — the pharmacist story is the template. Giving is the primary identity; GoodLabs is the reward that comes with it. 93% first-timers reflects May 2026 launch, not churn. First repeat cohort becomes eligible Aug 2026. Staff FAQs at donation centers are the highest-leverage activation channel. Listen Labs caveat: altruism appeals won the Prolific survey on appeal (net +224) but behavioral intent diverges from appeal for prosocial messaging. For in-market Altruists already donating through Blood Assurance, altruism framing is appropriate identity reinforcement. For new-to-donation acquisition in Nashville, pair altruism with explicit body-reassurance elements — volume ('about one cup'), experienced phlebotomists, eligibility checker — to address the body-level barriers that actually prevent conversion."
   },
   "1-2": {
     priority: "hi", source: "partial",
@@ -604,7 +604,7 @@ const CELLS = {
     channels: ["Community health fairs", "FQHCs and community health centers", "Spanish-language social (Facebook dominant)", "In-center flyers in lower-income zip codes"],
     message: "Free bloodwork. No insurance needed.",
     testMethods: ["survey", "interview"],
-    note: "Higher uninsured rates in Southern states. News and poster referrals suggest this segment is already self-activating through community channels. Spanish-language support is essential — significant Hispanic communities in Nashville and Chattanooga. Research trial participation is a relevant retention mechanism."
+    note: "Higher uninsured rates in Southern states. News and poster referrals suggest this segment is already self-activating through community channels. Spanish-language support is essential — significant Hispanic communities in Nashville and Chattanooga. Listen Labs: lead with 'free bloodwork, no insurance needed, no doctor visit required' — the functional access frame, not altruism. Access Seekers in Prolific data (n=23) chose Wellness over Altruism as most-appealing, consistent with qualitative finding that this segment responds to what they get, not what they give. Results interpretation is a conversion-critical layer — without a clinician to contextualize results, the panel feels incomplete. Eligibility checker is a high-leverage funnel intervention."
   },
   "1-3": {
     priority: "hi", source: "data",
@@ -612,7 +612,7 @@ const CELLS = {
     channels: ["Instagram (dominant — 52 BA orders)", "TikTok (strong Southern penetration)", "Friend referral", "News / earned media"],
     message: "You take care of yourself. Now check your numbers.",
     testMethods: ["meta", "listen"],
-    note: "Nashville's health-conscious crowd — gym-goers, runners, people who think about what they eat but haven't formalized it with bloodwork. Instagram is the dominant acquisition channel here (52 BA orders). The message is validation, not optimization. Post-result activation is the next challenge: do the results feel meaningful enough to come back?"
+    note: "Nashville's health-conscious crowd — gym-goers, runners, people who think about what they eat but haven't formalized it with bloodwork. Instagram is the dominant acquisition channel here (52 BA orders). The message is validation, not optimization. Listen Labs confirmed: use 'see what's going on inside' language, not 'optimize' or 'biomarkers.' 'Two birds, one stone' framing (help someone + learn about yourself) tests well with this persona, but self-insight must be prominent — altruism alone doesn't convert Maintainers who already have PCP access. The 35–54 age band (heaviest in this market) is where Wellness messaging competes most closely with Altruism in Prolific data; creative testing by age segment is warranted. Post-result experience is the retention lever."
   },
   "1-4": {
     priority: "lo", source: "inferred",
@@ -654,7 +654,7 @@ const CELLS = {
     channels: ["Instagram", "Gym partnerships", "Workplace wellness / employee referral", "Friend referral"],
     message: "Health-conscious. Make it official.",
     testMethods: ["meta", "listen"],
-    note: "DC professionals who exercise, watch what they eat, and think about their health — but haven't formalized it with bloodwork. Instagram is driving acquisition here (11 Inova orders). The message is validation: they already feel like they're doing the right things, now they can see it confirmed. Employer wellness channels may be more efficient than consumer social in this market."
+    note: "DC professionals who exercise, watch what they eat, and think about their health — but haven't formalized it with bloodwork. Instagram is driving acquisition here (11 Inova orders). The message is validation: they already feel like they're doing the right things, now they can see it confirmed. Listen Labs: lead with 'see what's going on inside' — participants' own language before any Goodlabs framing. 'Two birds, one stone' (help someone + get your own results) resonates but the self-insight half must carry the message; altruism sweetens but doesn't drive conversion for insured Maintainers who have PCP access. Employer wellness channels may be more efficient than consumer social in this market."
   },
   "2-4": {
     priority: "md", source: "inferred",
@@ -806,7 +806,7 @@ const CELLS = {
     channels: ["Blood Assurance in-center (Rome, GA)", "Church blood drives", "Civic orgs (Rotary, Lions Club, VFW)", "Friend and family referral"],
     message: "Giving is what this community does. Now you get something back.",
     testMethods: ["interview", "survey"],
-    note: "The highest-potential persona in this market. Blood donation is a civic and religious identity in rural Southern towns — not a transaction. The Altruist here gives because their church does it, their parents did it, their neighbors do it. GoodLabs fits naturally as the benefit that makes a deeply-held habit more tangible. Blood Assurance's existing community relationships are the activation infrastructure."
+    note: "The highest-potential persona in this market. Blood donation is a civic and religious identity in rural Southern towns — not a transaction. The Altruist here gives because their church does it, their parents did it, their neighbors do it. GoodLabs fits naturally as the benefit that makes a deeply-held habit more tangible. Blood Assurance's existing community relationships are the activation infrastructure. Listen Labs: altruism framing is appropriate here as identity reinforcement for existing donors — this is the one context where altruism is the right lead, not just a sweetener. But new-to-donation acquisition still requires body-reassurance elements alongside community framing: eligibility clarity, volume ('about one cup'), familiar location. Rural respondents in Prolific data showed strong Altruism preference (50%) with almost no Optimizer interest (8%), consistent with this profile."
   },
   "6-2": {
     priority: "hi", source: "partial",
@@ -907,7 +907,7 @@ function openPanel(key, market, persona, pi, data) {
     meta:      "We believe this segment is reachable through paid social. Meta tests whether the messages that perform in surveys and interviews actually drive behavior: clicks, bookings, and donations in the real world.",
     interview: "We already have customers who chose to donate through GoodLabs. Interviews help us understand what first caught their attention, what convinced them, and how they naturally describe us. Messaging rooted in real customer language rather than assumptions.",
     survey:    "Our existing data is directional but skewed toward current customers. Surveys let us validate our hypotheses with a broader audience and quantify which value propositions resonate across different types of potential donors.",
-    listen:    "Before we decide how to position GoodLabs, we want to understand how people frame the problem themselves. Listen Labs uncovers the language, mental models, and objections people naturally express before we introduce our own messaging."
+    listen:    "Listen Labs qualitative study complete (N=17, June 2026). Key findings: visibility not virtue is the primary pull — participants described wanting to 'see what's going on inside' before Goodlabs was mentioned. Language to use: clear picture, good handle, flying blind, in the dark. Language to avoid: biomarkers, biohacking, optimize. Altruism sweetens but doesn't drive — appeal and behavioral intent diverge for prosocial messaging; body-level barriers (needles, fainting, eligibility uncertainty) are the actual funnel killers. Two gates every execution must pass: convenient location (13/17) and named credible operator (8/17)."
   };
   body.innerHTML = `
     <div class="panel-field">
