@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goodlabs Donor Interviews — Qualitative Synthesis, July 2026</title>
+<style>
+  :root {
+    --bg:       #F7F8F9;
+    --surface:  #FFFFFF;
+    --border:   #DDE2E0;
+    --text-1:   #191B1E;
+    --text-2:   #52605C;
+    --text-3:   #8A9994;
+    --green:    #1B5E3B;
+    --green-lt: #E3F0EA;
+    --sage:     #4A8F78;
+    --sage-lt:  #EBF4F0;
+    --amber:    #7A5200;
+    --amber-bg: #FEF3DC;
+    --col:      680px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; background: var(--bg); color: var(--text-1); -webkit-font-smoothing: antialiased; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.7; padding: 0 24px 80px; }
+
+  .col { max-width: var(--col); margin: 0 auto; }
+
+  /* Cover */
+  .cover { max-width: var(--col); margin: 0 auto; padding: 60px 0 44px; border-bottom: 2px solid var(--text-1); }
+  .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+  .cover h1 { font-family: Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.2; text-wrap: balance; color: var(--text-1); margin-bottom: 20px; max-width: 560px; }
+  .cover-meta { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+  .cover-meta span { font-size: 12px; color: var(--text-3); }
+  .cover-meta strong { color: var(--text-2); font-weight: 600; }
+
+  /* Sections */
+  .section { max-width: var(--col); margin: 44px auto 0; padding-top: 44px; border-top: 1px solid var(--border); }
+  .section:first-of-type { border-top: none; margin-top: 0; padding-top: 44px; }
+  .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+  .section h2 { font-family: Georgia, serif; font-size: 22px; font-weight: 400; line-height: 1.3; text-wrap: balance; color: var(--text-1); margin-bottom: 18px; }
+  .section h3 { font-family: Georgia, serif; font-size: 16px; font-weight: 400; font-style: italic; color: var(--text-2); margin: 28px 0 10px; }
+
+  p { margin-bottom: 16px; font-size: 15px; line-height: 1.72; }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { font-size: 15px; line-height: 1.65; margin-bottom: 8px; }
+  li:last-child { margin-bottom: 0; }
+
+  /* Pullquote */
+  .pullquote { border-left: 3px solid var(--green); padding: 4px 0 4px 20px; margin: 28px 0; }
+  .pullquote p { font-family: Georgia, serif; font-size: 17px; font-style: italic; line-height: 1.5; color: var(--text-1); margin: 0; }
+  .pullquote cite { display: block; font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
+
+  /* Callout */
+  .callout { background: var(--amber-bg); border-left: 3px solid var(--amber); padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0; }
+  .callout-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+  .callout p { font-size: 13px; line-height: 1.6; color: #5c4200; margin: 0; }
+
+  /* Participant cards */
+  .participant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+  @media (max-width: 600px) { .participant-grid { grid-template-columns: 1fr; } }
+  .participant-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 18px 16px; }
+  .participant-name { font-family: Georgia, serif; font-size: 15px; font-weight: 400; color: var(--text-1); margin-bottom: 4px; }
+  .participant-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; display: block; }
+  .participant-fact { font-size: 12.5px; line-height: 1.55; color: var(--text-2); margin-bottom: 6px; display: flex; gap: 8px; }
+  .participant-fact:last-child { margin-bottom: 0; }
+  .fact-label { color: var(--text-3); font-weight: 600; flex-shrink: 0; }
+
+  /* Findings list */
+  .findings-list { list-style: none; padding: 0; margin: 0 0 16px; }
+  .findings-list li { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .findings-list li:first-child { border-top: 1px solid var(--border); }
+  .finding-num { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; font-weight: 700; color: var(--text-3); padding-top: 3px; flex-shrink: 0; width: 24px; }
+  .finding-text { font-size: 14px; line-height: 1.6; }
+  .finding-text strong { font-weight: 600; color: var(--text-1); }
+
+  /* Comparison table */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+  .compare-table th { background: var(--text-1); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+  .compare-table th:first-child { border-radius: 4px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 4px 0 0; }
+  .compare-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; color: var(--text-2); }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 600; color: var(--text-1); white-space: nowrap; }
+  .compare-table tr:nth-child(even) td { background: var(--bg); }
+
+  /* Signal pills */
+  .signal { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 40px; }
+  .signal-new { background: var(--green-lt); color: var(--green); }
+  .signal-confirms { background: var(--sage-lt); color: var(--sage); }
+
+  /* Implication rows */
+  .implication { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .implication:first-of-type { border-top: 1px solid var(--border); }
+  .implication-tag { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 5px; }
+  .tag-product { color: #5B4A9C; }
+  .tag-messaging { color: var(--green); }
+  .tag-retention { color: var(--amber); }
+  .tag-expansion { color: var(--sage); }
+  .implication-head { font-family: Georgia, serif; font-size: 15px; font-weight: 400; color: var(--text-1); margin-bottom: 8px; line-height: 1.4; }
+  .implication p { font-size: 13.5px; line-height: 1.6; color: var(--text-2); margin: 0; }
+
+  /* Footnote */
+  .footnote { font-size: 11.5px; color: var(--text-3); line-height: 1.55; padding-top: 28px; border-top: 1px solid var(--border); margin-top: 28px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-eyebrow">Qualitative Research · Donor Interviews</div>
+  <h1>Three Existing Donors — What Converted Them, What Keeps Them, What Doesn't</h1>
+  <div class="cover-meta">
+    <span><strong>Method:</strong> 25–30 min video interviews, existing Goodlabs donors</span>
+    <span><strong>Referral source:</strong> Friend or family member (2 of 3); search (1 of 3)</span>
+    <span><strong>Conducted:</strong> July 2026</span>
+    <span><strong>Interviewer:</strong> Brooke Watson</span>
+  </div>
+</div>
+
+<!-- PARTICIPANTS -->
+<div class="section">
+  <div class="section-eyebrow">Who We Talked To</div>
+  <h2>Three donors, three paths in</h2>
+
+  <div class="participant-grid">
+    <div class="participant-card">
+      <div class="participant-name">Kwan</div>
+      <span class="participant-tag">SF Bay Area · 36F · Friend referral</span>
+      <div class="participant-fact"><span class="fact-label">Background:</span> Former tech worker, currently unemployed; previously had excellent employer insurance</div>
+      <div class="participant-fact"><span class="fact-label">Donor history:</span> Long-time casual donor; donated heavily in college and during a period of depression</div>
+      <div class="participant-fact"><span class="fact-label">Health profile:</span> Good baseline health; 125 lbs; doesn't actively track data; counts herself as "not very fit" among her peer group</div>
+      <div class="participant-fact"><span class="fact-label">Draw:</span> Friend mentioned it while co-working; had therapy 3 blocks away — convenient to stack trips</div>
+    </div>
+    <div class="participant-card">
+      <div class="participant-name">Mason</div>
+      <span class="participant-tag">Reno, NV · musician / National Guard · Search</span>
+      <div class="participant-fact"><span class="fact-label">Background:</span> Musician, arts administrator, 11 years National Guard; recently relocated from Northern Virginia</div>
+      <div class="participant-fact"><span class="fact-label">Donor history:</span> Regular donor, every 8–12 weeks; periods of ineligibility due to medications; occasional bruising, no adverse reactions</div>
+      <div class="participant-fact"><span class="fact-label">Health profile:</span> Wears a Garmin for sleep and activity tracking; does not use any platform to aggregate data</div>
+      <div class="participant-fact"><span class="fact-label">Draw:</span> Searched for affordable blood testing while working in an isolated area without good healthcare access; found Goodlabs as the cost-free option</div>
+    </div>
+    <div class="participant-card">
+      <div class="participant-name">Emily</div>
+      <span class="participant-tag">Consulting / data viz · autoimmune · Friend referral</span>
+      <div class="participant-fact"><span class="fact-label">Background:</span> Journalism + data viz master's; consulting and marketing roles; many healthcare clients</div>
+      <div class="participant-fact"><span class="fact-label">Donor history:</span> Donating since her twenties; father went through cancer; last pre-Goodlabs attempt failed due to high blood pressure during a difficult health period</div>
+      <div class="participant-fact"><span class="fact-label">Health profile:</span> Autoimmune conditions; tracks weight and flare-up days informally; has run blood work through AI out of curiosity</div>
+      <div class="participant-fact"><span class="fact-label">Draw:</span> Gym-owner friend who does competitive strongman discussed optimizing biomarkers in depth; give-to-get model resonated immediately</div>
+    </div>
+  </div>
+</div>
+
+<!-- KEY FINDINGS -->
+<div class="section">
+  <div class="section-eyebrow">Summary</div>
+  <h2>What these three interviews add to the picture</h2>
+
+  <ul class="findings-list">
+    <li>
+      <span class="finding-num">01</span>
+      <span class="finding-text"><strong>Convenience works through anchor appointments, not standalone motivation.</strong> Kwan donated consistently when therapy was 3 blocks from the Goodlabs location — the donation slotted into existing downtown time. When that anchor moved, so did her motivation. Mason is geographically locked out entirely after relocating to Reno. The mechanism isn't "I decided to make the trip"; it's "I was already going to be there." This has direct implications for location strategy and scheduling prompts.</span>
+    </li>
+    <li>
+      <span class="finding-num">02</span>
+      <span class="finding-text"><strong>Platform and UX failures are breaking retention across all three profiles.</strong> Mason's account showed a missed appointment even after his results were ready — he contacted support twice to confirm his blood wasn't lost. Kwan had a Quest/Goodlabs linkage failure that kept results out of the platform for months; she saw them for the first time during this interview. Emily uploaded PDFs and found it cumbersome. These aren't edge cases — they surfaced independently across three different users with different tech profiles.</span>
+    </li>
+    <li>
+      <span class="finding-num">03</span>
+      <span class="finding-text"><strong>Word of mouth leads with "what you get," not "what you give."</strong> Emily says it explicitly: "I lead with the free lab work, for sure." Kwan never evangelized at all — only mentioned Goodlabs logistically ("I need to be downtown that day"). Mason found it through search. No one led with community or altruism when describing how they talk about Goodlabs. This is a third data source — after Prolific and Listen Labs — confirming the appeal/intent gap for altruism messaging.</span>
+    </li>
+    <li>
+      <span class="finding-num">04</span>
+      <span class="finding-text"><strong>A distinct "coverage-gap" Access Seeker sub-profile exists in tech markets.</strong> Kwan isn't chronically uninsured — she left a tech job with excellent insurance and now has a temporary coverage downgrade. She described it precisely: "I used to be spoiled by really good health insurance... I don't get to indulge straight curiosities as much." This is a different profile from the rural uninsured or the structurally underinsured, and is likely concentrated in SF, Seattle, and NYC where tech-worker insurance is unusually good and its loss is unusually felt.</span>
+    </li>
+    <li>
+      <span class="finding-num">05</span>
+      <span class="finding-text"><strong>Symptom-based panels are a product gap, not a messaging hypothesis.</strong> Kwan independently described wanting a "bad sleep" panel; she kept a notes app list of tests, then had to control-find each one and navigate spelling variants. Mason described "I feel tired" as a lower-barrier entry point. Emily wanted journal prompts that correlate how she feels with what her labs show — and said she would pay for it. All three surfaced this unprompted. It's a feature request with apparent willingness to pay.</span>
+    </li>
+    <li>
+      <span class="finding-num">06</span>
+      <span class="finding-text"><strong>Reno, NV is a named expansion gap with existing partner infrastructure.</strong> Mason relocated there, can't use Goodlabs (4.5hr drive to SF), and specifically named Quest Diagnostics centers in Reno as existing, unpartnered infrastructure. He said he would use Goodlabs as his primary donation venue if it were accessible. This is the most concrete geographic expansion signal to emerge from any research to date.</span>
+    </li>
+  </ul>
+</div>
+
+<!-- SECTION 1: CONVENIENCE -->
+<div class="section">
+  <div class="section-eyebrow">Finding 01</div>
+  <h2>Convenience is an ecosystem, not a feature — and it breaks when the anchor moves</h2>
+
+  <p>The Listen Labs study established that 13 of 17 participants gated participation on a nearby, convenient location. These interviews reveal the mechanism more precisely: convenience isn't about willingness to make a trip to Goodlabs specifically, it's about whether Goodlabs can attach itself to a trip that's already happening.</p>
+
+  <div class="pullquote">
+    <p>"I used to have therapy near three blocks away from Good Labs. And I would just, and so it felt like I could just kind of do that. I don't know how much I'll continue to make this the trek."</p>
+    <cite>Kwan — SF Bay Area donor</cite>
+  </div>
+
+  <p>Kwan's donation history maps almost directly to proximity to an anchor destination — college campus where she "could literally finish lunch early," a blood drive during therapy appointments nearby. When the therapy moved, the Goodlabs trip became its own errand. She acknowledged she'll probably keep going for now because she's not working and needs calendar structure, but framed it as uncertain. Her most telling line: "I've always given the most in phases of my life where I would regularly walk by something I could just drop into."</p>
+
+  <p>Mason's case shows what happens when the anchor disappears entirely. He donated at the Centreville, VA location because he happened to be in the area during a period of limited healthcare access — it was the right time, right place. After relocating to Reno, he's geographically locked out. Four and a half hours to San Francisco. He would use Goodlabs regularly "if it were accessible," which means the demand is there; the supply infrastructure isn't.</p>
+
+  <p>The product implication isn't messaging — it's scheduling UX and location density. Scheduling nudges that surface when someone is already downtown for another appointment ("you're near a Goodlabs center — want to add a 20-min slot?") would address the anchor mechanism directly. Location expansion to mid-size cities (Reno, Chattanooga, Sacramento) is a retention tool, not just an acquisition tool.</p>
+
+  <div class="callout">
+    <div class="callout-label">Expansion Signal — Reno, NV</div>
+    <p>Mason named Quest Diagnostics centers in Reno specifically as existing infrastructure not yet partnered with Goodlabs. He is an eligible, motivated, regular donor who is currently unable to use the service. This is the most specific and actionable expansion signal from any research to date — a named market, a named partner candidate, and a confirmed willing user.</p>
+  </div>
+</div>
+
+<!-- SECTION 2: PLATFORM UX -->
+<div class="section">
+  <div class="section-eyebrow">Finding 02</div>
+  <h2>The platform experience is a retention problem, not a feature gap</h2>
+
+  <p>Three separate users hit three separate platform failures. The pattern suggests systemic UX issues, not isolated incidents.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Issue</th>
+        <th>Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mason</td>
+        <td>Account showed "missed appointment" and "not yet donated" even after blood had been tested and results were ready</td>
+        <td>Contacted support 1–2 times to confirm blood wasn't lost. Created anxiety and distrust of the system</td>
+      </tr>
+      <tr>
+        <td>Mason</td>
+        <td>Rescheduling produced conflicting messages about whether appointment was successfully moved</td>
+        <td>Confusion about status made the pre-donation experience more stressful than necessary</td>
+      </tr>
+      <tr>
+        <td>Kwan</td>
+        <td>Quest/Goodlabs account linkage failure kept results out of the platform</td>
+        <td>Saw results for the first time during this interview — December 2024 donation. Seven months of inaccessible data</td>
+      </tr>
+      <tr>
+        <td>Kwan</td>
+        <td>Frequently logged out; platform doesn't save credentials due to health data security</td>
+        <td>"It's kind of a hassle to get in and out of it" — reduces frequency of results engagement</td>
+      </tr>
+      <tr>
+        <td>Emily</td>
+        <td>Manual PDF upload to aggregate prior blood work was cumbersome</td>
+        <td>Partial engagement with a feature she said she'd pay for if it worked better</td>
+      </tr>
+      <tr>
+        <td>Mason</td>
+        <td>Platform not mobile-friendly; couldn't view trends effectively on phone</td>
+        <td>Disengaged from tracking features because he doesn't use a desktop outside work hours</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Mason referenced Guava as a positive benchmark: it automatically synced an ER visit and primary care results without any manual upload, and compared them to historical data. That set the expectation bar. What Goodlabs currently requires — manual PDF uploads, repeated logins, status states that contradict reality — reads as friction against that bar.</p>
+
+  <div class="pullquote">
+    <p>"I wanted to confirm that my blood didn't go missing somewhere, because it still said I had missed my appointment. But then I got my results back."</p>
+    <cite>Mason — Northern Virginia / Reno donor</cite>
+  </div>
+
+  <p>Emily was the most positive about the platform, but her praise was specifically for onboarding communications — the pre-donation reminder emails, which she described as "thorough, well-designed, engaging — upbeat, quick, thoughtful." The gap between onboarding communication quality and post-donation platform quality appears to be significant. The brand promise lands in the emails; it doesn't always land in the product.</p>
+</div>
+
+<!-- SECTION 3: WORD OF MOUTH -->
+<div class="section">
+  <div class="section-eyebrow">Finding 03</div>
+  <h2>When existing donors refer, they lead with what you get — not what you give</h2>
+
+  <p>None of the three donors led with community or altruism when describing how they talk about Goodlabs. This is consistent across all three referral styles — the enthusiast, the reluctant, and the non-referrer.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Donor</th>
+        <th>How they talk about it</th>
+        <th>What they lead with</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Emily</td>
+        <td>Has told multiple people; pitching 21-year-old daughter as "you can get lab work without going to a doctor"</td>
+        <td>Free lab work, access without a doctor visit</td>
+      </tr>
+      <tr>
+        <td>Kwan</td>
+        <td>Has never evangelized intentionally; mentions it only when explaining a downtown calendar commitment</td>
+        <td>Logistics ("I need to be downtown for a blood donation")</td>
+      </tr>
+      <tr>
+        <td>Mason</td>
+        <td>Told his girlfriend about it; framed the dementia/Alzheimer's markers as relevant to her concerns</td>
+        <td>Specific test she'd find valuable + how easy the donation experience was</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pullquote">
+    <p>"I lead with the free lab work, for sure."</p>
+    <cite>Emily — when asked whether she leads with the community angle or the free testing angle</cite>
+  </div>
+
+  <p>The referral conversation quality also varied significantly. Emily's friend — a gym owner doing competitive strongman — had a detailed, in-depth technical conversation about biomarker optimization. That level of specificity likely drove a higher-quality conversion than a casual mention. Kwan's friend brought it up incidentally while co-working; she heard it, found it plausible, and tried it — but it didn't produce an evangelist.</p>
+
+  <p>Kwan articulated clearly why she doesn't evangelize more broadly: most of her friends have good insurance, can walk into One Medical, and get tested cheaply. The trade-off (scheduling, travel time, locked calendar) isn't worth it for them the way it is for her. This is an honest and useful map of who the word-of-mouth audience actually is — people in the coverage-gap profile, not the generally health-conscious.</p>
+
+  <div class="pullquote">
+    <p>"I think I'm in a niche case where I have an abundance of time and not as good insurance. For most of my friends, this is not the right trade-off for locking your schedule down that much."</p>
+    <cite>Kwan</cite>
+  </div>
+</div>
+
+<!-- SECTION 4: COVERAGE GAP -->
+<div class="section">
+  <div class="section-eyebrow">Finding 04</div>
+  <h2>There's a distinct Access Seeker sub-profile in tech markets: the coverage-gap donor</h2>
+
+  <p>The existing Access Seeker framing covers the chronically uninsured and the structurally underinsured (Medicaid, no PCP). These interviews surface a third type: the temporarily coverage-degraded tech worker who previously had exceptional employer-sponsored insurance and now has a gap.</p>
+
+  <p>Kwan described this precisely. At her former tech job, she had insurance good enough to get "whatever random tweet I read about" tested for minimal money. Since leaving, she's not in financial difficulty, but she can't indulge health curiosity the same way. Goodlabs fills that curiosity gap without requiring a doctor's visit or out-of-pocket payment. The draw isn't crisis care — it's the loss of a perk she took for granted.</p>
+
+  <p>This profile is likely concentrated in specific markets:</p>
+  <ul>
+    <li>SF Bay Area — high density of tech workers in career transitions, layoffs, or freelance pivots</li>
+    <li>Seattle — similar tech-employer concentration</li>
+    <li>NYC — post-startup or post-corporate transitions are common</li>
+  </ul>
+
+  <p>The messaging implication is different from the structural Access Seeker. "Free bloodwork, no insurance needed" speaks to someone who never had good insurance. The coverage-gap donor needs something closer to "get the testing you're used to, without the insurance you used to have" — a framing that acknowledges prior access and temporary loss rather than permanent scarcity.</p>
+
+  <p>The retention dynamic also differs. The coverage-gap donor may return to employer-sponsored insurance — and when they do, the Goodlabs value proposition becomes weaker relative to their One Medical plan. Retention messaging for this sub-profile should acknowledge the health-habit angle (tracking over time, the value of longitudinal data) to create a reason to stay even when insurance returns.</p>
+</div>
+
+<!-- SECTION 5: SYMPTOM PANELS -->
+<div class="section">
+  <div class="section-eyebrow">Finding 05</div>
+  <h2>Symptom-based panels are a product gap with apparent willingness to pay</h2>
+
+  <p>All three donors, unprompted, described wanting some version of a symptoms-first entry point into test selection.</p>
+
+  <div class="pullquote">
+    <p>"If there was one that was like 'bad sleep' — things that generally impact bad sleep — I'd be like, okay, I don't want to bother to research what the main things are that people check for when you're trying to diagnose bad sleep, but if there's one that's yeah... panels that are related to what life might feel like."</p>
+    <cite>Kwan</cite>
+  </div>
+
+  <p>Kwan's frustration was specific: she kept a notes-app list of tests she'd read about online, then had to control-find each one in Goodlabs' menu while navigating different spellings, abbreviations, and parenthetical formats. The friction wasn't ignorance — she knew what she wanted — but the taxonomy didn't match how she'd organized her own thinking.</p>
+
+  <p>Mason described it from a lower-knowledge starting point: when he was searching for care in a healthcare desert, having a "feeling tired" entry point would have been lower-barrier than knowing specific biomarker names. He framed this as something that would remove reasons to go elsewhere.</p>
+
+  <p>Emily wanted the symptom-correlation in the post-test experience rather than pre-test selection — journal prompts that ask how you're feeling over time, then surface patterns against lab results. She said explicitly she would pay for this feature. Kwan also endorsed paying for things once they're in front of her, noting that a complete metabolic panel at cost is around $30 — within the range she'd spend if the product was working well for her.</p>
+
+  <p>These are three different versions of the same gap: the interface between how people experience symptoms and how tests are categorized. It surfaces at test selection (Kwan, Mason) and at results interpretation (Emily). Both ends of the test journey have this mismatch.</p>
+</div>
+
+<!-- SECTION 6: TPE -->
+<div class="section">
+  <div class="section-eyebrow">Finding 06</div>
+  <h2>TPE: body stakes matter more than price, and trust comes before cost</h2>
+
+  <p>Two of the three donors commented on therapeutic plasma exchange. Both reactions reinforce the Listen Labs pattern: the barrier isn't skepticism about Goodlabs' credibility, it's that something going back into the body is a categorically different risk calculation than something leaving it.</p>
+
+  <div class="pullquote">
+    <p>"Blood donation is a known thing. This is… the physical act is blood leaving my body, whatever, it's a known thing. That's good. And then you siphon off a little to run some tests. Great. Having it actually be doing something to a thing and putting it in my body feels very different stakes."</p>
+    <cite>Kwan</cite>
+  </div>
+
+  <p>Kwan was the more skeptical of the two. She drew a clear distinction between blood donation (known, legible, the components are things she understands) and TPE (a procedure on something that goes back in). She said she would need to decide independently that she wanted the treatment before cost or provider became relevant. She didn't rule it out — "if I decided after a bunch of other research that this is a thing I wanted, I'd be interested to find out there's a way to get it cheaper" — but the research step is hers to do, not Goodlabs' to skip past.</p>
+
+  <p>Emily was more open, largely because she's accustomed to medical procedures for her autoimmune conditions. "If I can just have my laptop and work while I'm doing it, like, I don't care." She had actually observed someone receiving what appeared to be TPE at the clinic during her own donation but hadn't asked about it. Her condition for trust: "trustworthy, published data and research presented in accessible formats — video snippets, something digestible." She noted her daughter (21 years old) would be significantly more anxious about it.</p>
+
+  <p>The implication is sequenced: body-stakes anxiety has to be addressed before the price conversation is relevant, and published clinical evidence in accessible formats (not white papers, not jargon) is the prerequisite. The clinic observation that Emily had — someone else receiving TPE visibly in the same room — is worth noting as a passive exposure channel that didn't trigger anxiety for her but might for others.</p>
+</div>
+
+<!-- IMPLICATIONS -->
+<div class="section">
+  <div class="section-eyebrow">Implications</div>
+  <h2>What these interviews add to the strategy</h2>
+
+  <div class="implication">
+    <div class="implication-tag tag-product">Product</div>
+    <div class="implication-head">Scheduling UX should surface the anchor-trip mechanism, not require standalone motivation</div>
+    <p>If a donor is already downtown for another appointment, a timely nudge could convert that into a Goodlabs slot. The current model requires the donor to have intrinsic motivation to make the trip; the higher-leverage model layers onto existing movement patterns. Geographic expansion to mid-size cities (Reno, Chattanooga, Sacramento) is also a retention tool — existing users who relocate become unavailable.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-tag tag-retention">Retention</div>
+    <div class="implication-head">Platform UX issues are creating distrust and reducing results engagement — fix before building new features</div>
+    <p>Appointment status showing "missed" when results are already ready. Account linkage failures keeping results out of the portal. Mobile experience that prevents trend-tracking. These are not minor inconveniences — they are moments when a donor questions whether the system worked at all. The benchmark being referenced is Guava's auto-sync with EHR systems. The path there doesn't need to start with full EHR integration; it starts with accurate appointment status and reliable account linking.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-tag tag-messaging">Messaging</div>
+    <div class="implication-head">Referral content should be written for the person doing the referring, not the person being referred</div>
+    <p>Emily knows how to talk about Goodlabs — she leads with free lab work, frames it as getting lab work without a doctor's visit for her daughter. Give her the tools to do that efficiently: share cards, a one-liner, a specific angle for the coverage-gap profile. Kwan doesn't refer because she doesn't think it's the right fit for her well-insured friends — which is honest and accurate. The referral program should target people in coverage gaps and healthcare transitions, not broadcast broadly.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-tag tag-product">Product</div>
+    <div class="implication-head">Symptom-based panels have apparent willingness to pay and surfaced across all three interviews unprompted</div>
+    <p>"Bad sleep," "fatigue," "stress" as entry points to test selection — paired with journal prompts that correlate how the user feels with what their labs show over time. Emily said she would pay for this. The test-selection and post-results interpretation sides of this gap are different but connected: the mismatch between symptom language and biomarker taxonomy appears at both ends of the journey.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-tag tag-messaging">Messaging</div>
+    <div class="implication-head">The coverage-gap Access Seeker needs a different frame than the structurally uninsured</div>
+    <p>"Free bloodwork, no insurance needed" speaks to someone who never had it. The coverage-gap donor in SF/Seattle/NYC needs acknowledgment that they had good access and lost it — "get the testing you're used to, without the plan you used to have." Retention messaging for this group should also address the longitudinal value (tracking over time matters even when coverage returns), because their reason to stay weakens when insurance does.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-tag tag-expansion">Expansion</div>
+    <div class="implication-head">Reno, NV — willing user, named partner infrastructure, confirmed demand</div>
+    <p>Mason is an existing, eligible, motivated regular donor who relocated and is now unable to use the service. He named Quest Diagnostics centers in Reno as the existing infrastructure. This is a specific and actionable expansion signal.</p>
+  </div>
+
+  <div class="footnote">
+    <p><strong>Study limitations:</strong> N=3, all existing Goodlabs donors — findings reflect retention and conversion experience, not pre-conversion hesitation. Sample skews toward SF Bay Area and tech-adjacent profiles. All three were referred by a friend or found the service independently; this is not representative of the full acquisition funnel. Rural Southern, mid-size Southern city, and chronically-uninsured profiles are not represented. Treat as directional hypotheses for broader testing, not generalizable conclusions.</p>
+  </div>
+</div>
+
+</body>
+</html>
