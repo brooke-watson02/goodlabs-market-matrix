@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goodlabs Donor Messaging Study — Findings & Analysis</title>
+<style>
+  :root {
+    --bg:       #F7F8F9;
+    --surface:  #FFFFFF;
+    --border:   #DDE2E0;
+    --text-1:   #191B1E;
+    --text-2:   #52605C;
+    --text-3:   #8A9994;
+    --green:    #1B5E3B;
+    --green-lt: #E3F0EA;
+    --sage:     #4A8F78;
+    --sage-lt:  #EBF4F0;
+    --teal:     #2A7D6F;
+    --opt:      #9DB5AF;
+    --opt-lt:   #EEF3F2;
+    --warn:     #7A5200;
+    --warn-bg:  #FEF3DC;
+    --col:      680px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 15px; background: var(--bg); color: var(--text-1); -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    padding: 0 24px 80px;
+  }
+
+  /* ── Column wrapper ── */
+  .col { max-width: var(--col); margin: 0 auto; }
+
+  /* ── Cover ── */
+  .cover {
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 60px 0 44px;
+    border-bottom: 2px solid var(--text-1);
+  }
+  .cover-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-wrap: balance;
+    color: var(--text-1);
+    margin-bottom: 20px;
+    max-width: 560px;
+  }
+  .cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+  }
+  .cover-meta span {
+    font-size: 12px;
+    color: var(--text-3);
+  }
+  .cover-meta strong { color: var(--text-2); font-weight: 600; }
+
+  /* ── Section ── */
+  .section {
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 44px 0 0;
+  }
+  .section + .section { border-top: 1px solid var(--border); margin-top: 44px; }
+
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 10px;
+  }
+  .section h2 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.3;
+    text-wrap: balance;
+    color: var(--text-1);
+    margin-bottom: 18px;
+  }
+  .section h3 {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-2);
+    margin: 28px 0 10px;
+  }
+
+  p { margin-bottom: 16px; font-size: 15px; line-height: 1.72; color: var(--text-1); }
+  p:last-child { margin-bottom: 0; }
+
+  ul { padding-left: 20px; margin-bottom: 16px; }
+  li { font-size: 15px; line-height: 1.65; margin-bottom: 8px; color: var(--text-1); }
+  li:last-child { margin-bottom: 0; }
+
+  /* ── Pullquote ── */
+  .pullquote {
+    border-left: 3px solid var(--green);
+    padding: 4px 0 4px 20px;
+    margin: 28px 0;
+  }
+  .pullquote p {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-1);
+    margin: 0;
+  }
+  .pullquote cite {
+    display: block;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  /* ── Callout box ── */
+  .callout {
+    background: var(--warn-bg);
+    border-left: 3px solid var(--warn);
+    padding: 16px 20px;
+    margin: 24px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--warn);
+    margin-bottom: 6px;
+  }
+  .callout p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #5c4200;
+    margin: 0;
+  }
+
+  /* ── Key findings list ── */
+  .findings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+  }
+  .findings-list li {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .findings-list li:first-child { border-top: 1px solid var(--border); }
+  .finding-num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-3);
+    padding-top: 3px;
+    flex-shrink: 0;
+    width: 24px;
+  }
+  .finding-text { font-size: 14px; line-height: 1.6; color: var(--text-1); }
+  .finding-text strong { font-weight: 600; }
+
+  /* ── Charts ── */
+  .chart-block { margin: 28px 0; }
+  .chart-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 16px;
+  }
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-bottom: 18px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Stacked bar rows */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .bar-row-label {
+    width: 170px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .bar-row-label .row-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-1);
+    display: block;
+    line-height: 1.3;
+  }
+  .bar-row-label .row-n {
+    font-size: 11px;
+    color: var(--text-3);
+    font-family: ui-monospace, monospace;
+  }
+  .bar-track {
+    flex: 1;
+    height: 30px;
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: ui-monospace, "SF Mono", monospace;
+    color: rgba(255,255,255,0.92);
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity .15s;
+  }
+  .bar-seg:hover { opacity: .85; }
+  .seg-alt  { background: var(--green); }
+  .seg-well { background: var(--sage); }
+  .seg-opt  { background: var(--opt); }
+  .seg-acc  { background: var(--teal); }
+  .bar-note { font-size: 11px; color: var(--text-3); margin-left: 4px; }
+
+  /* Diverging bar for net scores */
+  .net-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .net-label {
+    width: 120px;
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-1);
+  }
+  .net-track {
+    flex: 1;
+    height: 28px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .net-bar-pos {
+    height: 100%;
+    border-radius: 0 3px 3px 0;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: ui-monospace, monospace;
+    color: white;
+  }
+  .net-bar-neg {
+    height: 100%;
+    border-radius: 3px 0 0 3px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: ui-monospace, monospace;
+    color: white;
+    margin-left: auto;
+  }
+  .net-axis {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  /* Cost barrier chart */
+  .cost-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .cost-label {
+    width: 190px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-1);
+    text-align: right;
+  }
+  .cost-bar {
+    height: 24px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: ui-monospace, monospace;
+    color: white;
+    min-width: 36px;
+  }
+
+  /* ── Data note ── */
+  .data-note {
+    background: var(--opt-lt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 24px 0;
+  }
+  .data-note p {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--text-2);
+    margin: 0;
+  }
+  .data-note strong { color: var(--text-1); }
+
+  /* ── Implication rows ── */
+  .implication {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .implication:first-of-type { border-top: 1px solid var(--border); }
+  .implication-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 5px;
+  }
+  .implication-head {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-1);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .implication p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0;
+  }
+
+  /* ── Footnote ── */
+  .footnote {
+    font-size: 11.5px;
+    color: var(--text-3);
+    line-height: 1.55;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    margin-top: 28px;
+  }
+
+  @media (max-width: 640px) {
+    .cover h1 { font-size: 24px; }
+    .section h2 { font-size: 19px; }
+    .bar-row-label { width: 120px; }
+    .cost-label { width: 140px; }
+    .net-label { width: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-eyebrow">Research Findings</div>
+  <h1>Goodlabs Donor Messaging Study — Appeal, Audience, and What the Numbers Don't Settle</h1>
+  <div class="cover-meta">
+    <span><strong>Primary study:</strong> Prolific quantitative survey, N=204</span>
+    <span><strong>Qualitative overlay:</strong> Listen Labs, N=17</span>
+    <span><strong>Fielded:</strong> June 2026</span>
+    <span><strong>Analyst:</strong> Brooke Watson</span>
+  </div>
+</div>
+
+<!-- ── EXECUTIVE SUMMARY ── -->
+<div class="section">
+  <div class="section-eyebrow">Summary</div>
+  <h2>What we found — and what we still need to resolve</h2>
+
+  <ul class="findings-list">
+    <li>
+      <span class="finding-num">01</span>
+      <span class="finding-text"><strong>Altruism won the appeal competition, decisively.</strong> Altruism-coded messages outperformed all other themes in the Prolific survey with a net score of +224, more than four times the next-highest theme (Access, +50). Wellness and Optimizer both went negative. This is the headline — and the caveat below is as important as the number.</span>
+    </li>
+    <li>
+      <span class="finding-num">02</span>
+      <span class="finding-text"><strong>Appeal and behavioral intent are not the same thing.</strong> The survey measured message appeal, not likelihood to donate. Listen Labs qualitative data (N=17) specifically found that altruism "sweetens the deal but doesn't drive it" — participants liked altruistic messages but the body-level barriers that actually prevent donation (needles, fainting, eligibility uncertainty) are entirely unaddressed by altruism appeals.</span>
+    </li>
+    <li>
+      <span class="finding-num">03</span>
+      <span class="finding-text"><strong>Access Seekers are the only persona where altruism doesn't lead.</strong> In the captured ballot round, Wellness Maintainers, Optimizers, and General respondents all ranked Altruism first. Access Seekers (n=23) ranked Wellness first (48%) over Altruism (35%). This is a small sample but the direction is consistent with qualitative findings: Access Seekers respond to functional removal of structural barriers, not community framing.</span>
+    </li>
+    <li>
+      <span class="finding-num">04</span>
+      <span class="finding-text"><strong>Wellness messaging has a real middle-age window.</strong> Among 35–54 year-olds, Altruism and Wellness are nearly tied. At 45–54, Wellness actually leads (48% vs. Altruism 34%). For younger and older respondents, Altruism dominates. The 35–54 cohort is the segment where Wellness-framed creative has the strongest standing.</span>
+    </li>
+    <li>
+      <span class="finding-num">05</span>
+      <span class="finding-text"><strong>Suburban respondents are the most split.</strong> Urban and Rural respondents both lean Altruism. Suburban respondents (n=127, the majority) are almost exactly tied: Wellness 43%, Altruism 42%. Suburban is the market where message choice has the most impact on outcome.</span>
+    </li>
+    <li>
+      <span class="finding-num">06</span>
+      <span class="finding-text"><strong>Cost is a concentrated barrier, not a broad one.</strong> Overall 35% of respondents said cost had blocked bloodwork. But among Access Seekers that's 52%; among Wellness Maintainers it's only 12%. The cost message is most efficient when targeted, not broadcast.</span>
+    </li>
+  </ul>
+</div>
+
+<!-- ── STUDY DESIGN ── -->
+<div class="section">
+  <div class="section-eyebrow">Study Design</div>
+  <h2>What we measured and how the data is structured</h2>
+
+  <p>204 US adults completed a quantitative survey fielded through Prolific in June 2026. Each respondent completed three ballot rounds in which they saw a rotating set of ads and selected the most and least appealing message. Across the full study, all ten ads across four themes were evaluated.</p>
+
+  <p>Net score per ad = total most-appealing picks minus total least-appealing picks across all respondents who saw that ad. The net scores are zero-sum across the full set. Theme-level net scores are the sum of individual ad nets within that theme.</p>
+
+  <p>Persona classifications were built from behavioral survey responses, not self-selection. <strong>Wellness Maintainers</strong> (n=81) track two or more wellness behaviors (exercise, nutrition, sleep, weight). <strong>Access Seekers</strong> (n=23) have two or more access-gap markers (no insurance, no PCP, cost-blocked). <strong>Optimizers</strong> (n=51) track biomarkers plus at least one advanced signal (wearables or HRV). Remaining respondents (n=49) were General/Mixed.</p>
+
+  <div class="callout">
+    <div class="callout-label">Data Limitation — Read Before Interpreting Charts</div>
+    <p>Typeform's CSV export collapses three ballot rounds into a single most/least column, retaining only one round's responses per respondent. The round captured in the export contains three specific ads: <em>"Strong communities start with people willing to help"</em> (Altruism), <em>"Tired all the time? Your blood may have answers"</em> (Wellness), and <em>"Data-driven training starts inside your body"</em> (Optimizer). Access Gap theme ads do not appear in this round. All persona × theme and demographic × theme charts below reflect preferences among these three ads only — the Access theme is not visible in these cuts. Overall theme net scores (+224, +50, −69, −205) come from the full three-round analysis document and are not subject to this limitation.</p>
+  </div>
+</div>
+
+<!-- ── OVERALL APPEAL ── -->
+<div class="section">
+  <div class="section-eyebrow">Overall Findings</div>
+  <h2>Altruism dominated overall appeal; Optimizer ads were consistently rejected</h2>
+
+  <p>Across all 204 respondents and all three ballot rounds, Altruism-coded messages accumulated a net score of +224 — meaning altruism ads were picked as most appealing 224 more times than they were picked as least appealing. Optimizer ads went the other direction by −205: they attracted strong rejection, not ambivalence. Wellness was mildly negative (−69); Access moderately positive (+50).</p>
+
+  <div class="chart-block">
+    <div class="chart-title">Theme Net Scores — Full Study (most picks minus least picks, zero-sum)</div>
+
+    <!-- Altruism +224, Access +50, Wellness -69, Optimizer -205 -->
+    <!-- Scale: 205 maps to half the track width. Full track = 410 units. -->
+    <!-- 50% of track = 0. Pos bars grow right, neg bars grow left. -->
+
+    <div class="net-row" style="margin-bottom:4px;">
+      <div class="net-label">Altruism</div>
+      <div class="net-track">
+        <div class="net-axis"></div>
+        <!-- pos bar: 224/410 = 54.6% of track, starting from center (50%) -->
+        <div style="width:50%;height:100%;display:flex;align-items:center;justify-content:flex-end;">
+          <!-- empty left half -->
+        </div>
+        <div class="net-bar-pos" style="width:54.6%;background:var(--green);">+224</div>
+      </div>
+    </div>
+
+    <div class="net-row" style="margin-bottom:4px;">
+      <div class="net-label">Access</div>
+      <div class="net-track">
+        <div class="net-axis"></div>
+        <div style="width:50%;height:100%;"></div>
+        <div class="net-bar-pos" style="width:12.2%;background:var(--teal);">+50</div>
+      </div>
+    </div>
+
+    <div class="net-row" style="margin-bottom:4px;">
+      <div class="net-label">Wellness</div>
+      <div class="net-track">
+        <div class="net-axis"></div>
+        <div style="width:50%;height:100%;display:flex;align-items:center;justify-content:flex-end;">
+          <div class="net-bar-neg" style="width:16.8%;background:var(--sage);">−69</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="net-row">
+      <div class="net-label">Optimizer</div>
+      <div class="net-track">
+        <div class="net-axis"></div>
+        <div style="width:50%;height:100%;display:flex;align-items:center;justify-content:flex-end;">
+          <div class="net-bar-neg" style="width:50%;background:var(--opt);">−205</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:11px;color:var(--text-3);margin-top:12px;">Net score = Σ most-appealing picks − Σ least-appealing picks across all respondents who saw each ad. Zero-sum across the full set. N=204.</p>
+  </div>
+
+  <p>The Optimizer theme's strong net negative is not simply low appeal — it attracted active rejection. "Use bloodwork to optimize your training protocol" and "Data-driven training starts inside your body" were among the most-frequently chosen as least appealing. The language likely reads as niche or exclusive to most respondents who don't see themselves as athletes or biohackers. The rejection signal is useful: it clarifies that the Optimizer frame should be reserved for segments where it's specifically validated, not used as a default.</p>
+
+  <p>Access Gap ads were moderately positive (+50) — meaningful given they were seen by a smaller subset and the theme resonates strongly with a specific segment rather than broadly.</p>
+</div>
+
+<!-- ── ALTRUISM CAVEAT ── -->
+<div class="section">
+  <div class="section-eyebrow">Critical Interpretation</div>
+  <h2>The Altruism number is real. So is its limit.</h2>
+
+  <div class="pullquote">
+    <p>"Altruism sweetens the deal but doesn't drive it."</p>
+    <cite>Listen Labs executive summary — N=17 qualitative interviews</cite>
+  </div>
+
+  <p>The survey measured message appeal, not likelihood to donate. This distinction matters more for altruism than for any other theme. Research on prosocial messaging consistently finds that people genuinely like altruistic appeals — they produce a "warm glow" response — but this approval doesn't translate into behavior at the same rate as messages tied to direct personal benefit.</p>
+
+  <p>Listen Labs confirmed this qualitatively. When participants were shown Goodlabs' concept, the most common reaction was warm but conditional: <em>"I think that's really good compensation for donating your blood, but I would want to know…"</em> The hesitations that followed were entirely about the body — needles, fainting, eligibility uncertainty, past bad draws. Nothing an altruism appeal addresses.</p>
+
+  <p>Specifically, 8 of 17 participants self-disqualified on eligibility, sometimes on incorrect assumptions (not knowing their blood type, assuming they were ineligible after a trip to Mexico). These people liked the concept and felt positively toward the community framing. They still said no.</p>
+
+  <p>The practical implication: altruism messaging is not the acquisition hook. It's a secondary motivator that works best as a <em>layer</em> — "help someone who needs it, and learn about your own body at the same time" — where the self-insight half does the converting and the altruism half increases warmth toward the brand. Using altruism as the primary headline, without addressing the body-level barriers and logistical gates, is spending the strongest appeal signal on the wrong problem.</p>
+</div>
+
+<!-- ── PERSONA CUT ── -->
+<div class="section">
+  <div class="section-eyebrow">Data Cut — Persona</div>
+  <h2>Message preference by persona proxy: Wellness Maintainer vs. Access Seeker</h2>
+
+  <div class="data-note">
+    <p><strong>What this chart shows:</strong> Among the one ballot round captured in the CSV, each respondent chose between three ads — one Altruism, one Wellness, one Optimizer. The Access theme was not present in this round. Percentages reflect share of that three-way choice within each persona group. n values are the full persona counts; only respondents with a valid pick in this round are included in percentages.</p>
+  </div>
+
+  <div class="chart-block">
+    <div class="chart-title">Most-Appealing Message Choice by Persona Proxy (single captured round, 3-way choice)</div>
+    <div class="chart-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Altruism</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--sage)"></span>Wellness</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--opt)"></span>Optimizer</div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">Wellness Maintainer</span>
+        <span class="row-n">n=81</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:52%">52%</div>
+        <div class="bar-seg seg-well" style="width:38%">38%</div>
+        <div class="bar-seg seg-opt" style="width:10%">10%</div>
+      </div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">Access Seeker</span>
+        <span class="row-n">n=23</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-well" style="width:48%">48%</div>
+        <div class="bar-seg seg-alt" style="width:35%">35%</div>
+        <div class="bar-seg seg-opt" style="width:17%">17%</div>
+      </div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">Optimizer</span>
+        <span class="row-n">n=51</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:41%">41%</div>
+        <div class="bar-seg seg-well" style="width:37%">37%</div>
+        <div class="bar-seg seg-opt" style="width:22%">22%</div>
+      </div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">General / Mixed</span>
+        <span class="row-n">n=49</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:47%">47%</div>
+        <div class="bar-seg seg-well" style="width:41%">41%</div>
+        <div class="bar-seg seg-opt" style="width:12%">12%</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>What stands out: Access Seekers flip the order</h3>
+  <p>Access Seekers are the only persona group where Altruism does not lead. They chose the Wellness ad ("Tired all the time? Your blood may have answers") at 48%, over the Altruism ad at 35%. This is consistent with Listen Labs: the two Access Seekers in the qualitative study responded to practical, access-removal framing — "no insurance, no doctor visit" — rather than community altruism. For Access Seekers, the draw is what they get, not what they give.</p>
+
+  <p>Note that the Access theme ads were not present in this ballot round — it's possible Access Seekers would have shown even stronger preference for Access-coded messages if they'd had that option. The Wellness pick here likely proxies for the visibility/self-knowledge pull that also drives Access Seeker interest in the concept.</p>
+
+  <h3>Wellness Maintainers: Altruism leads, but not by as much as it does overall</h3>
+  <p>Wellness Maintainers chose Altruism at 52% — lower than the overall survey lead of Altruism (+224 net). Listen Labs explains why: Wellness Maintainers who already have a PCP describe the Goodlabs concept as "nice for other people" — they appreciate it, but they don't feel a personal pull because they already have an existing path to bloodwork. The "two birds, one stone" framing (help someone + get your own results) resonates with this group, but only when the self-insight half is prominent. Altruism alone is insufficient for Maintainer conversion.</p>
+
+  <p>The cost-barrier data reinforces the Access / Maintainer split: 52% of Access Seekers said cost had blocked them from getting bloodwork, vs. 12% of Wellness Maintainers. These are people with materially different relationships to the healthcare system responding to messaging in ways that reflect those differences.</p>
+
+  <!-- Cost barrier mini chart -->
+  <div class="chart-block">
+    <div class="chart-title">Cost Has Blocked Bloodwork — by Persona Proxy</div>
+    <div class="cost-row">
+      <div class="cost-label">Access Seeker</div>
+      <div class="cost-bar" style="width:52%;background:var(--green);">52%</div>
+      <span style="font-size:11px;color:var(--text-3);margin-left:6px;">12 of 23</span>
+    </div>
+    <div class="cost-row">
+      <div class="cost-label">Optimizer</div>
+      <div class="cost-bar" style="width:18%;background:var(--sage);">18%</div>
+      <span style="font-size:11px;color:var(--text-3);margin-left:6px;">9 of 51</span>
+    </div>
+    <div class="cost-row">
+      <div class="cost-label">Wellness Maintainer</div>
+      <div class="cost-bar" style="width:12%;background:var(--opt);">12%</div>
+      <span style="font-size:11px;color:var(--text-3);margin-left:6px;">10 of 81</span>
+    </div>
+    <div class="cost-row">
+      <div class="cost-label">General / Mixed</div>
+      <div class="cost-bar" style="width:8%;background:var(--opt);">8%</div>
+      <span style="font-size:11px;color:var(--text-3);margin-left:6px;">4 of 49</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── AGE CUT ── -->
+<div class="section">
+  <div class="section-eyebrow">Data Cut — Age</div>
+  <h2>Age: Altruism dominates at both ends; Wellness peaks in the middle</h2>
+
+  <div class="chart-block">
+    <div class="chart-title">Most-Appealing Message Choice by Age Group (single captured round, 3-way choice)</div>
+    <div class="chart-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Altruism</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--sage)"></span>Wellness</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--opt)"></span>Optimizer</div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">18–24</span>
+        <span class="row-n">n=12</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:67%">67%</div>
+        <div class="bar-seg seg-well" style="width:33%">33%</div>
+      </div>
+      <span class="bar-note">↑ Altruism</span>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">25–34</span>
+        <span class="row-n">n=46</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:41%">41%</div>
+        <div class="bar-seg seg-well" style="width:37%">37%</div>
+        <div class="bar-seg seg-opt" style="width:22%">22%</div>
+      </div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">35–44</span>
+        <span class="row-n">n=71</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:45%">45%</div>
+        <div class="bar-seg seg-well" style="width:44%">44%</div>
+        <div class="bar-seg seg-opt" style="width:11%">11%</div>
+      </div>
+      <span class="bar-note">Near tie</span>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">45–54</span>
+        <span class="row-n">n=44</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-well" style="width:48%">48%</div>
+        <div class="bar-seg seg-alt" style="width:34%">34%</div>
+        <div class="bar-seg seg-opt" style="width:18%">18%</div>
+      </div>
+      <span class="bar-note">↑ Wellness leads</span>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">55–64</span>
+        <span class="row-n">n=22</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:59%">59%</div>
+        <div class="bar-seg seg-well" style="width:32%">32%</div>
+        <div class="bar-seg seg-opt" style="width:9%">9%</div>
+      </div>
+      <span class="bar-note">↑ Altruism</span>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">65+</span>
+        <span class="row-n">n=8</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:75%">75%</div>
+        <div class="bar-seg seg-opt" style="width:13%">13%</div>
+        <div class="bar-seg seg-well" style="width:12%">12%</div>
+      </div>
+      <span class="bar-note">↑↑ Altruism</span>
+    </div>
+
+    <p style="font-size:11px;color:var(--text-3);margin-top:12px;">65+ n=8 — treat directionally, not as statistically reliable. 18–24 n=12 — same caveat.</p>
+  </div>
+
+  <p>The pattern is U-shaped: Altruism dominates among the youngest (18–24: 67%) and oldest (65+: 75%) respondents. Wellness builds through the middle cohorts and peaks at 45–54, where it becomes the plurality choice at 48%. The 35–44 and 45–54 age bands are where message choice has the most leverage — Altruism's lead collapses to 1 percentage point at 35–44, and Wellness actually takes over at 45–54.</p>
+
+  <p>This has a practical implication for segmentation. If Goodlabs is running paid social across age brackets, a Wellness-led creative will outperform an Altruism-led creative for the 45–54 audience. The 25–34 band also shows the highest Optimizer share (22%) — the only cohort where data-optimization language has material traction.</p>
+</div>
+
+<!-- ── LOCATION CUT ── -->
+<div class="section">
+  <div class="section-eyebrow">Data Cut — Location</div>
+  <h2>Urban and Rural lean Altruism; Suburban is the contested territory</h2>
+
+  <div class="chart-block">
+    <div class="chart-title">Most-Appealing Message Choice by Location Type (single captured round, 3-way choice)</div>
+    <div class="chart-legend">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Altruism</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--sage)"></span>Wellness</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--opt)"></span>Optimizer</div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">Urban</span>
+        <span class="row-n">n=46</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:54%">54%</div>
+        <div class="bar-seg seg-well" style="width:30%">30%</div>
+        <div class="bar-seg seg-opt" style="width:15%">15%</div>
+      </div>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">Suburban</span>
+        <span class="row-n">n=127</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-well" style="width:43%">43%</div>
+        <div class="bar-seg seg-alt" style="width:42%">42%</div>
+        <div class="bar-seg seg-opt" style="width:15%">15%</div>
+      </div>
+      <span class="bar-note">Near tie</span>
+    </div>
+
+    <div class="bar-row">
+      <div class="bar-row-label">
+        <span class="row-name">Rural</span>
+        <span class="row-n">n=26</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-seg seg-alt" style="width:50%">50%</div>
+        <div class="bar-seg seg-well" style="width:42%">42%</div>
+        <div class="bar-seg seg-opt" style="width:8%">8%</div>
+      </div>
+    </div>
+  </div>
+
+  <p>Suburban respondents make up 62% of the sample (n=127) and are the most evenly divided. Wellness leads by one point (43% vs. 42%) — effectively tied. This is important because most of Goodlabs' current and target markets are suburban or mid-size city: Nashville, Sacramento, Chattanooga, Rome GA. In those markets there is no dominant message theme, which means creative testing has real decision value.</p>
+
+  <p>Urban respondents skew toward Altruism (54%) and away from Wellness (30%) compared to the overall average. This may reflect a tendency for urban respondents to already have access to bloodwork through dense health infrastructure — the access/visibility benefit feels less personal, while the community/altruism framing resonates more. Listen Labs' qualitative sample was also all urban/suburban, and Wellness Maintainers (the majority of that sample) showed the same "nice for others" framing for altruism.</p>
+
+  <p>Rural respondents show a strong Altruism-Wellness split with almost no Optimizer interest (8%). This aligns with the qualitative picture of rural Southern markets: community and civic identity drive donation behavior, and optimization language reads as niche and exclusive.</p>
+
+  <div class="data-note">
+    <p><strong>Note on geography:</strong> The survey collected location type (Urban / Suburban / Rural) but not city or state. Geographic cuts below market type are not possible from this dataset. The Prolific panel was US-national; market-specific splits require separate geo-targeted sampling.</p>
+  </div>
+</div>
+
+<!-- ── QUALITATIVE LAYER ── -->
+<div class="section">
+  <div class="section-eyebrow">Qualitative Layer</div>
+  <h2>What Listen Labs adds — five findings the survey can't show</h2>
+
+  <p>The Prolific survey tells us what people chose. The Listen Labs qualitative study (17 interviews, all urban/suburban US adults, conducted pre-pitch so participants hadn't seen Goodlabs before) tells us what people said before they were asked to evaluate messages. These are the findings that reshape how to interpret the survey data.</p>
+
+  <h3>1. "Visibility, not virtue" is the dominant pre-existing pull</h3>
+  <p>Before Goodlabs was mentioned, participants described health almost entirely in terms of visible behaviors they could already see and measure (gym sessions, sleep scores, diet). Their frustration was what they couldn't see — anything beneath the skin. "Seeing what's going on inside my body" was the unprompted phrase pattern across the majority of participants. Altruism scored well in the survey because it's an appealing frame; <em>visibility</em> scored well in conversation because it named something people already wanted.</p>
+
+  <h3>2. Bloodwork language matters more than most teams assume</h3>
+  <p>Participants consistently used: <em>clear picture, good handle, flying blind, in the dark, what's going on inside my body</em>. They did not say "biomarkers," "optimize," or "biohack." The Optimizer theme's strong rejection (−205 net) is likely partly a language problem as much as a framing problem — these are words that signal a niche community, not a broad one.</p>
+
+  <h3>3. Body-level barriers are the primary funnel killer — not brand skepticism</h3>
+  <p>Among 17 participants, the barriers that came up most were: fainting (8/17), eligibility uncertainty (8/17), needle fear (7/17), bad past draws (7/17). Institutional distrust — concern about the brand or company — was raised by only 1 of 17. This is important for creative: addressing brand credibility and legitimacy matters (8/17 said they needed a named, credible operator), but addressing body fears is a larger leverage point. An eligibility checker at the top of the funnel could recover up to half of self-disqualifiers who opted out on incorrect assumptions.</p>
+
+  <h3>4. Convenience and legitimacy are the two non-negotiable gates</h3>
+  <p>13 of 17 gated participation on a nearby, convenient location. 8 of 17 needed to know who the operator was before considering it. These came up before any body-level barriers were raised. No message appeal — however high — converts someone who doesn't know where to go or who's running it. Creative must answer these before it asks for anything.</p>
+
+  <div class="pullquote">
+    <p>"I think that's really good compensation for donating your blood, but I would want to know who is operating this, and where exactly I would need to go."</p>
+    <cite>Listen Labs participant — typical response pattern across 10 of 17</cite>
+  </div>
+
+  <h3>5. Access Seekers and Wellness Maintainers need different leads</h3>
+  <p>Wellness Maintainers (12 of 17 in the qualitative sample) already have a PCP and a path to bloodwork. They need a reason to prefer Goodlabs over their doctor — the "two birds, one stone" frame (help someone + get your own results) works, but only when the self-insight half is prominent. Access Seekers (2 of 17, with the qualification that the qualitative sample under-recruited this group) responded to the functional access itself: "bloodwork without insurance, without a doctor visit." They also need a results interpretation layer more than Maintainers do, because they have no clinician to follow up with.</p>
+</div>
+
+<!-- ── IMPLICATIONS ── -->
+<div class="section">
+  <div class="section-eyebrow">Implications</div>
+  <h2>What this means for messaging strategy</h2>
+
+  <div class="implication">
+    <div class="implication-label">Lead frame — universal</div>
+    <div class="implication-head">"See what's going on inside your body" before any altruism or wellness frame</div>
+    <p>The visibility insight is the shared pull across personas and locations. Open with the inside/outside gap in participants' own language, then layer the persona-specific hook. This is not a headline — it's the motivational premise that makes the rest land.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-label">Wellness Maintainers (Suburban, 35–54, insured)</div>
+    <div class="implication-head">Two birds, one stone — but self-insight is the bird that counts</div>
+    <p>Altruism as a secondary motivator works here ("help someone, and learn about yourself at the same time"), but leading with altruism alone is unlikely to convert. The creative differentiator from "just going to my PCP" needs to be explicit — panel scope, interpretation layer, no appointment required.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-label">Access Seekers (uninsured, no PCP, cost-blocked)</div>
+    <div class="implication-head">"Bloodwork without insurance, without a doctor visit" — functional, not altruistic</div>
+    <p>This is the frame the qualitative data identifies as most resonant for Access Seekers. The altruism layer is not the hook. The cost barrier data (52% blocked) confirms that free bloodwork is a material benefit for this segment — it's not just language, it solves a real problem. The interpretation/results layer matters more here than for any other segment because Access Seekers don't have a clinician to contextualize results.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-label">Altruism — use as sweetener, not driver</div>
+    <div class="implication-head">High appeal score ≠ high conversion intent; don't spend the strongest signal on the wrong job</div>
+    <p>Altruism messaging will win appeal tests. It will feel like the right choice in research. The risk is optimizing for a metric (appeal) that diverges from the metric that matters (donation). Body-level objections — needles, fainting, eligibility — don't appear anywhere in altruistic appeals. Until creative answers those objections, the appeal score is a ceiling, not a floor.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-label">Age targeting</div>
+    <div class="implication-head">Wellness creative for 35–54; Altruism for under-25 and over-55</div>
+    <p>The age data supports different default creative by age band. The 45–54 group is where Wellness messaging has its strongest standing nationally. The 25–34 band shows the most Optimizer interest (22%) — the only age group where data-optimization language has measurable traction.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-label">Suburban markets</div>
+    <div class="implication-head">Test both; don't default to either</div>
+    <p>Suburban respondents are essentially tied between Wellness and Altruism (43% vs. 42%). This is the majority of Goodlabs' current market footprint. In these markets, message testing has real decision value — there is no prior evidence for a dominant frame.</p>
+  </div>
+
+  <div class="implication">
+    <div class="implication-label">Before any of the above</div>
+    <div class="implication-head">Answer the two non-negotiable gates in every execution</div>
+    <p>Convenience (nearby, easy) and legitimacy (named operator, credible) are preconditions that came up before any message frame was evaluated. A named clinical partner, a visible location, and a clear "no cost, no upsell" statement are not message tests — they are prerequisites that make message tests meaningful.</p>
+  </div>
+
+  <div class="footnote">
+    <p><strong>Study limitations:</strong> Prolific panel is US-national and not geographically targeted to Goodlabs' active markets. Theme preference charts use a single ballot round captured by Typeform CSV — Access Gap theme ads are not visible in these cuts, and individual-level round data from the other two rounds is not recoverable from the export. Persona classifications are proxy scores from behavioral self-report, not validated archetypes. Access Seeker n=23 — directional, not statistically robust. Listen Labs qualitative sample is urban/suburban only (N=17) and over-represented Wellness Maintainers (12/17); Access Seeker qualitative signal is especially thin (2/17). All qualitative findings are directional hypotheses for quantitative testing, not generalizable conclusions.</p>
+  </div>
+</div>
+
+</body>
+</html>
