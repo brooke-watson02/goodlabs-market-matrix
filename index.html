@@ -384,6 +384,29 @@
     color: var(--text-2);
   }
 
+  .interviews-box {
+    background: var(--surface-2);
+    border-left: 3px solid #7C9EF8;
+    border-radius: 0 4px 4px 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--text-2);
+  }
+  .interview-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    background: #7C9EF8;
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+
   .hint {
     padding: 12px 28px;
     font-size: 11px;
@@ -546,7 +569,8 @@ const CELLS = {
     channels: ["Word-of-mouth / friend + trainer referral", "Reddit (r/longevity, r/goodlabs)", "Huberman-adjacent podcasts", "Instagram (health optimization creative)"],
     message: "Know your numbers. Donate while you're at it.",
     testMethods: ["interview", "meta"],
-    note: "This segment self-selects into Goodlabs. Vitalant market is producing nearly all Optimizer donors nationally with 75% CA concentration. The acquisition channel is trust networks (trainers, friends in health communities), not paid social. Reddit is already seeding itself organically. Donor interviews: SF wellness and cold plunge meetup culture is an active discovery channel where people compare testing services directly. The Huberman audience is the right core target framing. Goodlabs wins on price and access to targeted panels. It loses to Function Health on per-biomarker education depth (cited sources, optimal vs lab-normal ranges, mechanistic explanations) and that gap pushes overlapping users toward both products. The highest-engagement users treat Goodlabs as a recurring monitoring tool and some have built custom result-analysis workflows on top of CSV exports. Seattle expansion (Aug 2026) has roughly 1,000 existing users in this profile ready to activate. First-appointment scheduling dropout is a confirmed systemic problem at N=4+ data points. Lead times longer than two weeks should trigger proactive re-engagement."
+    note: "This segment self-selects into Goodlabs. Vitalant market is producing nearly all Optimizer donors nationally with 75% CA concentration. The acquisition channel is trust networks (trainers, friends in health communities), not paid social. Reddit is already seeding itself organically.",
+    interviews: "SF wellness and cold plunge meetup culture is an active discovery channel where people compare testing services directly. The Huberman audience is the right core target framing. Goodlabs wins on price and access to targeted panels. It loses to Function Health on per-biomarker education depth (cited sources, optimal vs lab-normal ranges, mechanistic explanations) and that gap pushes overlapping users toward both products. The highest-engagement users treat Goodlabs as a recurring monitoring tool and some have built custom result-analysis workflows on top of CSV exports. Seattle expansion (Aug 2026) has roughly 1,000 existing users in this profile ready to activate. First-appointment scheduling dropout is a confirmed systemic problem at N=4+ data points. Lead times longer than two weeks should trigger proactive re-engagement."
   },
   "0-1": {
     priority: "md", source: "data",
@@ -554,7 +578,8 @@ const CELLS = {
     channels: ["Vitalant in-center signage + staff FAQ", "Friend and family referral", "Community referral programs"],
     message: "You already donate. Now get something back.",
     testMethods: ["survey", "interview"],
-    note: "Vitalant's 18% repeat rate is the benchmark for a mature market. Altruists here have some health interest (CMP, testosterone panels) but giving is the primary identity. The message is reciprocity, not optimization. In-center activation is the highest-leverage channel. Brand confusion with Vitalant is a real friction to address. Listen Labs: altruism scored highest in appeal (Prolific net +224) but appeal and behavioral intent diverge for prosocial messaging. Body-level barriers (needles, fainting, eligibility uncertainty) are the actual conversion blockers. For existing Altruists already donating, altruism framing reinforces identity. For new acquisition, pair it with body-reassurance creative. Donor interviews: in-center signage was the discovery touchpoint for at least one longtime donor who had never found Goodlabs digitally. When evaluating against Function Health ($500/year), the quarterly donation cadence tipped the decision toward Goodlabs because it provides equivalent testing for free. Word-of-mouth in this segment leads with health value ('saves a trip to Quest, no doctor needed') rather than altruism, even among deeply committed donors. Account bugs tied to iron deferral and a scheduling sync disconnect between Goodlabs and Vitalant caused friction and damaged the in-center experience. Fix the booking sync before leaning on in-center as the primary activation channel."
+    note: "Vitalant's 18% repeat rate is the benchmark for a mature market. Altruists here have some health interest (CMP, testosterone panels) but giving is the primary identity. The message is reciprocity, not optimization. In-center activation is the highest-leverage channel. Brand confusion with Vitalant is a real friction to address. Listen Labs: altruism scored highest in appeal (Prolific net +224) but appeal and behavioral intent diverge for prosocial messaging. Body-level barriers (needles, fainting, eligibility uncertainty) are the actual conversion blockers. For existing Altruists already donating, altruism framing reinforces identity. For new acquisition, pair it with body-reassurance creative.",
+    interviews: "In-center signage was the discovery touchpoint for at least one longtime donor who had never found Goodlabs digitally. When evaluating against Function Health ($500/year), the quarterly donation cadence tipped the decision toward Goodlabs because it provides equivalent testing for free. Word-of-mouth in this segment leads with health value ('saves a trip to Quest, no doctor needed') rather than altruism, even among deeply committed donors. Account bugs tied to iron deferral and a scheduling sync disconnect between Goodlabs and Vitalant caused friction and damaged the in-center experience. Fix the booking sync before leaning on in-center as the primary activation channel."
   },
   "0-2": {
     priority: "md", source: "partial",
@@ -562,7 +587,8 @@ const CELLS = {
     channels: ["Community health orgs", "Spanish-language Instagram + Facebook", "In-center flyers in low-income zip codes", "Gig worker / service worker channels"],
     message: "Free bloodwork. No insurance needed.",
     testMethods: ["interview", "survey"],
-    note: "Significant uninsured gig and service worker population in tech cities despite high cost of living. Harder to reach via paid social alone — community partnerships required. Spanish-language support is a near-term need. Listen Labs: sharper hook is 'bloodwork without insurance, without a doctor visit.' Prolific data: Access Seekers are the only persona where Altruism does not lead (Wellness 48%, Altruism 35%). Results interpretation layer matters most here — no clinician to follow up with. Eligibility checker at top of funnel recovers self-disqualifiers. Donor interviews: SF specifically has a distinct 'coverage-gap' sub-profile — formerly well-insured tech workers who left employer plans and can no longer indulge health curiosity cheaply. Kwan: 'I used to be spoiled by really good health insurance... I don't get to indulge straight curiosities as much.' Different message from chronically uninsured: acknowledge prior access and its loss, not permanent scarcity. Word-of-mouth referrers in this market lead with free lab work, not community — equip them with that frame explicitly."
+    note: "Significant uninsured gig and service worker population in tech cities despite high cost of living. Harder to reach via paid social alone — community partnerships required. Spanish-language support is a near-term need. Listen Labs: sharper hook is 'bloodwork without insurance, without a doctor visit.' Prolific data: Access Seekers are the only persona where Altruism does not lead (Wellness 48%, Altruism 35%). Results interpretation layer matters most here — no clinician to follow up with. Eligibility checker at top of funnel recovers self-disqualifiers.",
+    interviews: "SF has a distinct coverage-gap sub-profile of formerly well-insured tech workers who left employer plans and can no longer indulge health curiosity cheaply. One donor described it as being 'spoiled by really good health insurance' and no longer being able to act on straight curiosities. The message for this group is different from chronically uninsured: acknowledge prior access and its loss, not permanent scarcity. Word-of-mouth referrers in this market lead with free lab work, not community. Equip them with that frame explicitly."
   },
   "0-3": {
     priority: "hi", source: "data",
@@ -570,7 +596,8 @@ const CELLS = {
     channels: ["Instagram (curiosity-driven creative)", "Reddit (r/sanfrancisco, r/longevity)", "TikTok", "Friend referral"],
     message: "You take care of yourself. Now see what your blood says.",
     testMethods: ["meta", "listen"],
-    note: "Oura ring, morning runs, decent diet. Health-conscious but not tracking biomarkers yet. SF and Seattle have the highest density of this profile. The JTBD is validation — they want to know they're doing okay. Listen Labs confirmed: lead with 'see what's going on inside your body' (participants' own language), not wellness optimization framing. The two birds one stone frame works (help someone and learn about yourself), but the self-insight half does the converting. Altruism alone is not sufficient for this group. Their objection to Goodlabs over their PCP must be answered explicitly: panel scope, interpretation layer, no appointment required. Avoid 'biomarkers' and 'optimize' — these read as niche. Donor interviews: scheduling convenience is the activation lever. Donors slot Goodlabs into existing downtown trips rather than making standalone visits. When a nearby anchor moves, donation consistency drops. First-appointment dropout is a confirmed systemic problem at N=4+ data points. Scheduling nudges tied to location or existing routine outperform standalone reminders. The embedded AI feature is a differentiator for this segment specifically because it interprets results in context of the full panel, not in isolation, and keeps data within the product. Donors preferred this over copying results to a general-purpose tool, partly for privacy. Symptom-based panel framing ('bad sleep,' 'fatigue') surfaced unprompted across multiple interviews and maps to how this segment already frames their own health. Current panel categories don't match that mental model. Seattle PNW launch (Aug 2026) has roughly 1,000 existing users in this profile ready to activate."
+    note: "Oura ring, morning runs, decent diet. Health-conscious but not tracking biomarkers yet. SF and Seattle have the highest density of this profile. The JTBD is validation — they want to know they're doing okay. Listen Labs confirmed: lead with 'see what's going on inside your body' (participants' own language), not wellness optimization framing. The two birds one stone frame works (help someone and learn about yourself), but the self-insight half does the converting. Altruism alone is not sufficient for this group. Their objection to Goodlabs over their PCP must be answered explicitly: panel scope, interpretation layer, no appointment required. Avoid 'biomarkers' and 'optimize' — these read as niche.",
+    interviews: "Scheduling convenience is the activation lever. Donors slot Goodlabs into existing downtown trips rather than making standalone visits. When a nearby anchor moves, donation consistency drops. First-appointment dropout is a confirmed systemic problem at N=4+ data points. Scheduling nudges tied to location or existing routine outperform standalone reminders. The embedded AI feature is a differentiator for this segment because it interprets results in context of the full panel, not in isolation, and keeps data within the product. Donors preferred this over copying results to a general-purpose tool, partly for privacy. Symptom-based panel framing ('bad sleep,' 'fatigue') surfaced unprompted across multiple interviews and maps to how this segment frames their own health. Current panel categories don't match that mental model. Seattle PNW launch (Aug 2026) has roughly 1,000 existing users in this profile ready to activate."
   },
   "0-4": {
     priority: "hi", source: "data",
@@ -612,7 +639,8 @@ const CELLS = {
     channels: ["Instagram (dominant — 52 BA orders)", "TikTok (strong Southern penetration)", "Friend referral", "News / earned media"],
     message: "You take care of yourself. Now check your numbers.",
     testMethods: ["meta", "listen"],
-    note: "Nashville's health-conscious crowd. Gym-goers, runners, people who think about what they eat but haven't formalized it with bloodwork. Instagram is the dominant acquisition channel here (52 BA orders). The message is validation, not optimization. Listen Labs confirmed: use 'see what's going on inside' language, not 'optimize' or 'biomarkers.' Two birds one stone framing tests well but self-insight must be prominent. Altruism alone doesn't convert Maintainers who already have PCP access. The 35 to 54 age band is where Wellness messaging competes most closely with Altruism in Prolific data; creative testing by age segment is warranted. Donor interviews: Nashville Wellness Maintainers often arrive with a specific health question rather than general curiosity. Family planning, hormone health, and fatigue are common entry points. The embedded AI feature is a meaningful differentiator for this segment because it interprets results within the context of the full panel rather than in isolation, and keeps data within the product. Donors preferred this over copying results to a general-purpose AI tool, partly for privacy. Pre-grouped panels organized by condition or life stage resonated strongly and map to how people in this segment frame their own needs. Partner location quality is a trust variable. A newly-onboarded site with a chaotic experience damaged confidence and is likely to suppress referrals from that cohort. Onboarding quality for new partner sites needs to be high before leaning on in-market word-of-mouth. Post-result experience is the retention lever."
+    note: "Nashville's health-conscious crowd. Gym-goers, runners, people who think about what they eat but haven't formalized it with bloodwork. Instagram is the dominant acquisition channel here (52 BA orders). The message is validation, not optimization. Listen Labs confirmed: use 'see what's going on inside' language, not 'optimize' or 'biomarkers.' Two birds one stone framing tests well but self-insight must be prominent. Altruism alone doesn't convert Maintainers who already have PCP access. The 35 to 54 age band is where Wellness messaging competes most closely with Altruism in Prolific data; creative testing by age segment is warranted.",
+    interviews: "Nashville Wellness Maintainers often arrive with a specific health question rather than general curiosity. Family planning, hormone health, and fatigue are common entry points. The embedded AI feature is a meaningful differentiator for this segment because it interprets results within the context of the full panel rather than in isolation, and keeps data within the product. Donors preferred this over copying results to a general-purpose AI tool, partly for privacy. Pre-grouped panels organized by condition or life stage resonated strongly and map to how people in this segment frame their own needs. Partner location quality is a trust variable. A newly-onboarded site with a chaotic experience damaged confidence and is likely to suppress referrals from that cohort. Onboarding quality for new partner sites needs to be high before leaning on in-market word-of-mouth. Post-result experience is the retention lever."
   },
   "1-4": {
     priority: "lo", source: "inferred",
@@ -638,7 +666,8 @@ const CELLS = {
     channels: ["Inova in-center partnership", "Federal employee wellness programs", "Friend and family referral", "Civic and community orgs"],
     message: "You already give. Now get something back.",
     testMethods: ["survey", "interview"],
-    note: "DC has strong civic donation culture. The Red Cross donor profile is the template. Giving is the primary identity and Goodlabs is the benefit that comes with it. Inova's 20% repeat rate confirms this segment is active and converting. Federal employee wellness programs are a unique high-efficiency channel not available in other markets. Donor interviews: altruism-primary donors in this market are often motivated by direct personal connection to medical need, such as a family member's treatment history, rather than abstract community benefit. They arrive curious, have positive first-time experiences at partner centers, and naturally leave with shareable framing. 'I saved three lives today' surfaced as an unprompted post-visit takeaway and travels well in civic and professional networks. Humor and panel curiosity co-exist with altruism in this segment — don't assume pure civic earnestness. Altruism-primary donors are the highest-quality word-of-mouth amplifiers in the matrix. They articulate impact naturally and genuinely enjoy telling the story. In-center messaging at Inova should name the lives-saved impact explicitly at checkout to prime this moment rather than leaving it implicit."
+    note: "DC has strong civic donation culture. The Red Cross donor profile is the template. Giving is the primary identity and Goodlabs is the benefit that comes with it. Inova's 20% repeat rate confirms this segment is active and converting. Federal employee wellness programs are a unique high-efficiency channel not available in other markets.",
+    interviews: "Altruism-primary donors in this market are often motivated by direct personal connection to medical need, such as a family member's treatment history, rather than abstract community benefit. They arrive curious, have positive first-time experiences at partner centers, and naturally leave with shareable framing. 'I saved three lives today' surfaced as an unprompted post-visit takeaway and travels well in civic and professional networks. Humor and panel curiosity co-exist with altruism in this segment, so don't assume pure civic earnestness. Altruism-primary donors are the highest-quality word-of-mouth amplifiers in the matrix. They articulate impact naturally and genuinely enjoy telling the story. In-center messaging at Inova should name the lives-saved impact explicitly at checkout to prime this moment rather than leaving it implicit."
   },
   "2-2": {
     priority: "md", source: "inferred",
@@ -932,6 +961,11 @@ function openPanel(key, market, persona, pi, data) {
       <div class="panel-label">Market Notes</div>
       <div class="panel-note">${data.note}</div>
     </div>
+    ${data.interviews ? `
+    <div class="panel-field">
+      <div class="panel-label">Interview Findings <span class="interview-badge">N=9</span></div>
+      <div class="interviews-box">${data.interviews}</div>
+    </div>` : ''}
     <div class="panel-field">
       <div class="panel-label">Acquisition Channels</div>
       <div class="channel-list">
