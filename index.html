@@ -407,6 +407,29 @@
     text-transform: uppercase;
   }
 
+  .meta-box {
+    background: var(--surface-2);
+    border-left: 3px solid #E8A838;
+    border-radius: 0 4px 4px 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--text-2);
+  }
+  .meta-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    background: #E8A838;
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+
   .hint {
     padding: 12px 28px;
     font-size: 11px;
@@ -570,25 +593,28 @@ const CELLS = {
     message: "Know your numbers. Donate while you're at it.",
     testMethods: ["interview", "meta"],
     note: "This segment self-selects into Goodlabs. Vitalant market is producing nearly all Optimizer donors nationally with 75% CA concentration. The acquisition channel is trust networks (trainers, friends in health communities), not paid social. Reddit is already seeding itself organically.",
-    interviews: "SF wellness and cold plunge meetup culture is an active discovery channel where people compare testing services directly. The Huberman audience is the right core target framing. Goodlabs wins on price and access to targeted panels. It loses to Function Health on per-biomarker education depth (cited sources, optimal vs lab-normal ranges, mechanistic explanations) and that gap pushes overlapping users toward both products. The highest-engagement users treat Goodlabs as a recurring monitoring tool and some have built custom result-analysis workflows on top of CSV exports. Seattle expansion (Aug 2026) has roughly 1,000 existing users in this profile ready to activate. First-appointment scheduling dropout is a confirmed systemic problem at N=4+ data points. Lead times longer than two weeks should trigger proactive re-engagement."
+    interviews: "SF wellness and cold plunge meetup culture is an active discovery channel where people compare testing services directly. The Huberman audience is the right core target framing. Goodlabs wins on price and access to targeted panels. It loses to Function Health on per-biomarker education depth (cited sources, optimal vs lab-normal ranges, mechanistic explanations) and that gap pushes overlapping users toward both products. The highest-engagement users treat Goodlabs as a recurring monitoring tool and some have built custom result-analysis workflows on top of CSV exports. Seattle expansion (Aug 2026) has roughly 1,000 existing users in this profile ready to activate. First-appointment scheduling dropout is a confirmed systemic problem at N=4+ data points. Lead times longer than two weeks should trigger proactive re-engagement.",
+    metaFindings: "Optimize ad ('You track everything. Why not your blood?') was the top performer across all creatives tested: 9 donation bookings at $103 each, 48,622 impressions, above-average quality ranking. The observation framing works because it names a gap the reader already feels without moralizing or hyping. This is the validated primary creative direction for paid social targeting this persona. Next test should explore whether a more specific version of the same frame (naming specific panels or comparing against wearables) improves efficiency further."
   },
   "0-1": {
     priority: "md", source: "data",
     sourceDetail: "Vitalant repeat rate: 18% — highest of the three live orgs. Friend_family dominant referral for this segment (30 known across all markets). CMP and testosterone panels popular at Vitalant, suggesting habitual donors with some health interest. Brand confusion (GoodLabs vs. Vitalant) documented in #customer-texts.",
     channels: ["Vitalant in-center signage + staff FAQ", "Friend and family referral", "Community referral programs"],
     message: "You already donate. Now get something back.",
-    testMethods: ["survey", "interview"],
+    testMethods: ["survey", "interview", "meta"],
     note: "Vitalant's 18% repeat rate is the benchmark for a mature market. Altruists here have some health interest (CMP, testosterone panels) but giving is the primary identity. The message is reciprocity, not optimization. In-center activation is the highest-leverage channel. Brand confusion with Vitalant is a real friction to address. Listen Labs: altruism scored highest in appeal (Prolific net +224) but appeal and behavioral intent diverge for prosocial messaging. Body-level barriers (needles, fainting, eligibility uncertainty) are the actual conversion blockers. For existing Altruists already donating, altruism framing reinforces identity. For new acquisition, pair it with body-reassurance creative.",
-    interviews: "In-center signage was the discovery touchpoint for at least one longtime donor who had never found Goodlabs digitally. When evaluating against Function Health ($500/year), the quarterly donation cadence tipped the decision toward Goodlabs because it provides equivalent testing for free. Word-of-mouth in this segment leads with health value ('saves a trip to Quest, no doctor needed') rather than altruism, even among deeply committed donors. Account bugs tied to iron deferral and a scheduling sync disconnect between Goodlabs and Vitalant caused friction and damaged the in-center experience. Fix the booking sync before leaning on in-center as the primary activation channel."
+    interviews: "In-center signage was the discovery touchpoint for at least one longtime donor who had never found Goodlabs digitally. When evaluating against Function Health ($500/year), the quarterly donation cadence tipped the decision toward Goodlabs because it provides equivalent testing for free. Word-of-mouth in this segment leads with health value ('saves a trip to Quest, no doctor needed') rather than altruism, even among deeply committed donors. Account bugs tied to iron deferral and a scheduling sync disconnect between Goodlabs and Vitalant caused friction and damaged the in-center experience. Fix the booking sync before leaning on in-center as the primary activation channel.",
+    metaFindings: "Altruism ad ('Your blood donation could be someone's chance at more years') produced 1 donation booking at $419, the worst cost per booking in the experiment by a factor of 4x. This is the clearest paid social signal in the dataset: altruism appeals but does not convert. For acquisition via Meta, do not lead with altruism. The reciprocity frame ('you already donate, now get something back') has not been tested yet and is the logical next creative to run for this persona."
   },
   "0-2": {
     priority: "md", source: "partial",
     sourceDetail: "Spanish-speaking donor in #customer-texts; Medicaid and uninsured responses in #care-nav (20% uninsured overall); donor email explicitly noting no insurance. Care-nav data is not donor-specific so counts are mixed with direct-pay population. Uninsured gig worker presence in SF Bay Area is well-documented.",
     channels: ["Community health orgs", "Spanish-language Instagram + Facebook", "In-center flyers in low-income zip codes", "Gig worker / service worker channels"],
     message: "Free bloodwork. No insurance needed.",
-    testMethods: ["interview", "survey"],
+    testMethods: ["interview", "survey", "meta"],
     note: "Significant uninsured gig and service worker population in tech cities despite high cost of living. Harder to reach via paid social alone — community partnerships required. Spanish-language support is a near-term need. Listen Labs: sharper hook is 'bloodwork without insurance, without a doctor visit.' Prolific data: Access Seekers are the only persona where Altruism does not lead (Wellness 48%, Altruism 35%). Results interpretation layer matters most here — no clinician to follow up with. Eligibility checker at top of funnel recovers self-disqualifiers.",
-    interviews: "SF has a distinct coverage-gap sub-profile of formerly well-insured tech workers who left employer plans and can no longer indulge health curiosity cheaply. One donor described it as being 'spoiled by really good health insurance' and no longer being able to act on straight curiosities. The message for this group is different from chronically uninsured: acknowledge prior access and its loss, not permanent scarcity. Word-of-mouth referrers in this market lead with free lab work, not community. Equip them with that frame explicitly."
+    interviews: "SF has a distinct coverage-gap sub-profile of formerly well-insured tech workers who left employer plans and can no longer indulge health curiosity cheaply. One donor described it as being 'spoiled by really good health insurance' and no longer being able to act on straight curiosities. The message for this group is different from chronically uninsured: acknowledge prior access and its loss, not permanent scarcity. Word-of-mouth referrers in this market lead with free lab work, not community. Equip them with that frame explicitly.",
+    metaFindings: "Access #1 ('Access to your bloodwork shouldn't be behind a paywall') was the most cost-efficient ad in the experiment: 4 bookings at $81 each. Access #2 ('You deserve to know what's going on inside your body, at no cost') received minimal spend and 0 bookings. The paywall framing outperforms the 'deserve' framing — naming a systemic problem is more actionable than entitlement language. For San Bernardino and other high-uninsured markets, Access #1's framing is the validated starting point for paid social."
   },
   "0-3": {
     priority: "hi", source: "data",
@@ -597,7 +623,8 @@ const CELLS = {
     message: "You take care of yourself. Now see what your blood says.",
     testMethods: ["meta", "listen"],
     note: "Oura ring, morning runs, decent diet. Health-conscious but not tracking biomarkers yet. SF and Seattle have the highest density of this profile. The JTBD is validation — they want to know they're doing okay. Listen Labs confirmed: lead with 'see what's going on inside your body' (participants' own language), not wellness optimization framing. The two birds one stone frame works (help someone and learn about yourself), but the self-insight half does the converting. Altruism alone is not sufficient for this group. Their objection to Goodlabs over their PCP must be answered explicitly: panel scope, interpretation layer, no appointment required. Avoid 'biomarkers' and 'optimize' — these read as niche.",
-    interviews: "Scheduling convenience is the activation lever. Donors slot Goodlabs into existing downtown trips rather than making standalone visits. When a nearby anchor moves, donation consistency drops. First-appointment dropout is a confirmed systemic problem at N=4+ data points. Scheduling nudges tied to location or existing routine outperform standalone reminders. The embedded AI feature is a differentiator for this segment because it interprets results in context of the full panel, not in isolation, and keeps data within the product. Donors preferred this over copying results to a general-purpose tool, partly for privacy. Symptom-based panel framing ('bad sleep,' 'fatigue') surfaced unprompted across multiple interviews and maps to how this segment frames their own health. Current panel categories don't match that mental model. Seattle PNW launch (Aug 2026) has roughly 1,000 existing users in this profile ready to activate."
+    interviews: "Scheduling convenience is the activation lever. Donors slot Goodlabs into existing downtown trips rather than making standalone visits. When a nearby anchor moves, donation consistency drops. First-appointment dropout is a confirmed systemic problem at N=4+ data points. Scheduling nudges tied to location or existing routine outperform standalone reminders. The embedded AI feature is a differentiator for this segment because it interprets results in context of the full panel, not in isolation, and keeps data within the product. Donors preferred this over copying results to a general-purpose tool, partly for privacy. Symptom-based panel framing ('bad sleep,' 'fatigue') surfaced unprompted across multiple interviews and maps to how this segment frames their own health. Current panel categories don't match that mental model. Seattle PNW launch (Aug 2026) has roughly 1,000 existing users in this profile ready to activate.",
+    metaFindings: "Wellness ad ('Tired all the time? Your blood may have answers') received only 626 impressions and 0 bookings. This is inconclusive rather than a failure — the creative was severely underfunded relative to others in the experiment (Optimize received 48,622 impressions). Symptom-based framing still needs a proper test with comparable budget before any conclusions can be drawn. The Exchange ad ('A win-win for your health and your community') is a partial proxy for this segment and produced 3 bookings at $89, suggesting the two-birds frame has some pull but performs below the Optimize angle."
   },
   "0-4": {
     priority: "hi", source: "data",
@@ -933,7 +960,7 @@ function openPanel(key, market, persona, pi, data) {
   const panelTmLabels = { survey: "Survey", meta: "Meta Ads", interview: "Interviews", listen: "Listen Labs" };
   const panelTmClasses = { survey: "tm-survey", meta: "tm-meta", interview: "tm-interview", listen: "tm-listen" };
   const panelTmRationale = {
-    meta:      "We believe this segment is reachable through paid social. Meta tests whether the messages that perform in surveys and interviews actually drive behavior: clicks, bookings, and donations in the real world.",
+    meta:      "Meta experiment complete (July 2026, all markets). Six creatives tested across five message angles, optimizing for donation bookings. Results: Optimize ('You track everything. Why not your blood?') was the top performer with 9 bookings at $103 each and an above-average quality ranking. Access #1 ('Access to your bloodwork shouldn't be behind a paywall') was most cost-efficient at $81 per booking. Altruism ('Your blood donation could be someone's chance at more years') produced 1 booking at $419, the worst cost per booking by a factor of 4x, directly confirming the Listen Labs and Prolific finding that altruism appeals but does not convert in paid social. Exchange/community framing ('A win-win for your health and your community') produced 3 bookings at $89. Wellness ('Tired all the time? Your blood may have answers') received minimal spend and 0 bookings, inconclusive. Cell-specific findings are noted in each market and persona view.",
     interview: "Donor interviews complete (N=9, July 2026). Five markets, four personas, active donors and non-donors. Cross-cutting findings: scheduling convenience drives both acquisition and retention, and first-appointment dropout is a confirmed systemic problem across markets. In-center discovery and word-of-mouth are underutilized activation channels. The embedded AI feature is a differentiator for curiosity-driven personas. Platform reliability issues (scheduling sync, iron deferral bugs, result status errors) are damaging retention for engaged users. Altruism-primary donors are the highest-quality word-of-mouth amplifiers in civic markets. Cell-specific findings are noted in each market and persona view.",
     survey:    "Our existing data is directional but skewed toward current customers. Surveys let us validate our hypotheses with a broader audience and quantify which value propositions resonate across different types of potential donors.",
     listen:    "Listen Labs qualitative study complete (N=17, June 2026). Key findings: visibility not virtue is the primary pull — participants described wanting to 'see what's going on inside' before Goodlabs was mentioned. Language to use: clear picture, good handle, flying blind, in the dark. Language to avoid: biomarkers, biohacking, optimize. Altruism sweetens but doesn't drive — appeal and behavioral intent diverge for prosocial messaging; body-level barriers (needles, fainting, eligibility uncertainty) are the actual funnel killers. Two gates every execution must pass: convenient location (13/17) and named credible operator (8/17)."
@@ -965,6 +992,11 @@ function openPanel(key, market, persona, pi, data) {
     <div class="panel-field">
       <div class="panel-label">Interview Findings <span class="interview-badge">N=9</span></div>
       <div class="interviews-box">${data.interviews}</div>
+    </div>` : ''}
+    ${data.metaFindings ? `
+    <div class="panel-field">
+      <div class="panel-label">Meta Experiment <span class="meta-badge">Jul 2026</span></div>
+      <div class="meta-box">${data.metaFindings}</div>
     </div>` : ''}
     <div class="panel-field">
       <div class="panel-label">Acquisition Channels</div>
